@@ -19,7 +19,7 @@ public class EmailService {
     private String sendgridApiKey;
 
     public void prepareAndSend(String subject, String emailContent, String emailTo) {
-        Email from = new Email("pittman.kenny24@gmail.com");
+        Email from = new Email("leec89@protonmail.com");
         Email to = new Email(emailTo);
         Content content = new Content("text/plain", emailContent);
         Mail mail = new Mail(from, subject, to, content);
