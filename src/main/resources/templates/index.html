@@ -12,9 +12,6 @@
             <article class="card">
                 <div class="card-body" th:with="PicNumber=${randomPicIndex + post.id}">
                     <h3 class="card-title" th:text="${post.title}"></h3>
-                    <img class="img" src="../static/images/photo.png" th:src="@{/images/{id}.jpg(id=${PicNumber})}" />
-<!--                    <p>Picture Number <span th:text="${PicNumber}"></span></p>-->
-<!--                    <p>Random Number <span th:block="${#}"></span></p>-->
                     <p>By <span th:text="${post.user.username}"></span></p>
                     <p th:text="${post.body}"></p>
                     <a th:href="@{/posts/{id}(id=${post.id})}">Read more</a>
