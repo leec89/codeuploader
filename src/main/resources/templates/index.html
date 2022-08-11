@@ -1,26 +1,159 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{}">Page Title</title>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"
+          media="screen"/>
 
-<head th:replace="partials/partials.html :: head('All Posts')"></head>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+
+    <style>
+
+        .jumbotron {
+            height: 350px;
+            color: white;
+            text-shadow: #444 0 1px 1px;
+        }
+
+        body {
+            color: #2b3636;
+            font-family: "Proxima";
+        }
+
+        body {
+            color: #333;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.4285;
+        }
+
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        .view-directory .course-listing {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .course-listing {
+            background-color: #f7f7f7;
+            border: 1px solid #f1f3f0;
+            border-radius: 9px;
+            box-shadow: 0 1px #f1f3f0;
+            cursor: pointer;
+            height: 390px;
+            margin-bottom: 50px;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .course-listing .course-box-image-container {
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        .course-listing .course-box-image-container .course-box-image {
+            border-bottom: 1px solid #ededed;
+            border-top-left-radius: 9px;
+            border-top-right-radius: 9px;
+            display: block;
+            margin: auto;
+            width: 100%;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        img {
+            border: 0 none;
+        }
+
+        .course-listing .course-listing-title {
+            color: #6cb44a;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 25px;
+            max-height: 70px;
+            overflow: hidden;
+            padding: 16px 16px 4px;
+        }
+
+        .course-listing .course-listing-extra-info .course-price {
+            color: #6eae50 !important;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 30px;
+            padding-right: 10px;
+            text-align: right;
+        }
+
+        .course-listing .course-listing-extra-info .course-author-name {
+            font-size: 15px;
+            font-weight: 200;
+            line-height: 30px;
+            max-height: 30px;
+            overflow: hidden;
+            padding-left: 5px;
+        }
+
+        .course-listing .course-listing-extra-info .course-bundle {
+            font-size: 15px;
+            font-weight: 200;
+            line-height: 30px;
+        }
+
+    </style>
+</head>
+
 <body>
-<nav th:replace="partials/partials.html :: nav"></nav>
-<header th:replace="partials/partials.html :: header('Posts')"></header>
 
-<main class="container">
-    <div class="row gy-4">
-        <div class="col-12 col-md-6" th:each="post : ${posts}">
-            <article class="card">
-                <div class="card-body" th:with="PicNumber=${randomPicIndex + post.id}">
-                    <h3 class="card-title" th:text="${post.title}"></h3>
-                    <p>By <span th:text="${post.user.username}"></span></p>
-                    <p th:text="${post.body}"></p>
-                    <a th:href="@{/posts/{id}(id=${post.id})}">Read more</a>
-                </div>
-            </article>
+<div class="jumbotron">
+
+    <div class="container">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website.
+            It includes a large callout called a jumbotron and three supporting pieces of content.
+            Use it as a starting point to create something more unique.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 th:text="#{}">Page Title</h1>
         </div>
     </div>
-    <th:block th:replace="partials/partials.html :: footer"></th:block>
-    <th:block th:replace="partials/partials.html :: scripts"></th:block>
-</main>
+
+    <div class="row">
+        <div class="row">
+            <div>
+                <div>
+                    <div th:replace>
+                    Pause
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
 </body>
-</html>
+
