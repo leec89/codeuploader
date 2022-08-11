@@ -1,5 +1,7 @@
 package com.example.capstonecckma.controllers;
 
+import com.example.capstonecckma.repositories.ResourceRepository;
+import com.example.capstonecckma.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 
 @Controller
