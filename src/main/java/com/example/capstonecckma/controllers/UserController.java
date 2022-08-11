@@ -40,15 +40,15 @@ public class UserController {
 
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
         String emailSubject = "A new CCKMA user account has been created!";
         String emailBlurb = "Thank you for creating your new account in CCKMA!\r\n\r\nThe username submitted was\r\n[" + user.getUsername() + "].\r\nIf this was not expected, please contact customer support.";
         String emailTo = user.getEmail();
 
         userDao.save(user);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-        return "/login";
+        return "redirect:users/login";
     }
 
 }
