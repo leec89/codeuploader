@@ -19,7 +19,7 @@ public class ErrorController {
         this.emailService = emailService;
     }
 
-    @GetMapping("/error400")
+    @GetMapping("/error")
     public String getError() {
         return "error-pages/4xx";
     }
