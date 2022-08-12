@@ -3,7 +3,9 @@
 <head th:replace="partials/partials.html :: head('Login')"></head>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
+
 <header th:replace="partials/partials.html :: header('Login')"></header>
+
 <main class="container">
     <div th:if="${param.error}">
         Invalid Username and Password.
