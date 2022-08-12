@@ -4,7 +4,7 @@ import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
-import com.example.capstonecckma.services.EmailService;
+//import com.example.capstonecckma.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +18,21 @@ import java.util.List;
 public class ResourceController {
     private ResourceRepository resourceDao;
     private UserRepository userDao;
-    private final EmailService emailService;
+//    private final EmailService emailService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, EmailService emailService) {
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
-        this.emailService = emailService;
+//        this.emailService = emailService;
     }
 
 //    index page mapping
     @GetMapping("/")
-    public String getIndex() {
-        return "index";
+    public String getIndex(Model vModel) {
+        List<Resource> resourceList = resourceDao.findAll();
+        // pass posts to view
+        vModel.addAttribute("resources", resourceList);
+        return "resources/index";
     }
 
 //    view of all resources
@@ -58,14 +61,14 @@ public class ResourceController {
 
     @PostMapping("/resources/create")
     public String postCreateForm(@ModelAttribute Resource resource) {
-        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        resource.setUser(principal);
+//        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        resource.setUser(principal);
         String emailSubject = "New Resource Added";
         String emailBlurb = "Thank you for uploading a new resource. The resource is titled \r\n["
                 + resource.getTitle() + "].\r\nIf this was not expected, please contact customer support.";
-        String emailTo = principal.getEmail();
+//        String emailTo = principal.getEmail();
         resourceDao.save(resource);
-        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+//        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
         return "redirect:/resources/index";
     }
 
