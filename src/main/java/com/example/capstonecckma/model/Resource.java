@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "resources")
@@ -31,7 +32,7 @@ public class Resource {
     @ManyToOne
     @JoinColumn (name = "curriculum_topic_id")
     @JsonBackReference
-    private String curriculum_topic;
+    private CurriculumTopic curriculum_topic;
 
     @Column (length = 100)
     private String file_name;
@@ -39,8 +40,8 @@ public class Resource {
     @Column (length = 100)
     private String file_type;
 
-    @Column
-    private byte file;
+//    @Column
+//    private byte file;
 
     @Column
     private LocalDateTime created_at;
@@ -48,7 +49,7 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(User user, String title, String link, String description, String curriculum_topic, String file_name, String file_type, byte file, LocalDateTime created_at) {
+    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, String file_name, String file_type, LocalDateTime created_at) {
         this.user = user;
         this.title = title;
         this.link = link;
@@ -56,7 +57,6 @@ public class Resource {
         this.curriculum_topic = curriculum_topic;
         this.file_name = file_name;
         this.file_type = file_type;
-        this.file = file;
         this.created_at = created_at;
     }
 
@@ -100,11 +100,11 @@ public class Resource {
         this.description = description;
     }
 
-    public String getCurriculum_topic() {
+    public CurriculumTopic getCurriculum_topic() {
         return curriculum_topic;
     }
 
-    public void setCurriculum_topic(String curriculum_topic) {
+    public void setCurriculum_topic(CurriculumTopic curriculum_topic) {
         this.curriculum_topic = curriculum_topic;
     }
 
@@ -124,13 +124,13 @@ public class Resource {
         this.file_type = file_type;
     }
 
-    public byte getFile() {
-        return file;
-    }
-
-    public void setFile(byte file) {
-        this.file = file;
-    }
+//    public byte getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(byte file) {
+//        this.file = file;
+//    }
 
     public LocalDateTime getCreated_at() {
         return created_at;
@@ -151,7 +151,7 @@ public class Resource {
                 ", curriculum_topic='" + curriculum_topic + '\'' +
                 ", file_name='" + file_name + '\'' +
                 ", file_type='" + file_type + '\'' +
-                ", file=" + file +
+//                ", file=" + file +
                 ", created_at=" + created_at +
                 '}';
     }

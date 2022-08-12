@@ -3,7 +3,7 @@ package com.example.capstonecckma.controllers;
 import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
-import com.example.capstonecckma.services.EmailService;
+//import com.example.capstonecckma.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class UserController {
     private ResourceRepository resourceDao;
     private UserRepository userDao;
 //    private PasswordEncoder passwordEncoder;
-    private EmailService emailService;
+//    private EmailService emailService;
 
 //    public UserController(ResourceRepository resourceDao, UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
 //        this.resourceDao = resourceDao;
@@ -26,10 +26,10 @@ public class UserController {
 //        this.emailService= emailService;
 //    }
 
-    public UserController(ResourceRepository resourceDao, UserRepository userDao, EmailService emailService) {
+    public UserController(ResourceRepository resourceDao, UserRepository userDao) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
-        this.emailService= emailService;
+//        this.emailService= emailService;
     }
 
     @GetMapping("/register")
@@ -47,7 +47,7 @@ public class UserController {
         String emailTo = user.getEmail();
 
         userDao.save(user);
-        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+//        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
         return "redirect:users/login";
     }
 
