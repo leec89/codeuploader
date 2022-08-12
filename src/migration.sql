@@ -8,6 +8,7 @@ USE capstone_db;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS resources;
 DROP TABLE IF EXISTS curriculum_topic;
+DROP TABLE IF EXISTS documents;
 
 CREATE TABLE users (
                        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -31,6 +32,7 @@ CREATE TABLE resources (
                      curriculum_topic_id INT UNSIGNED NOT NULL,
                      title VARCHAR(240) NOT NULL,
                      description TEXT NOT NULL,
+                     link VARCHAR(240) NULL,
                      PRIMARY KEY (id),
                      created_at DATETIME,
                      FOREIGN KEY (user_id) REFERENCES users(id),
