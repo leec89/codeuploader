@@ -16,8 +16,9 @@
     <h1 class="text-center display-4 my-4" th:text="${text}"></h1>
 </header>
 
+
 <nav th:fragment="nav" class="navbar">
-    <a class="brand-title navbar-brand" href="/">CCKMA</a>
+    <a class="brand-title navbar-brand" href="/">Spring Blog</a>
     <a href="#" class="toggle-button">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -26,21 +27,21 @@
     <div class="navbar-links">
         <ul>
             <li>
-                <a href="/resources">Resources</a>
+                <a href="/posts">Posts</a>
             </li>
-            <li sec:authorize="isAuthenticated()">
-                <a href="/resources/create">Create Resource</a>
-            </li>
-            <li sec:authorize="!isAuthenticated()">
-                <a href="/signup">Sign up</a>
-            </li>
-            <li sec:authorize="!isAuthenticated()">
-                <a href="/login">Login</a>
-            </li>
-            <li sec:authorize="isAuthenticated()">
-                <a id="logout-link" href="#">Logout</a>
-                <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>
-            </li>
+<!--            <li sec:authorize="isAuthenticated()">-->
+<!--                <a href="/posts/create">Create Post</a>-->
+<!--            </li>-->
+<!--            <li sec:authorize="!isAuthenticated()">-->
+<!--                <a href="/signup">Sign up</a>-->
+<!--            </li>-->
+<!--            <li sec:authorize="!isAuthenticated()">-->
+<!--                <a href="/login">Login</a>-->
+<!--            </li>-->
+<!--            <li sec:authorize="isAuthenticated()">-->
+<!--                <a id="logout-link" href="#">Logout</a>-->
+<!--                <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>-->
+<!--            </li>-->
         </ul>
     </div>
 </nav>
@@ -60,4 +61,4 @@
     <script src="/js/main.js"></script>
 </th:block>
 
-</html>git
+</html>
