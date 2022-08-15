@@ -29,18 +29,16 @@ public class ResourceController {
 //    index page mapping
     @GetMapping("/")
     public String getIndex(Model vModel) {
-        List<Resource> resourceList = resourceDao.findAll();
-        // pass posts to view
-        vModel.addAttribute("resources", resourceList);
-        return "resources/index";
+
+        return "index";
     }
 
 //    view of all resources
     @GetMapping("/resources")
-    public String getResources(Model model) {
-
-        model.addAttribute("resources", resourceDao.findAll());
-
+    public String getResources(Model vModel) {
+        List<Resource> resourceList = resourceDao.findAll();
+        // pass posts to view
+        vModel.addAttribute("resources", resourceList);
         return "resources/index";
     }
 
