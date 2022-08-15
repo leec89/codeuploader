@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="partials/partials.html :: head('Your Resources')"></head>
+<body>
+<nav th:replace="partials/partials.html :: nav"></nav>
+<header th:replace="partials/partials.html :: header('Your Resource')"></header>
+
+<!--<h2 th:if="${diceRoll == guessNum}">Lucky roll!</h2>-->
+<!--<h2 th:if="${diceRoll != guessNum}">Sorry, poor roll!</h2>-->
+<main class="container">
+    <div class="row gy-4">
+        <div class="col-12 col-md-6" th:if="${#authentication.getName() == resource.user.getUsername()}" th:each="resource : ${resources}">
+            <article class="card">
+<!--                <div class="card-body">-->
+<!--                    <h3 class="card-title" th:text="*{title}"></h3>-->
+                <div class="card-body" th:with="PicNumber=${randomPicIndex + resource.id}">
+                    <h3 class="card-title" th:text="${v.title}"></h3>
+                    <p>By <span th:text="${resource.user.username}"></span></p>
+                    <p th:text="${v.body}"></p>
+                    <a th:href="@{/resources/{id}(id=${resource.id})}">Read more</a>
+                </div>
+            </article>
+        </div>
+    </div>
+    <th:block th:replace="partials/partials.html :: scripts"></th:block>
+</main>
+
+</body>
+</html>
