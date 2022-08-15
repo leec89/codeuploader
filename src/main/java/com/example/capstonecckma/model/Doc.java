@@ -22,19 +22,19 @@ public class Doc {
 //    @JoinColumn (name = "resource_id")
 //    @JsonBackReference
 //    private Resource resource;
-    private int resource_id;
+    private Integer resource_id;
 
-    public int getResource_id() {
+    public Integer getResource_id() {
         return resource_id;
     }
 
-    public void setResource_id(int resource_id) {
+    public void setResource_id(Integer resource_id) {
         this.resource_id = resource_id;
     }
 
     public Doc() {}
 
-    public Doc(String docName, String docType, byte[] data, int resource_id) {
+    public Doc(String docName, String docType, byte[] data, Integer resource_id) {
         this.docName = docName;
         this.docType = docType;
         this.data = data;
