@@ -6,10 +6,7 @@ import com.example.capstonecckma.repositories.UserRepository;
 //import com.example.capstonecckma.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -32,23 +29,27 @@ public class UserController {
 //        this.emailService= emailService;
     }
 
-    @GetMapping("/register")
+    @GetMapping("/users/register")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
         return "users/register";
     }
 
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
+    @PostMapping("/users/register")
+    public String saveUser(@RequestParam("username") String username,
+                           @RequestParam("password") String password,
+                           @RequestParam("email") String email) {
 //        String hash = passwordEncoder.encode(user.getPassword());
 //        user.setPassword(hash);
+        User user = new User(username, password, email);
         String emailSubject = "A new CCKMA user account has been created!";
-        String emailBlurb = "Thank you for creating your new account in CCKMA!\r\n\r\nThe username submitted was\r\n[" + user.getUsername() + "].\r\nIf this was not expected, please contact customer support.";
+        String emailBlurb = "Thank you for creating your new account in CCKMA!\r\n\r\nThe username submitted was\r\n["
+                + user.getUsername() + "].\r\nIf this was not expected, please contact customer support.";
         String emailTo = user.getEmail();
 
         userDao.save(user);
 //        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-        return "redirect:users/login";
+        return "redirect:users/register";
     }
 
 }

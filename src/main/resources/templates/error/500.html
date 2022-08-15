@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <head th:insert="partials/partials.html :: head('Error!')"></head>
+
     <meta charset="UTF-8"/>
     <title th:text="'Ooops, ' + ${error}"></title>
 </head>
 <body>
+<nav th:insert="partials/partials.html :: nav"></nav>
+
 <th:block th:switch="${error}">
-    <div th:case="'500 - Internal Server Error'">
+    <div th:case="'Internal Server Error'">
         <h1>Server issue, cause unknown! </h1>
     </div>
-    <div th:case="'501 - Not Implemented'">
+    <div th:case="'Not Implemented'">
         <h1>Server was unable to perform the requested action at this time.</h1>
     </div>
-    <div th:case="'502 - Bad Gateway'">
+    <div th:case="'Bad Gateway'">
         <h1>Our server received an invalid response from the upstream server</h1>
     </div>
-    <div th:case="'503 - Service Unavailable">
+    <div th:case="'Service Unavailable">
         <h1>Our server seems to be unavailable at this time. Please try again later.</h1>
     </div>
-    <div th:case="'504 - Gateway Timeout'">
+    <div th:case="'Gateway Timeout'">
         <h1>Our gateway server took too long to respond, sorry!</h1>
     </div>
 </th:block>
