@@ -15,6 +15,7 @@
 <!--                <div class="card-body" th:text="${resource.id}">-->
                     <h3 class="" th:text="${resource.title}"></h3>
                     <p>By <span th:text="${resource.user.username}"></span></p>
+
                     <p th:text="${resource.description}"></p>
                     <a th:href="@{/resource/{id}(id=${resource.id})}">Read more</a>
                 </div>
@@ -26,9 +27,9 @@
 </main>
 
 <!--<main>-->
-<!--    <article th:each="r : ${resources}">-->
-<!--        <h3 th:text="${r.title}"></h3>-->
-<!--        <p th:text="${r.description}"></p>-->
+<!--    <article th:each="r : ${resources.docs}" >-->
+<!--        <h3 th:field="${r.doc_name}"></h3>-->
+<!--        <p  th:field="${r.doc_type}"></p>-->
 <!--&lt;!&ndash;       <button> <a th:href="@{/posts/{id}(id=${post.id})}">Update Post</a></button>&ndash;&gt;-->
 <!--    </article>-->
 <!--</main>-->

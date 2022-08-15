@@ -1,6 +1,7 @@
 package com.example.capstonecckma.controllers;
 
 import com.example.capstonecckma.model.Doc;
+import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.services.DocStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -31,8 +32,12 @@ public class DocController {
     }
 
     @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public String uploadMultipleFiles(@RequestParam("file") MultipartFile[] files) {
         for (MultipartFile file: files) {
+
+
+
+
             docStorageService.saveFile(file);
         }
         return "redirect:doc";
@@ -45,6 +50,12 @@ public class DocController {
                 .contentType(MediaType.parseMediaType(doc.getDocType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+doc.getDocName()+"\"")
                 .body(new ByteArrayResource(doc.getData()));
+    }
+
+    @GetMapping("/upload-doc")
+    public String uploadForm(Model vModel) {
+
+        return "resources/create-doc";
     }
 
 

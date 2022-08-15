@@ -1,6 +1,9 @@
 package com.example.capstonecckma.services;
 
+import com.example.capstonecckma.model.CurriculumTopic;
 import com.example.capstonecckma.model.Doc;
+import com.example.capstonecckma.model.Resource;
+import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.repositories.DocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +19,17 @@ public class DocStorageService {
 
     public Doc saveFile(MultipartFile file) {
         String docname = file.getOriginalFilename();
+
+
+
+
+
+
+
         try {
-            Doc doc = new Doc(docname, file.getContentType(), file.getBytes());
+            Doc doc = new Doc(docname, file.getContentType(), file.getBytes(),1 );
             return docRepository.save(doc);
+
 
         }
         catch(Exception e) {
