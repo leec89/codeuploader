@@ -18,18 +18,36 @@ public class Doc {
     @Lob
     private byte[] data;
 
-    @ManyToOne
-    @JoinColumn (name = "resource_id")
-    @JsonBackReference
-    private Resource resource;
+//    @ManyToOne
+//    @JoinColumn (name = "resource_id")
+//    @JsonBackReference
+//    private Resource resource;
+    private int resource_id;
+
+    public int getResource_id() {
+        return resource_id;
+    }
+
+    public void setResource_id(int resource_id) {
+        this.resource_id = resource_id;
+    }
 
     public Doc() {}
 
-    public Doc(String docName, String docType, byte[] data) {
+    public Doc(String docName, String docType, byte[] data, int resource_id) {
         this.docName = docName;
         this.docType = docType;
         this.data = data;
+        this.resource_id = resource_id;
     }
+
+
+//    public Doc(String docName, String docType, byte[] data, Resource resource) {
+//        this.docName = docName;
+//        this.docType = docType;
+//        this.data = data;
+//        this.resource = resource;
+//    }
 
     public Integer getId() {
         return id;

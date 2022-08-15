@@ -37,18 +37,11 @@ public class Resource {
     @JsonBackReference
     private CurriculumTopic curriculum_topic;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
-    @JsonManagedReference
-    private List<Doc> docs = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
+//    @JsonManagedReference
+//    private List<Doc> docs = new ArrayList<>();
 
-    @Column (length = 100)
-    private String file_name;
 
-    @Column (length = 100)
-    private String file_type;
-
-//    @Column
-//    private byte file;
 
     @Column
     private LocalDateTime created_at;
@@ -56,16 +49,18 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, List<Doc> docs, String file_name, String file_type, LocalDateTime created_at) {
+    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, LocalDateTime created_at) {
         this.user = user;
         this.title = title;
         this.link = link;
         this.description = description;
         this.curriculum_topic = curriculum_topic;
-        this.docs = docs;
-        this.file_name = file_name;
-        this.file_type = file_type;
+//        this.docs = docs;
         this.created_at = created_at;
+    }
+
+    public Resource(int id) {
+        this.id = id;
     }
 
     public long getId() {
@@ -116,30 +111,6 @@ public class Resource {
         this.curriculum_topic = curriculum_topic;
     }
 
-    public String getFile_name() {
-        return file_name;
-    }
-
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
-    }
-
-    public String getFile_type() {
-        return file_type;
-    }
-
-    public void setFile_type(String file_type) {
-        this.file_type = file_type;
-    }
-
-//    public byte getFile() {
-//        return file;
-//    }
-//
-//    public void setFile(byte file) {
-//        this.file = file;
-//    }
-
     public LocalDateTime getCreated_at() {
         return created_at;
     }
@@ -157,9 +128,7 @@ public class Resource {
                 ", link='" + link + '\'' +
                 ", description='" + description + '\'' +
                 ", curriculum_topic=" + curriculum_topic +
-                ", docs=" + docs +
-                ", file_name='" + file_name + '\'' +
-                ", file_type='" + file_type + '\'' +
+//                ", docs=" + docs +
                 ", created_at=" + created_at +
                 '}';
     }
