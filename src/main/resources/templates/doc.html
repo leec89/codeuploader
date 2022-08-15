@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             <tr th:each="doc:${docs}">
-                <td th:text="${doc.Id}" />
+                <td th:text="${doc.id}" />
                 <td th:text="${doc.docName}" />
                 <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td>
                 <td><a th:href="@{'/deleteFile/'+${doc.id}}">Delete</a></td>

@@ -37,7 +37,7 @@ public class DocStorageService {
         }
         return null;
     }
-    public Optional<Doc> getFile(long fileId) {
+    public Optional<Doc> getFile(Integer fileId) {
         return docRepository.findById(fileId);
     }
     public List<Doc> getFiles() {
