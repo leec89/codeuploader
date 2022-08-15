@@ -1,9 +1,12 @@
 package com.example.capstonecckma.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.swing.text.Document;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,6 +37,10 @@ public class Resource {
     @JsonBackReference
     private CurriculumTopic curriculum_topic;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
+    @JsonManagedReference
+    private List<Doc> docs = new ArrayList<>();
+
     @Column (length = 100)
     private String file_name;
 
@@ -49,12 +56,13 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, String file_name, String file_type, LocalDateTime created_at) {
+    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, List<Doc> docs, String file_name, String file_type, LocalDateTime created_at) {
         this.user = user;
         this.title = title;
         this.link = link;
         this.description = description;
         this.curriculum_topic = curriculum_topic;
+        this.docs = docs;
         this.file_name = file_name;
         this.file_type = file_type;
         this.created_at = created_at;
@@ -148,10 +156,10 @@ public class Resource {
                 ", title='" + title + '\'' +
                 ", link='" + link + '\'' +
                 ", description='" + description + '\'' +
-                ", curriculum_topic='" + curriculum_topic + '\'' +
+                ", curriculum_topic=" + curriculum_topic +
+                ", docs=" + docs +
                 ", file_name='" + file_name + '\'' +
                 ", file_type='" + file_type + '\'' +
-//                ", file=" + file +
                 ", created_at=" + created_at +
                 '}';
     }
