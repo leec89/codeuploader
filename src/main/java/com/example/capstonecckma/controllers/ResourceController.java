@@ -1,7 +1,6 @@
 package com.example.capstonecckma.controllers;
 
 import com.example.capstonecckma.model.Resource;
-import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 //import com.example.capstonecckma.services.EmailService;
@@ -39,7 +38,7 @@ public class ResourceController {
         List<Resource> resourceList = resourceDao.findAll();
         // pass posts to view
         vModel.addAttribute("resources", resourceList);
-        return "resources/index";
+        return "resources";
     }
 
 //    view a single resource
@@ -67,7 +66,7 @@ public class ResourceController {
 //        String emailTo = principal.getEmail();
         resourceDao.save(resource);
 //        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-        return "redirect:/resources/index";
+        return "redirect:/resources/resources";
     }
 
 //    edit resource
@@ -81,7 +80,7 @@ public class ResourceController {
     @PostMapping("/resources/{id}/edit")
     public String postEditForm(@ModelAttribute Resource resource) {
         resourceDao.save(resource);
-        return "redirect:/resources/index";
+        return "redirect:/resources/resources";
     }
 
 
