@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="card" th:each="doc : ${r.docs}">
+    <h5 class="card-header" th:text="${doc.docName}"></h5>
+    <div class="card-body">
+        <!--        <h5 class="card-title">Special title treatment</h5>-->
+        <p> <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td></p>
+        <p class="card-text" th:text="${doc.docType}"></p>
+        <div style="text-align: end">
+            <!--            <a th:href="@{/posts/{id}(id=${post.id})}">Go somewhere</a>-->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

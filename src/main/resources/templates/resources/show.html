@@ -7,24 +7,24 @@
 
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
-<main class="container">
-    <p>Post ID: <span th:text="${resource.id}" >></span></p>
-    <p>Username: <span th:text="${resource.user.username}"></span></p>
-    <p th:text="${resource.body}"></p>
-    <br>
-    <div class="show-buttons" th:object="${resource}" >
-        <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
-            <button>Edit</button>
-        </form>
-        <br>
-        <form th:action="@{/resources}" th:method="GET">
-            <button>Back to Posts</button>
-        </form>
-        <br>
-        <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
-            <button id="delete-post-btn">Delete</button>
-        </form>
-    </div>
+<!--<main class="container">-->
+<!--    <p>Post ID: <span th:text="${resource.id}" >></span></p>-->
+<!--    <p>Username: <span th:text="${resource.user.username}"></span></p>-->
+<!--    <p th:text="${resource.body}"></p>-->
+<!--    <br>-->
+<!--    <div class="show-buttons" th:object="${resource}" >-->
+<!--        <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">-->
+<!--            <button>Edit</button>-->
+<!--        </form>-->
+<!--        <br>-->
+<!--        <form th:action="@{/resources}" th:method="GET">-->
+<!--            <button>Back to Posts</button>-->
+<!--        </form>-->
+<!--        <br>-->
+<!--        <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">-->
+<!--            <button id="delete-post-btn">Delete</button>-->
+<!--        </form>-->
+<!--    </div>-->
 
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>

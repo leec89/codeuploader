@@ -5,6 +5,7 @@ import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.repositories.DocRepository;
+import com.example.capstonecckma.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,18 +17,19 @@ import java.util.Optional;
 public class DocStorageService {
     @Autowired
     private DocRepository docRepository;
+    private ResourceRepository resourceDao;
 
     public Doc saveFile(MultipartFile file) {
         String docname = file.getOriginalFilename();
 
-
+        Optional<Resource> r = resourceDao.findById(Long.valueOf(1));
 
 
 
 
 
         try {
-            Doc doc = new Doc(docname, file.getContentType(), file.getBytes(),1 );
+            Doc doc = new Doc(docname, file.getContentType(), file.getBytes(),r  );
             return docRepository.save(doc);
 
 

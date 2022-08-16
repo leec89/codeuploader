@@ -3,6 +3,7 @@ package com.example.capstonecckma.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name="docs")
@@ -18,28 +19,46 @@ public class Doc {
     @Lob
     private byte[] data;
 
-//    @ManyToOne
-//    @JoinColumn (name = "resource_id")
-//    @JsonBackReference
-//    private Resource resource;
-    private Integer resource_id;
+    @ManyToOne
+    @JoinColumn (name = "resource_id")
+    @JsonBackReference
+    private Resource resource;
+//    private Integer resource_id;
 
-    public Integer getResource_id() {
-        return resource_id;
-    }
-
-    public void setResource_id(Integer resource_id) {
-        this.resource_id = resource_id;
-    }
+//    public Integer getResource_id() {
+//        return resource_id;
+//    }
+//
+//    public void setResource_id(Integer resource_id) {
+//        this.resource_id = resource_id;
+//    }
 
     public Doc() {}
 
-    public Doc(String docName, String docType, byte[] data, Integer resource_id) {
+    public Doc(String docname, String contentType, byte[] bytes, Optional<Resource> r) {
+
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
+    public Doc(String docName, String docType, byte[] data, Resource resource) {
         this.docName = docName;
         this.docType = docType;
         this.data = data;
-        this.resource_id = resource_id;
+        this.resource = resource;
     }
+    //    public Doc(String docName, String docType, byte[] data, Integer resource_id) {
+//        this.docName = docName;
+//        this.docType = docType;
+//        this.data = data;
+//        this.resource_id = resource_id;
+//    }
 
 
 //    public Doc(String docName, String docType, byte[] data, Resource resource) {

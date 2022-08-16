@@ -1,9 +1,11 @@
 package com.example.capstonecckma.controllers;
 
+import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 //import com.example.capstonecckma.services.EmailService;
+import com.example.capstonecckma.services.DocStorageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +19,21 @@ import java.util.List;
 public class ResourceController {
     private ResourceRepository resourceDao;
     private UserRepository userDao;
+
+    private DocStorageService docStorageService;
 //    private final EmailService emailService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao) {
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, DocStorageService docStorageService) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
-//        this.emailService = emailService;
+        this.docStorageService = docStorageService;
     }
+
+//    public ResourceController(ResourceRepository resourceDao, UserRepository userDao) {
+//        this.resourceDao = resourceDao;
+//        this.userDao = userDao;
+////        this.emailService = emailService;
+//    }
 
 //    index page mapping
     @GetMapping("/")
@@ -38,13 +48,14 @@ public class ResourceController {
         List<Resource> resourceList = resourceDao.findAll();
         // pass posts to view
         vModel.addAttribute("resources", resourceList);
-        return "resources";
+        return "resources/resources";
     }
 
 //    view a single resource
     @GetMapping("/resources/{id}")
     public String getResource(@PathVariable("id") long id, Model model) {
         Resource resource = resourceDao.findById(id).get();
+
         model.addAttribute("resource", resource);
         return "resources/show";
     }
@@ -81,6 +92,14 @@ public class ResourceController {
     public String postEditForm(@ModelAttribute Resource resource) {
         resourceDao.save(resource);
         return "redirect:/resources/resources";
+    }
+
+    @GetMapping("/resources/individual-doc/{id}")
+    public String resId(@PathVariable long id, Model model){
+        Resource r = resourceDao.findById(id).get();
+
+        model.addAttribute("r", r);
+        return "individual-doc";
     }
 
 

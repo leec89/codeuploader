@@ -37,9 +37,9 @@ public class Resource {
     @JsonBackReference
     private CurriculumTopic curriculum_topic;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
-//    @JsonManagedReference
-//    private List<Doc> docs = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
+    @JsonManagedReference
+    private List<Doc> docs = new ArrayList<>();
 
 
 
@@ -49,13 +49,13 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, LocalDateTime created_at) {
+    public Resource(User user, String title, String link, String description, CurriculumTopic curriculum_topic, List<Doc> docs, LocalDateTime created_at) {
         this.user = user;
         this.title = title;
         this.link = link;
         this.description = description;
         this.curriculum_topic = curriculum_topic;
-//        this.docs = docs;
+        this.docs = docs;
         this.created_at = created_at;
     }
 
@@ -119,6 +119,14 @@ public class Resource {
         this.created_at = created_at;
     }
 
+    public List<Doc> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(List<Doc> docs) {
+        this.docs = docs;
+    }
+
     @Override
     public String toString() {
         return "Resource{" +
@@ -128,7 +136,7 @@ public class Resource {
                 ", link='" + link + '\'' +
                 ", description='" + description + '\'' +
                 ", curriculum_topic=" + curriculum_topic +
-//                ", docs=" + docs +
+                ", docs=" + docs +
                 ", created_at=" + created_at +
                 '}';
     }
