@@ -1,6 +1,5 @@
 package com.example.capstonecckma.controllers;
 
-import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
@@ -48,7 +47,7 @@ public class ResourceController {
         List<Resource> resourceList = resourceDao.findAll();
         // pass posts to view
         vModel.addAttribute("resources", resourceList);
-        return "resources/resources";
+        return "resources/showall";
     }
 
 //    view a single resource
@@ -57,14 +56,14 @@ public class ResourceController {
         Resource resource = resourceDao.findById(id).get();
 
         model.addAttribute("resource", resource);
-        return "resources/show";
+        return "resources/showone";
     }
 
 //    create resource
-    @GetMapping("/resources/create")
+    @GetMapping("/create")
     public String getCreateForm(Model model) {
         model.addAttribute("resource", new Resource());
-        return "resources/create-resource";
+        return "resources/create";
     }
 
     @PostMapping("/resources/create")
@@ -91,7 +90,7 @@ public class ResourceController {
     @PostMapping("/resources/{id}/edit")
     public String postEditForm(@ModelAttribute Resource resource) {
         resourceDao.save(resource);
-        return "redirect:/resources/resources";
+        return "redirect:/resources/showall";
     }
 
     @GetMapping("/resources/individual-doc/{id}")
@@ -99,7 +98,7 @@ public class ResourceController {
         Resource r = resourceDao.findById(id).get();
 
         model.addAttribute("r", r);
-        return "individual-doc";
+        return "singleupload";
     }
 
 

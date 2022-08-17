@@ -30,7 +30,7 @@ public class DocController {
     public String get(Model vModel) {
         List<Doc> docs = docStorageService.getFiles();
         vModel.addAttribute("docs", docs);
-        return "doc";
+        return "multiupload";
     }
 
     @PostMapping("/uploadFiles")
@@ -60,7 +60,7 @@ public class DocController {
     public String uploadForm(Model vModel, @PathVariable int id) {
         Resource r = new Resource(id);
         vModel.addAttribute("doc", new Doc(r));
-        return "resources/create-doc";
+        return "resources/upload";
     }
 
 

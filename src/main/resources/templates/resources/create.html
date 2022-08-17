@@ -3,13 +3,13 @@
 <head th:replace="partials/partials.html :: head('Post Create')"></head>
 <body>
 <div style="text-align:center;" class="mt-5">
-<form th:action="@{/resources/create}"  method="post" th:object="${resource}">
+<form th:action="@{/resources/create}" method="POST" th:object="${resource}">
     <label>Title</label><br>
     <input type="text" id="title" name="title" input th:field="*{title}"><br>
     <label>Description</label><br>
     <!--    <textarea id="body" name="body" rows="4" cols="50"></textarea><br><br>-->
     <!--    <input type="submit" value="Submit" input th:field="*{description}">-->
-    <input type="text" id="title" name="title" input th:field="*{description}"><br>
+    <input type="text" id="description" name="description" input th:field="*{description}"><br>
     <!--    <p th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy HH:mm')}"></p>-->
     <button>Submit</button>
 
