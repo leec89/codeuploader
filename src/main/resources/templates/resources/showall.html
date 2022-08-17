@@ -14,7 +14,7 @@
                 <div class="card-body">
 <!--                <div class="card-body" th:text="${resource.id}">-->
                     <h3 class="" th:text="${resource.title}"></h3>
-                    <p>By <span th:text="${resource.user.username}"></span></p>
+<!--                    <p>By <span th:text="${resource.user.username}"></span></p>-->
 
                     <p th:text="${resource.description}"></p>
                     <a th:href="@{/resources/{id}(id=${resource.id})}">View Resource</a>
