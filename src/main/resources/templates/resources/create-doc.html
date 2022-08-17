@@ -39,10 +39,10 @@
         <div class="form-group text-center">
           <input type="file" name="file" id="file" />
         </div>
-        <div class="form-group">
-          <span>URL:</span>
-          <input type="url" >
-        </div>
+<!--        <div class="form-group">-->
+<!--          <span>URL:</span>-->
+<!--          <input type="url" >-->
+<!--        </div>-->
         <div class="form-group">
           <!--                Destination:-->
           <!--                <input type="text" value="/upload" name="destination"/>-->
@@ -52,3 +52,62 @@
     </div>
   </div>
 </div>
+<!--multi thymleaf-->
+<!--<div class="container-fluid h-100 bg-light text-dark mt-5">-->
+<!--  <div class="row justify-content-center align-items-center">-->
+<!--    <h1 class="mt-5">Submit File</h1>-->
+<!--  </div>-->
+<!--  <hr/>-->
+<!--  <div class="row justify-content-center align-items-center h-100">-->
+<!--    <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">-->
+<!--      <form th:action="@{/uploadFiles/{id}(id=${doc.resource.id})}"  method="post" enctype="multipart/form-data" th:object="${doc}">-->
+<!--        <div class="form-group text-center">-->
+<!--          <input type="file" name="file" id="file" />-->
+<!--        </div>-->
+<!--        &lt;!&ndash;        <div class="form-group">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <span>URL:</span>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <input type="url" >&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--          &lt;!&ndash;                Destination:&ndash;&gt;-->
+<!--          &lt;!&ndash;                <input type="text" value="/upload" name="destination"/>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <input type="submit" value="Upload" name="upload" id="upload" />-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<section class="my-5">-->
+<!--  <div class="container" th:object="${doc}">-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-8 mx-auto">-->
+<!--        <h2>Upload File Example</h2>-->
+<!--        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>-->
+<!--        <form method="post" th:action="@{/uploadfiles}" enctype="multipart/form-data">-->
+<!--          <div class="form-group">-->
+<!--            <input type="file" name="file" class="form-control-file">-->
+<!--          </div>-->
+<!--          <button type="submit" class="btn btn-primary">Upload File</button>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<form th:action="@{/uploadFiles/{id}"  method="post" th:object="${resource}">-->
+<!--  <label>Title</label><br>-->
+<!--  <input type="text" id="title" name="title" input th:field="*{title}"><br>-->
+<!--  <label>Description</label><br>-->
+<!--  &lt;!&ndash;    <textarea id="body" name="body" rows="4" cols="50"></textarea><br><br>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <input type="submit" value="Submit" input th:field="*{description}">&ndash;&gt;-->
+<!--  <input type="text" id="title" name="title" input th:field="*{description}"><br>-->
+<!--  &lt;!&ndash;    <p th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy HH:mm')}"></p>&ndash;&gt;-->
+<!--  <button>Submit</button>-->
+
+<!--</form>-->
+
+<!--  <th:block th:replace="partials/partials.html :: scripts"></th:block>-->
+<!--</body>-->
+<!--</html>-->

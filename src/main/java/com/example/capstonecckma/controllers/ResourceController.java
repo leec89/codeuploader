@@ -64,20 +64,20 @@ public class ResourceController {
     @GetMapping("/resources/create")
     public String getCreateForm(Model model) {
         model.addAttribute("resource", new Resource());
-        return "resources/create";
+        return "resources/create-resource";
     }
 
     @PostMapping("/resources/create")
     public String postCreateForm(@ModelAttribute Resource resource) {
 //        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        resource.setUser(principal);
-        String emailSubject = "New Resource Added";
-        String emailBlurb = "Thank you for uploading a new resource. The resource is titled \r\n["
-                + resource.getTitle() + "].\r\nIf this was not expected, please contact customer support.";
-//        String emailTo = principal.getEmail();
+//        String emailSubject = "New Resource Added";
+//        String emailBlurb = "Thank you for uploading a new resource. The resource is titled \r\n["
+//                + resource.getTitle() + "].\r\nIf this was not expected, please contact customer support.";
+////        String emailTo = principal.getEmail();
         resourceDao.save(resource);
 //        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-        return "redirect:/resources/resources";
+        return "resources/resource-before-fileupload";
     }
 
 //    edit resource

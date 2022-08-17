@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+
+<head th:replace="partials/partials.html :: head('View Resource')"></head>
+<body>
+<nav th:replace="partials/partials.html :: nav"></nav>
+<header th:replace="partials/partials.html :: header(${resource.title})"></header>
+
+<a th:href="@{/upload-doc/{id}(id=${resource.id})}">Add file to upload</a>
+
+<th:block th:replace="partials/partials.html :: scripts"></th:block>
+</body>
+</html>

@@ -9,12 +9,15 @@ import java.util.Optional;
 @Table(name="docs")
 public class Doc {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String docName;
     private String docType;
+
+
 
     @Lob
     private byte[] data;
@@ -35,9 +38,10 @@ public class Doc {
 
     public Doc() {}
 
-    public Doc(String docname, String contentType, byte[] bytes, Optional<Resource> r) {
-
+    public Doc(Resource resource){
+        this.resource = resource;
     }
+
 
     public Resource getResource() {
         return resource;
