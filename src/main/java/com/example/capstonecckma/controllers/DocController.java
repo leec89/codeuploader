@@ -56,10 +56,9 @@ public class DocController {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/upload-doc/{id}")
-    public String uploadForm(Model vModel, @PathVariable int id) {
-        Resource r = new Resource(id);
-        vModel.addAttribute("doc", new Doc(r));
+    @GetMapping("/upload")
+    public String uploadForm(Model vModel) {
+        vModel.addAttribute("doc", new Doc());
         return "resources/upload";
     }
 

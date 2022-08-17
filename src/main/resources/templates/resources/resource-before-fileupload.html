@@ -7,7 +7,7 @@
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
 
-<a th:href="@{/upload-doc/{id}(id=${resource.id})}">Add file to upload</a>
+<a th:href="@{/upload}">Add file to upload</a>
 
 <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </body>
