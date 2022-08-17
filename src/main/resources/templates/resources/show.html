@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
 
 <head th:replace="partials/partials.html :: head('View Resource')"></head>
 <body>
@@ -8,7 +8,19 @@
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
 <!--<main class="container">-->
-<!--    <p>Post ID: <span th:text="${resource.id}" >></span></p>-->
+    <p>User ID: <span th:text="${resource.user.username}" >></span></p>
+
+<div class="card" th:each="doc : ${resource.docs}">
+    <h5 class="card-header" th:text="${doc.docName}"></h5>
+    <div class="card-body">
+        <!--        <h5 class="card-title">Special title treatment</h5>-->
+        <p> <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td></p>
+        <p class="card-text" th:text="${doc.docType}"></p>
+        <div style="text-align: end">
+            <!--            <a th:href="@{/posts/{id}(id=${post.id})}">Go somewhere</a>-->
+        </div>
+    </div>
+</div>
 <!--    <p>Username: <span th:text="${resource.user.username}"></span></p>-->
 <!--    <p th:text="${resource.body}"></p>-->
 <!--    <br>-->

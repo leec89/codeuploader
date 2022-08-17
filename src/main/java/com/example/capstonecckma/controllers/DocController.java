@@ -2,6 +2,7 @@ package com.example.capstonecckma.controllers;
 
 import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
+import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.services.DocStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -23,7 +24,8 @@ public class DocController {
 
     @Autowired
     private DocStorageService docStorageService;
-
+    @Autowired
+    private ResourceRepository resourceDao;
     @GetMapping("/uploads")
     public String get(Model vModel) {
         List<Doc> docs = docStorageService.getFiles();
@@ -35,12 +37,14 @@ public class DocController {
     public String uploadMultipleFiles(@RequestParam("file") MultipartFile[] files) {
         for (MultipartFile file: files) {
 
+            List<Resource> resourceList = resourceDao.findAll();
+            Resource lastOne = resourceList.get(resourceList.size()-1);
 
+              int id = (int) lastOne.getId();
 
-
-            docStorageService.saveFile(file);
+            docStorageService.saveFile(file, id);
         }
-        return "redirect:doc";
+        return "redirect:/resources";
     }
 
     @GetMapping("/downloadFile/{fileId}")
@@ -52,9 +56,10 @@ public class DocController {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/upload-doc")
-    public String uploadForm(Model vModel) {
-
+    @GetMapping("/upload-doc/{id}")
+    public String uploadForm(Model vModel, @PathVariable int id) {
+        Resource r = new Resource(id);
+        vModel.addAttribute("doc", new Doc(r));
         return "resources/create-doc";
     }
 
