@@ -18,20 +18,15 @@ public class DocStorageService {
     @Autowired
     private ResourceRepository resourceDao;
 
-    public Doc saveFile(MultipartFile file, long id) {
+    public Doc saveFile(MultipartFile file, long resId) {
         String docname = file.getOriginalFilename();
 
 //        Resource r = new Resource(1);
-        Resource r = new Resource((int) id);
-
-
-
-
+        Resource res = new Resource((int) resId);
 
         try {
-            Doc doc = new Doc(docname, file.getContentType(), file.getBytes(), r);
+            Doc doc = new Doc(docname, file.getContentType(), file.getBytes(), res);
             return docRepository.save(doc);
-
 
         }
         catch(Exception e) {

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+
+<head th:replace="partials/partials.html :: head('Test Page')"></head>
+<body>
+<nav th:replace="partials/partials.html :: nav"></nav>
+<header class="container">
+    <h1 class="text-center display-4 my-4">Testing Page</h1>
+</header>
+
+<th:block th:replace="partials/partials.html :: scripts"></th:block>
+</body>
+</html>
