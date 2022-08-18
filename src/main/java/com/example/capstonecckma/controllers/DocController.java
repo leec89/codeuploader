@@ -2,6 +2,7 @@ package com.example.capstonecckma.controllers;
 
 import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
+import com.example.capstonecckma.repositories.DocRepository;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.services.DocStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -26,6 +32,9 @@ public class DocController {
     private DocStorageService docStorageService;
     @Autowired
     private ResourceRepository resourceDao;
+
+    @Autowired
+    private DocRepository ob;
     @GetMapping("/multiupload")
     public String get(Model vModel) {
         List<Doc> docs = docStorageService.getFiles();
@@ -36,12 +45,10 @@ public class DocController {
     @PostMapping("/uploadFiles")
     public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         for (MultipartFile file: files) {
-
             List<Resource> resourceList = resourceDao.findAll();
             Resource lastOne = resourceList.get(resourceList.size()-1);
 
             int resId = (int) lastOne.getId();
-
             docStorageService.saveFile(file, resId);
         }
         return "redirect:/resources";
@@ -56,12 +63,19 @@ public class DocController {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/upload-doc/{id}")
-    public String uploadForm(Model vModel, @PathVariable int id) {
-        Resource r = new Resource(id);
-        vModel.addAttribute("doc", new Doc(r));
+    @GetMapping("/deleteFile/{fileId}")
+    public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId) throws IOException {
+            ob.deleteById(fileId);
+        return null;
+    }
+
+    @GetMapping("/upload")
+    public String uploadForm(Model vModel) {
+        vModel.addAttribute("doc", new Doc());
         return "resources/upload";
     }
+
+
 
 
 }
