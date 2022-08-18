@@ -18,65 +18,89 @@
     <h1 class="text-center display-4 my-4" th:text="${text}"></h1>
 </header>
 
-<!--<nav th:fragment="nav" class="navbar">-->
-<!--    <a class="brand-title navbar-brand" href="/">CCKMA</a>-->
-<!--    <a href="#" class="toggle-button">-->
-<!--        <span class="bar"></span>-->
-<!--        <span class="bar"></span>-->
-<!--        <span class="bar"></span>-->
-<!--    </a>-->
-<!--    <div class="navbar-links">-->
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <a href="/resources">Resources</a>-->
-<!--            </li>-->
-<!--            <li sec:authorize="isAuthenticated()">-->
-<!--                <a href="/resources/create">Create Resource</a>-->
-<!--            </li>-->
-<!--            <li sec:authorize="!isAuthenticated()">-->
-<!--                <a href="/signup">Sign up</a>-->
-<!--            </li>-->
-<!--            <li sec:authorize="!isAuthenticated()">-->
-<!--                <a href="/login">Login</a>-->
-<!--            </li>-->
-<!--            <li sec:authorize="isAuthenticated()">-->
-<!--                <a id="logout-link" href="#">Logout</a>-->
-<!--                <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
-
-<!--NAVBAR-->
-<nav th:fragment="nav" class="navbar navbar-expand-lg py-3 navbar-light bg-light">
-    <div class="container">
-        <a class="brand-title navbar-brand" href="/">CodeUpLoader</a>
-        <a class="navbar-brand" href="#">
-            <img src="images/flying-duck.png">
-            <a target="_blank" href="/resources"></a>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </ul>
-            <button class="btn btn-primary ms-lg-3">Sign Up</button>
-        </div>
+<!--Hamburger NavBar-->
+<nav th:fragment="nav" class="navbar">
+    <div class="navbar-left-links">
+        <ul class="navbar-brand">
+            <li>
+                <a href="/">CodeUpLoader</a>
+            </li>
+            <li>
+                <a href="/resources">
+                    <img src="/images/flying-duck.png">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+        <ul>
+            <li>
+                <a href="/resources">Resources</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/create">Create Resource</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a href="/profile">Profile</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a href="/signup">SignUp!</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a href="/login">Login</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a id="logout-link" href="#">Logout</a>
+                <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>
+            </li>
+        </ul>
     </div>
 </nav>
+
+<!--Alfredo NAVBAR-->
+<!--<nav th:fragment="nav" class="navbar navbar-expand-lg py-3 navbar-light bg-light">-->
+<!--    <div class="container">-->
+<!--        <a class="brand-title navbar-brand" href="/">CodeUpLoader</a>-->
+<!--        <a class="navbar-brand" href="#">-->
+<!--            <img src="/images/flying-duck.png">-->
+<!--            <a target="_blank" href="/resources"></a>-->
+<!--        </a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--            <ul class="navbar-nav ms-auto">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">About</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Profile</a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="!isAuthenticated()">-->
+<!--                    <a class="nav-link" href="/login">Login</a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="isAuthenticated()">-->
+<!--                    <a id="logout-link" href="#">Logout</a>-->
+<!--                    <form id="logout-form" th:action="@{/logout}" th:method="POST"></form>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            <a href="/signup">-->
+<!--                <button class="btn btn-primary ms-lg-3">Sign Up</button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
 <!--NAVBAR-->
 
 <footer th:fragment="footer">

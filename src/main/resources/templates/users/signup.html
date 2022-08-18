@@ -7,7 +7,7 @@
 <header th:replace="partials/partials.html :: header('Create an Account')"></header>
 
 <main class="container">
-    <form th:action="@{/users/register}" method="POST" th:object="${user}">
+    <form th:action="@{/users/signup}" method="POST" th:object="${user}">
         <div class="mt-3">
             <label class="form-label" for="email">Email</label>
             <input class="form-control" id="email" th:field="*{email}" />

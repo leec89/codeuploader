@@ -26,7 +26,7 @@ public class DocController {
     private DocStorageService docStorageService;
     @Autowired
     private ResourceRepository resourceDao;
-    @GetMapping("/uploads")
+    @GetMapping("/multiupload")
     public String get(Model vModel) {
         List<Doc> docs = docStorageService.getFiles();
         vModel.addAttribute("docs", docs);
@@ -34,15 +34,15 @@ public class DocController {
     }
 
     @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("file") MultipartFile[] files) {
+    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         for (MultipartFile file: files) {
 
             List<Resource> resourceList = resourceDao.findAll();
             Resource lastOne = resourceList.get(resourceList.size()-1);
 
-              int id = (int) lastOne.getId();
+            int resId = (int) lastOne.getId();
 
-            docStorageService.saveFile(file, id);
+            docStorageService.saveFile(file, resId);
         }
         return "redirect:/resources";
     }
