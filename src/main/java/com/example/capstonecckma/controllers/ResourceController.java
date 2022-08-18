@@ -73,6 +73,12 @@ public class ResourceController {
         return "resources/create";
     }
 
+    @GetMapping("/createtest")
+    public String getCreateTestForm(Model model) {
+        model.addAttribute("resource", new Resource());
+        return "resources/createtest";
+    }
+
     @PostMapping("/resources/create")
     public String postCreateForm(@ModelAttribute Resource resource) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
