@@ -31,8 +31,7 @@ public class User {
     @JsonManagedReference
     private List<Resource> resources = new ArrayList<>();
 
-    public User() {
-    }
+    public User() {}
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
