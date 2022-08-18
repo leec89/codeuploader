@@ -74,6 +74,7 @@ public class ResourceController {
 //        String emailBlurb = "Thank you for uploading a new resource. The resource is titled \r\n["
 //                + resource.getTitle() + "].\r\nIf this was not expected, please contact customer support.";
 ////        String emailTo = principal.getEmail();
+
         resourceDao.save(resource);
 //        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
         return "resources/resource-before-fileupload";

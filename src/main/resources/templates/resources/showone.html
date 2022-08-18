@@ -9,12 +9,16 @@
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
 <!--<main class="container">-->
     <p>User ID: <span th:text="${resource.user.username}" >></span></p>
-
+<div style="text-align:center;" >
+<button><a>Edit</a></button>
+<button><a>Delete</a></button>
+</div>
 <div class="card" th:each="doc : ${resource.docs}">
     <h5 class="card-header" th:text="${doc.docName}"></h5>
     <div class="card-body">
         <!--        <h5 class="card-title">Special title treatment</h5>-->
         <p> <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td></p>
+        <p> <td><a th:href="@{'/deleteFile/'+${doc.id}}">Delete</a></td></p>
         <p class="card-text" th:text="${doc.docType}"></p>
         <div style="text-align: end">
             <!--            <a th:href="@{/posts/{id}(id=${post.id})}">Go somewhere</a>-->
