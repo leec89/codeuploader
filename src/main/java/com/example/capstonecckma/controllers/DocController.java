@@ -33,8 +33,8 @@ public class DocController {
         return "multiupload";
     }
 
-    @PostMapping("/multiupload")
-    public String uploadMultipleFiles(@RequestParam("file") MultipartFile[] files) {
+    @PostMapping("/uploadFiles")
+    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         for (MultipartFile file: files) {
 
             List<Resource> resourceList = resourceDao.findAll();
