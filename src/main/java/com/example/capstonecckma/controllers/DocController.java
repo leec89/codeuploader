@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,13 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -37,9 +32,11 @@ public class DocController {
     private DocStorageService docStorageService;
     @Autowired
     private ResourceRepository resourceDao;
-
     @Autowired
     private DocRepository ob;
+
+    // =================== uploading DOC(s) to resource (from create!)
+
     @GetMapping("/multiupload")
     public String get(Model vModel) {
         List<Doc> docs = docStorageService.getFiles();
@@ -59,6 +56,27 @@ public class DocController {
         return "redirect:/resources";
     }
 
+    // =================== uploading DOC(s) to resource (inside showone, not after create)
+
+    @GetMapping("/multiupload/{resId}")
+    public String uploadDocsFromRes(Model vModel, @PathVariable Integer resId) {
+        List<Doc> docs = docStorageService.getFiles();
+        vModel.addAttribute("docs", docs);
+        vModel.addAttribute("resId", resId);
+        return "multiuploadshowone";
+    }
+
+    @PostMapping("/uploadFiles/{resId}")
+    public String uploadMultipleDocsFromRes(@RequestParam("files") MultipartFile[] files, @PathVariable Integer resId) {
+        for (MultipartFile file: files) {
+
+            docStorageService.saveFile(file, resId);
+        }
+        return "redirect:/resources";
+    }
+
+    // =================== downloading a DOC after click DOWNLOAD link
+
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Integer fileId) {
         Doc doc = docStorageService.getFile(fileId).get();
@@ -68,6 +86,8 @@ public class DocController {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
+    // =================== deleting an individual DOC, and refreshing showone page with updated view
+
     @GetMapping("/deleteFile/{resId}/{fileId}")
     public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId, @PathVariable long resId, RedirectAttributes redirAttrs) throws IOException, URISyntaxException {
         ob.deleteById(fileId);
@@ -76,8 +96,9 @@ public class DocController {
         httpHeaders.setLocation(yahoo);
         redirAttrs.addFlashAttribute("success", "File deleted successfully.");
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-
     }
+
+    // =================== testing upload of a single DOC to resource (need to be logged in)
 
     @GetMapping("/upload")
     public String uploadForm(Model vModel) {

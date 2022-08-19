@@ -9,7 +9,7 @@
 <main class="container">
     <div>
         <h3>Upload Multiple Files</h3>
-        <form id="uploadFiles" name="uploadFiles" method="post" th:action=@{/uploadFiles} enctype="multipart/form-data">
+        <form id="uploadFiles" name="uploadFiles" method="post" th:action=@{/uploadFiles/} enctype="multipart/form-data">
             <input type="file" name="files" multiple required />
             <button type="submit">Submit</button>
         </form>
@@ -18,3 +18,4 @@
 </main>
 </body>
 </html>
+@{/resources/{id}/delete(id=*{id})}

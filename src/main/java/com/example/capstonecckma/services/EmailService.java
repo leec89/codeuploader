@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class EmailService {
 
-    @Value("${spring.sendgrid.api-key}")
+    @Value("${spring_sendgrid_api_key}")
     private String sendgridApiKey;
 
     public void prepareAndSend(String subject, String emailContent, String emailTo) {
