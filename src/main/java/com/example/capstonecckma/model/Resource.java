@@ -161,11 +161,6 @@ public List<User> usersThatLiked = new ArrayList<>();
         }
     }
 
-
-
-
-
-
     @Override
     public String toString() {
         return "Resource{" +

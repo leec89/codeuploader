@@ -31,7 +31,6 @@ public class Doc {
         this.resource = resource;
     }
 
-
     public Resource getResource() {
         return resource;
     }

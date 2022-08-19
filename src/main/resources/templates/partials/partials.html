@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
+
     <meta th:name="_csrf" th:content="${_csrf.token}" />
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
     <title th:text="${'CodeUpLoader | ' + title}"></title>
@@ -30,12 +31,10 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <!--    <a target="_blank" href="https://icons8.com/icon/9QKFk2mi6YYi/flying-duck">Flying Duck</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
     <link href = "/bootstrap/css/bootstrap.min.css" rel = "stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-
     <script src = "/scripts/jquery.min.js"></script>
     <script src = "/bootstrap/js/bootstrap.min.js"></script>
+</head>
 
 <header th:fragment="header(text)" class="container">
     <h1 class="text-center display-4 my-4" th:text="${text}"></h1>

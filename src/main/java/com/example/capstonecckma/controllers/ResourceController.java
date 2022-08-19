@@ -109,6 +109,8 @@ public class ResourceController {
 
     @PostMapping("/resources/{id}/edit")
     public String postEditForm(@ModelAttribute Resource resource) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        resource.setUser(principal);
         resourceDao.save(resource);
         return "redirect:/resources";
     }
