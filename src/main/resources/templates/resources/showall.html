@@ -3,7 +3,7 @@
 
 <head th:replace="partials/partials.html :: head('All Resources')"></head>
 <style>
-    .thumb {
+    .bi-star {
         cursor: pointer;
     }
 </style>
@@ -59,8 +59,8 @@
                         <div class="d-flex">
                             <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
                             <th:block sec:authorize="isAuthenticated()">
-                                <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="thumb bi bi-hand-thumbs-up"></i></h3>
-                                <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="thumb bi bi-hand-thumbs-up-fill"></i></h3>
+                                <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
+                                <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
                             </th:block>
                         </div>
                     </div>
@@ -81,20 +81,20 @@
 <!--</main>-->
 <script>
     // code to handle like post feature
-    document.querySelectorAll('.thumb').forEach(element => element.addEventListener('click', function(e) {
+    document.querySelectorAll('.bi-star').forEach(element => element.addEventListener('click', function(e) {
         function flipThumbVisibility(e) {
             const classList = e.target.classList;
-            if (classList.contains('bi-hand-thumbs-up-fill')) {
-                classList.remove('bi-hand-thumbs-up-fill');
-                classList.add('bi-hand-thumbs-up');
+            if (classList.contains('bi-star-fill')) {
+                classList.remove('bi-star-fill');
+                classList.add('bi-star');
             } else {
-                classList.remove('bi-hand-thumbs-up');
-                classList.add('bi-hand-thumbs-up-fill');
+                classList.remove('bi-star');
+                classList.add('bi-star-fill');
             }
         }
         function changeLikeCount(e) {
             const likedPostsNode = e.target.parentNode.parentNode.parentNode.parentNode.querySelector('span.liked-posts');
-            if (e.target.classList.contains('bi-hand-thumbs-up-fill')) {
+            if (e.target.classList.contains('bi-star-fill')) {
                 likedPostsNode.innerText = Number(likedPostsNode.innerText) + 1;
             } else {
                 likedPostsNode.innerText = Number(likedPostsNode.innerText) - 1;
