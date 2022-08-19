@@ -51,7 +51,6 @@ public class DocController {
         for (MultipartFile file: files) {
             List<Resource> resourceList = resourceDao.findAll();
             Resource lastOne = resourceList.get(resourceList.size()-1);
-
             int resId = (int) lastOne.getId();
             docStorageService.saveFile(file, resId);
         }
@@ -67,15 +66,13 @@ public class DocController {
                 .body(new ByteArrayResource(doc.getData()));
     }
 
-    @GetMapping("/deleteFile/{fileId}")
-    public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId) throws IOException, URISyntaxException {
-            ob.deleteById(fileId);
-        URI yahoo = new URI("http://www.yahoo.com");
+    @GetMapping("/deleteFile/{resId}/{fileId}")
+    public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId, @PathVariable long resId) throws IOException, URISyntaxException {
+        ob.deleteById(fileId);
+        URI yahoo = new URI("/resources/"+resId);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(yahoo);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-
-
 
     }
 
@@ -84,8 +81,5 @@ public class DocController {
         vModel.addAttribute("doc", new Doc());
         return "resources/upload";
     }
-
-
-
 
 }
