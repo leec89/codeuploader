@@ -7,13 +7,13 @@ import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.services.EmailService;
 import com.example.capstonecckma.services.DocStorageService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,22 +32,32 @@ public class ResourceController {
         this.emailService = emailService;
     }
 
-    //    testing page
+    // =================== Testing Page
+
     @GetMapping("/testing")
     public String testPage(Model vModel) {
 
         return "testpage";
     }
 
+    // =================== Initial landing on index URL
 
-//    index page mapping
     @GetMapping("/")
     public String getIndex(Model vModel) {
 
         return "index";
     }
 
-//    view of all resources
+    // =================== Landing page
+
+    @GetMapping("/landing")
+    public String getLanding(Model vModel) {
+
+        return "landing-page-idea";
+    }
+
+    // =================== resources URL - view ALL resources
+
     @GetMapping("/resources")
     public String getResources(Model vModel) {
         List<Resource> resourceList = resourceDao.findAll();
@@ -56,7 +66,8 @@ public class ResourceController {
         return "resources/showall";
     }
 
-//    view a single resource
+    // =================== resources URL - view single resource
+
     @GetMapping("/resources/{id}")
     public String getResource(@PathVariable("id") long id, Model vModel) {
         Resource resource = resourceDao.findById(id).get();
@@ -66,17 +77,12 @@ public class ResourceController {
         return "resources/showone";
     }
 
-//    create resource
+    // =================== resource CREATE
+
     @GetMapping("/create")
     public String getCreateForm(Model model) {
         model.addAttribute("resource", new Resource());
         return "resources/create";
-    }
-
-    @GetMapping("/createtest")
-    public String getCreateTestForm(Model model) {
-        model.addAttribute("resource", new Resource());
-        return "resources/createtest";
     }
 
     @PostMapping("/resources/create")
@@ -92,7 +98,8 @@ public class ResourceController {
         return "multiupload";
     }
 
-//    edit resource
+    // =================== resources EDIT/UPDATE
+
     @GetMapping("/resources/{id}/edit")
     public String getEditForm(@PathVariable("id") long id, Model model) {
         Resource resource = resourceDao.findById(id).get();
@@ -102,9 +109,13 @@ public class ResourceController {
 
     @PostMapping("/resources/{id}/edit")
     public String postEditForm(@ModelAttribute Resource resource) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        resource.setUser(principal);
         resourceDao.save(resource);
-        return "redirect:/resources/showall";
+        return "redirect:/resources";
     }
+
+    // =================== add single DOC to resource
 
     @GetMapping("/resources/individual-doc/{id}")
     public String resId(@PathVariable long id, Model model){
@@ -114,8 +125,29 @@ public class ResourceController {
         return "singleupload";
     }
 
+    @GetMapping("/hello")
+    ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+    }
 
+    @GetMapping("/customHeader")
+    ResponseEntity<String> customHeader() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
 
+        return new ResponseEntity<>(
+                "Custom header set", headers, HttpStatus.OK);
+    }
 
+    @PostMapping("/resources/{id}/like")
+    @ResponseBody
+    public String likeUnlikePost(@PathVariable long id) {
+        Resource r = resourceDao.findById(id).get();
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userThatLiked = userDao.findById(principal.getId()).get();
+        r.toggleUserLike(userThatLiked);
+        resourceDao.save(r);
+        return "Post liked!";
+    }
 
 }

@@ -1,7 +1,9 @@
 package com.example.capstonecckma.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.swing.text.Document;
@@ -41,10 +43,19 @@ public class Resource {
     @JsonManagedReference
     private List<Doc> docs = new ArrayList<>();
 
+    @CreatedDate
+    @Column(name = "created_at", nullable = false)
+    @JsonIgnore
+    private LocalDateTime created_at = LocalDateTime.now();
 
-
-    @Column
-    private LocalDateTime created_at;
+//    Many to many resource_likes
+@ManyToMany(cascade = CascadeType.ALL)
+@JoinTable(
+        name="resource_likes",
+        joinColumns={@JoinColumn(name="resource_id")},
+        inverseJoinColumns={@JoinColumn(name="user_id")}
+)
+public List<User> usersThatLiked = new ArrayList<>();
 
     public Resource() {
     }
@@ -125,6 +136,29 @@ public class Resource {
 
     public void setDocs(List<Doc> docs) {
         this.docs = docs;
+    }
+
+//  Getter and Setter for usersThatLiked
+    public List<User> getUsersThatLiked() {
+        return usersThatLiked;
+    }
+
+    public void setUsersThatLiked(List<User> usersThatLiked) {
+        this.usersThatLiked = usersThatLiked;
+    }
+
+//    Methods for likes/favorite
+
+    public boolean containsId(final List<User> list, final long id){
+        return list.stream().map(User::getId).anyMatch(userId -> userId == id);
+    }
+
+    public void toggleUserLike(User user) {
+        if (containsId(usersThatLiked, user.getId())) {
+            usersThatLiked.remove(user);
+        } else {
+            usersThatLiked.add(user);
+        }
     }
 
     @Override

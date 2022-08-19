@@ -3,7 +3,7 @@
 }
 
 body {
-    background: gainsboro;
+    background: oldlace;
     margin: 0;
     padding: 0;
 }
@@ -12,14 +12,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: white;
     color: white;
 }
 
 .brand-title {
     font-size: 1.5rem;
     margin: .5rem;
-    color: white;
+    color: dodgerblue;
 }
 
 .navbar-brand {
@@ -39,13 +39,13 @@ body {
 
 .navbar-links li a {
     text-decoration: none;
-    color: white;
+    color: dodgerblue;
     padding: 1rem;
     display: block;
 }
 
 .navbar-links li:hover {
-    background-color: #555;
+    background-color: blanchedalmond;
 }
 
 .navbar-left-links ul {
@@ -60,13 +60,13 @@ body {
 
 .navbar-left-links li a {
     text-decoration: none;
-    color: white;
+    color: dodgerblue;
     padding: 1rem;
     display: block;
 }
 
 .navbar-left-links li:hover {
-    background-color: #555;
+    background-color: blanchedalmond;
 }
 
 .toggle-button {
@@ -83,7 +83,7 @@ body {
 .toggle-button .bar {
     height: 3px;
     width: 100%;
-    background-color: white;
+    background-color: dodgerblue;
     border-radius: 10px;
 }
 
