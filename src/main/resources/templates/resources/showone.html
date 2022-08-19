@@ -9,7 +9,8 @@
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
 
 <main class="container">
-<!--    <p>Created by: <span th:text="${resource.user.username}"></span></p>-->
+    <p>Created by UserID: <span th:text="${resource.user.id}"></span></p>
+    <p th:text="${resource.link}"></p>
     <p th:text="${resource.description}"></p>
     <br>
     <div>
@@ -31,27 +32,25 @@
                 <td th:text="${doc.resource.id}" />
                 <td th:text="${doc.docName}" />
                 <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td>
-                <td><a th:href="@{'/deleteFile/'+${doc.id}}">Delete</a></td>
+                <td><a th:href="@{'/deleteFile/'+${doc.resource.id}+'/'+${doc.id}}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-<!--    <p>Username: <span th:text="${resource.user.username}"></span></p>-->
-<!--    <p th:text="${resource.body}"></p>-->
-<!--    <br>-->
-<!--    <div class="show-buttons" th:object="${resource}" >-->
-<!--        <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">-->
-<!--            <button>Edit</button>-->
-<!--        </form>-->
-<!--        <br>-->
-<!--        <form th:action="@{/resources}" th:method="GET">-->
-<!--            <button>Back to Posts</button>-->
-<!--        </form>-->
-<!--        <br>-->
-<!--        <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">-->
-<!--            <button id="delete-post-btn">Delete</button>-->
-<!--        </form>-->
-<!--    </div>-->
+    <br>
+    <div class="show-buttons" th:object="${resource}" >
+        <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
+            <button>Edit</button>
+        </form>
+        <br>
+        <form th:action="@{/resources}" th:method="GET">
+            <button>Back to Resources</button>
+        </form>
+        <br>
+        <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
+            <button id="delete-post-btn">Delete</button>
+        </form>
+    </div>
 
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>

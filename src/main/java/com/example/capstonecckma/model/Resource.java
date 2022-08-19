@@ -1,7 +1,9 @@
 package com.example.capstonecckma.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.swing.text.Document;
@@ -41,10 +43,10 @@ public class Resource {
     @JsonManagedReference
     private List<Doc> docs = new ArrayList<>();
 
-
-
-    @Column
-    private LocalDateTime created_at;
+    @CreatedDate
+    @Column(name = "created_at", nullable = false)
+    @JsonIgnore
+    private LocalDateTime created_at = LocalDateTime.now();
 
 //    Many to many resource_likes
 @ManyToMany(cascade = CascadeType.ALL)

@@ -26,6 +26,8 @@ public class UserController {
         this.emailService= emailService;
     }
 
+    // =================== user CREATE/REGISTER
+
     @GetMapping("/signup")
     public String showSignupForm(Model vModel){
         vModel.addAttribute("user", new User());

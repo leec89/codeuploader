@@ -7,24 +7,13 @@
 <header th:replace="partials/partials.html :: header('Create a Resource')"></header>
 <main class="container">
     <form th:action="@{/resources/create}" method="POST" th:object="${resource}">
-<!--        <label>Title</label><br>-->
-<!--        <input type="text" id="title" name="title" input th:field="*{title}"><br>-->
-<!--        <label>Description</label><br>-->
-<!--        &lt;!&ndash;    <textarea id="body" name="body" rows="4" cols="50"></textarea><br><br>&ndash;&gt;-->
-<!--        &lt;!&ndash;    <input type="submit" value="Submit" input th:field="*{description}">&ndash;&gt;-->
-<!--        <input type="text" id="description" name="description" input th:field="*{description}"><br>-->
-<!--        &lt;!&ndash;    <p th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy HH:mm')}"></p>&ndash;&gt;-->
-<!--        <button>Submit</button>-->
-
-
-<!--        <p hidden><span th:text="${user.id}"></span></p>-->
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
             <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title">
         </div>
         <div class="mb-3">
             <label class="form-label" for="link">Link</label>
-            <textarea th:field="*{link}" class="form-control" id="link" name="link" placeholder="Enter link"></textarea>
+            <input th:field="*{link}" class="form-control" id="link" name="link" placeholder="Enter link">
         </div>
         <div class="mb-3">
             <label class="form-label" for="description">Description</label>
@@ -33,7 +22,6 @@
         <div class="d-grid">
             <button class="btn btn-dark btn-block">Create Resource</button>
         </div>
-
     </form>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>
