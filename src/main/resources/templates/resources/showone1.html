@@ -51,12 +51,6 @@
             <button id="delete-post-btn">Delete</button>
         </form>
     </div>
-    <div class="show-buttons" th:object="${resource}" >
-        <form th:action="@{/resources}" th:method="GET">
-            <button>Back to Resources</button>
-        </form>
-        <br>
-    </div>
 
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>

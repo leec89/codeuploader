@@ -34,7 +34,7 @@ public class DocController {
     @Autowired
     private DocRepository ob;
 
-    // =================== uploading DOC(s) to resource
+    // =================== uploading DOC(s) to resource (from create!)
 
     @GetMapping("/multiupload")
     public String get(Model vModel) {
@@ -49,6 +49,25 @@ public class DocController {
             List<Resource> resourceList = resourceDao.findAll();
             Resource lastOne = resourceList.get(resourceList.size()-1);
             int resId = (int) lastOne.getId();
+            docStorageService.saveFile(file, resId);
+        }
+        return "redirect:/resources";
+    }
+
+    // =================== uploading DOC(s) to resource (inside showone, not after create)
+
+    @GetMapping("/multiupload/{resId}")
+    public String uploadDocsFromRes(Model vModel, @PathVariable Integer resId) {
+        List<Doc> docs = docStorageService.getFiles();
+        vModel.addAttribute("docs", docs);
+        vModel.addAttribute("resId", resId);
+        return "multiuploadshowone";
+    }
+
+    @PostMapping("/uploadFiles/{resId}")
+    public String uploadMultipleDocsFromRes(@RequestParam("files") MultipartFile[] files, @PathVariable Integer resId) {
+        for (MultipartFile file: files) {
+
             docStorageService.saveFile(file, resId);
         }
         return "redirect:/resources";

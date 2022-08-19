@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/partials.html :: head('Login')"></head>
+<body>
+<nav th:replace="partials/partials.html :: nav"></nav>
+
+<header th:replace="partials/partials.html :: header('Upload to Resource')"></header>
+
+<main class="container">
+    <div>
+        <h3>Upload Multiple Files</h3>
+        <form id="uploadFiles" name="uploadFiles" method="post" th:action=@{/uploadFiles/} enctype="multipart/form-data">
+            <input type="file" name="files" multiple required />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <th:block th:replace="partials/partials.html :: scripts"></th:block>
+</main>
+</body>
+</html>
+@{/resources/{id}/delete(id=*{id})}
