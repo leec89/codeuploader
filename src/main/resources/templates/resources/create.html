@@ -6,7 +6,7 @@
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header('Create a Resource')"></header>
 <main class="container">
-    <form th:action="@{/resources/create}" method="POST" th:object="${resource}">
+    <form th:action="@{/resources/create}" method="POST" id="form" th:object="${resource}">
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
             <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title">
@@ -25,5 +25,34 @@
     </form>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>
+
+
+<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+
+<script>
+    const validation = new JustValidate('#form');
+
+    validation
+        .addField('#title', [
+            {
+                rule: 'minLength',
+                value: 3,
+            },
+            {
+                rule: 'maxLength',
+                value: 240,
+            },
+        ])
+        .addField('#description', [
+            {
+                rule: 'required',
+                errorMessage: 'description is required',
+            }
+            // {
+            //     rule: 'description',
+            //     errorMessage: 'description is invalid!',
+            // },
+        ]);
+</script>
 </body>
 </html>
