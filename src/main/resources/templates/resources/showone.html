@@ -51,7 +51,9 @@
             <button id="delete-post-btn">Delete</button>
         </form>
     </div>
-
+    <div style="text-align: end;">
+    <button type="button" th:onclick="|window.location.href='/do-stuff'|" >Share</button>
+    </div>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>
 </body>
