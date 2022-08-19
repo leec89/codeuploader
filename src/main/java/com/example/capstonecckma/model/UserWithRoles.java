@@ -1,8 +1,8 @@
 package com.example.capstonecckma.model;
-
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.*;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 import java.util.Collection;
 

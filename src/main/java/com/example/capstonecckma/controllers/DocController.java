@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,6 +73,7 @@ public class DocController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(yahoo);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+
     }
 
     @GetMapping("/upload")
@@ -79,8 +81,5 @@ public class DocController {
         vModel.addAttribute("doc", new Doc());
         return "resources/upload";
     }
-
-
-
 
 }

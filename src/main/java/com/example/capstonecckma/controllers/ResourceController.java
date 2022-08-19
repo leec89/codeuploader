@@ -7,13 +7,13 @@ import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.services.EmailService;
 import com.example.capstonecckma.services.DocStorageService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -123,6 +123,31 @@ public class ResourceController {
 
         model.addAttribute("r", r);
         return "singleupload";
+    }
+
+    @GetMapping("/hello")
+    ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+    }
+
+    @GetMapping("/customHeader")
+    ResponseEntity<String> customHeader() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Header", "foo");
+
+        return new ResponseEntity<>(
+                "Custom header set", headers, HttpStatus.OK);
+    }
+
+    @PostMapping("/resources/{id}/like")
+    @ResponseBody
+    public String likeUnlikePost(@PathVariable long id) {
+        Resource r = resourceDao.findById(id).get();
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userThatLiked = userDao.findById(principal.getId()).get();
+        r.toggleUserLike(userThatLiked);
+        resourceDao.save(r);
+        return "Post liked!";
     }
 
 
