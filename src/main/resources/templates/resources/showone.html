@@ -8,6 +8,11 @@
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header(${resource.title})"></header>
 
+
+
+<div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}" style="text-align: center"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
 <main class="container">
     <p>Created by UserID: <span th:text="${resource.user.id}"></span></p>
     <p th:text="${resource.link}"></p>
@@ -50,6 +55,12 @@
         <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
             <button id="delete-post-btn">Delete</button>
         </form>
+        <div style="text-align: end;">
+<!--            <button type="button" th:onclick="|window.location.href='@{/do-stuff/{id}(id=${r.id})}'|" >Share</button>-->
+                <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET">
+                    <button>Share</button>
+                </form>
+        </div>
     </div>
     <div class="show-buttons" th:object="${resource}" >
         <form th:action="@{/resources}" th:method="GET">

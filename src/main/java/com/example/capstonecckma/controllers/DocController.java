@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.net.URI;
@@ -51,6 +52,7 @@ public class DocController {
             int resId = (int) lastOne.getId();
             docStorageService.saveFile(file, resId);
         }
+
         return "redirect:/resources";
     }
 
@@ -87,11 +89,12 @@ public class DocController {
     // =================== deleting an individual DOC, and refreshing showone page with updated view
 
     @GetMapping("/deleteFile/{resId}/{fileId}")
-    public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId, @PathVariable long resId) throws IOException, URISyntaxException {
+    public ResponseEntity<ByteArrayResource> deleteFile(@PathVariable Integer fileId, @PathVariable long resId, RedirectAttributes redirAttrs) throws IOException, URISyntaxException {
         ob.deleteById(fileId);
         URI yahoo = new URI("/resources/"+resId);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(yahoo);
+        redirAttrs.addFlashAttribute("success", "File deleted successfully.");
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
