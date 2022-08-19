@@ -49,4 +49,10 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @GetMapping("/about")
+    public String getAboutPage() {
+        return "about";
+    }
+
+
 }
