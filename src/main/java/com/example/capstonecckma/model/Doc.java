@@ -9,15 +9,13 @@ import java.util.Optional;
 @Table(name="docs")
 public class Doc {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String docName;
+
     private String docType;
-
-
 
     @Lob
     private byte[] data;
@@ -26,22 +24,12 @@ public class Doc {
     @JoinColumn (name = "resource_id")
     @JsonBackReference
     private Resource resource;
-//    private Integer resource_id;
-
-//    public Integer getResource_id() {
-//        return resource_id;
-//    }
-//
-//    public void setResource_id(Integer resource_id) {
-//        this.resource_id = resource_id;
-//    }
 
     public Doc() {}
 
     public Doc(Resource resource){
         this.resource = resource;
     }
-
 
     public Resource getResource() {
         return resource;
@@ -57,20 +45,6 @@ public class Doc {
         this.data = data;
         this.resource = resource;
     }
-    //    public Doc(String docName, String docType, byte[] data, Integer resource_id) {
-//        this.docName = docName;
-//        this.docType = docType;
-//        this.data = data;
-//        this.resource_id = resource_id;
-//    }
-
-
-//    public Doc(String docName, String docType, byte[] data, Resource resource) {
-//        this.docName = docName;
-//        this.docType = docType;
-//        this.data = data;
-//        this.resource = resource;
-//    }
 
     public Integer getId() {
         return id;
