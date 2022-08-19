@@ -1,30 +1,80 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="partials/partials.html :: head('Your Resources')"></head>
+<head th:replace="partials/partials.html :: head('Profile')"></head>
+<style>
+    .bi-star {
+        cursor: pointer;
+    }
+</style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
-<header th:replace="partials/partials.html :: header('Your Resource')"></header>
 
-<!--<h2 th:if="${diceRoll == guessNum}">Lucky roll!</h2>-->
-<!--<h2 th:if="${diceRoll != guessNum}">Sorry, poor roll!</h2>-->
+<header th:replace="partials/partials.html :: header('Your Submitted Resources')"></header>
+
 <main class="container">
     <div class="row gy-4">
-        <div class="col-12 col-md-6" th:if="${#authentication.getName() == resource.user.getUsername()}" th:each="resource : ${resources}">
+        <div class="col-12 col-md-6" th:if="${#authentication.getName() == res.user.username}" th:each="res : ${resources}">
             <article class="card">
-<!--                <div class="card-body">-->
-<!--                    <h3 class="card-title" th:text="*{title}"></h3>-->
-                <div class="card-body" th:with="PicNumber=${randomPicIndex + resource.id}">
-                    <h3 class="card-title" th:text="${v.title}"></h3>
-                    <p>By <span th:text="${resource.user.username}"></span></p>
-                    <p th:text="${v.body}"></p>
-                    <a th:href="@{/resources/{id}(id=${resource.id})}">Read more</a>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <h3 class="card-title" th:text="${res.title}"></h3>
+                        <p>
+                            <span class="liked-posts" th:text="${#lists.size(res.usersThatLiked)}"></span>
+                            <span th:if="${#lists.size(res.usersThatLiked) == 1}"> like</span>
+                            <span th:if="${#lists.size(res.usersThatLiked) != 1}"> likes</span>
+                        </p>
+                    </div>
+                    <p>By <span th:text="${res.user.username}"></span></p>
+                    <p th:text="${#strings.abbreviate(res.description,75)}"></p>
+                    <div class="d-flex">
+                        <a class="" th:href="@{/resources/{id}(id=${res.id})}">Read more</a>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <h3 th:if="${!res.user.hasLikedResource(res)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${res.id}" class="bi bi-star"></i></h3>
+                            <h3 th:if="${res.user.hasLikedResource(res)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${res.id}" class="bi bi-star-fill"></i></h3>
+                        </th:block>
+                    </div>
                 </div>
             </article>
         </div>
     </div>
-    <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>
-
+<th:block th:replace="partials/partials.html :: footer"></th:block>
+<th:block th:replace="partials/partials.html :: scripts"></th:block>
+<script>
+    // code to handle like post feature
+    document.querySelectorAll('.bi-star').forEach(element => element.addEventListener('click', function(e) {
+        function flipThumbVisibility(e) {
+            const classList = e.target.classList;
+            if (classList.contains('bi-star-fill')) {
+                classList.remove('bi-star-fill');
+                classList.add('bi-star');
+            } else {
+                classList.remove('bi-star');
+                classList.add('bi-star-fill');
+            }
+        }
+        function changeLikeCount(e) {
+            const likedPostsNode = e.target.parentNode.parentNode.parentNode.parentNode.querySelector('span.liked-posts');
+            if (e.target.classList.contains('bi-star-fill')) {
+                likedPostsNode.innerText = Number(likedPostsNode.innerText) + 1;
+            } else {
+                likedPostsNode.innerText = Number(likedPostsNode.innerText) - 1;
+            }
+        }
+        const likedPostId = e.currentTarget.getAttribute("data-id");
+        const options = {
+            method: 'POST',
+            headers: {}
+        }
+        const token = document.head.querySelector("meta[name=_csrf]").content;
+        const header = document.head.querySelector("meta[name=_csrf_header]").content;
+        options.headers[header] = token;
+        fetch(`/resources/${likedPostId}/like`, options).then(() => {
+            flipThumbVisibility(e);
+            changeLikeCount(e);
+        });
+    }));
+</script>
 </body>
 </html>

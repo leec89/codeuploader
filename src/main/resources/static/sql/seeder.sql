@@ -2,6 +2,11 @@ USE capstone_db;
 
 INSERT INTO users(username, email, password)
     VALUE ('test', 'test@gmail.com', 'password');
+INSERT INTO users(username, email, password)
+    VALUE ('test2', 'test@gmail.com', 'password');
+INSERT INTO users(username, email, password)
+    VALUE ('test3', 'test@gmail.com', 'password');
+
 
 set foreign_key_checks = 0;
 

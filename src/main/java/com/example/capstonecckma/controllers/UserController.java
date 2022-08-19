@@ -1,15 +1,19 @@
 package com.example.capstonecckma.controllers;
 
+import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -49,4 +53,21 @@ public class UserController {
         return "redirect:/login";
     }
 
+    // =================== user SHOW/VIEW profile - view user profile
+
+    @GetMapping("/profile")
+    public String getUserPosts(Model vModel) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Resource> resource = resourceDao.findAll();
+        vModel.addAttribute("user", principal);
+        vModel.addAttribute("resources", resource);
+        return "users/profile";
+    }
+    
+    // =================== About Us view
+    
+    @GetMapping("/about")
+    public String getAboutPage() {
+        return "about";
+    }
 }
