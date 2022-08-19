@@ -43,7 +43,6 @@ public class Resource {
     @JsonManagedReference
     private List<Doc> docs = new ArrayList<>();
 
-
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     @JsonIgnore
@@ -161,11 +160,6 @@ public List<User> usersThatLiked = new ArrayList<>();
             usersThatLiked.add(user);
         }
     }
-
-
-
-
-
 
     @Override
     public String toString() {

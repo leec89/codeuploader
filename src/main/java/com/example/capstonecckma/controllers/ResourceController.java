@@ -150,8 +150,4 @@ public class ResourceController {
         return "Post liked!";
     }
 
-
-
-
-
 }
