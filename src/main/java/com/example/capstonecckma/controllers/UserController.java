@@ -63,5 +63,11 @@ public class UserController {
         vModel.addAttribute("resources", resource);
         return "users/profile";
     }
-
+    
+    // =================== About Us view
+    
+    @GetMapping("/about")
+    public String getAboutPage() {
+        return "about";
+    }
 }
