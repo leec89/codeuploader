@@ -99,11 +99,6 @@ public class ResourceController {
         model.addAttribute("topic", list);
         return "resources/create";
     }
-    @GetMapping("/createtest")
-    public String getCreateTestForm(Model model) {
-        model.addAttribute("resource", new Resource());
-        return "resources/createtest";
-    }
 
     @PostMapping("/resources/create")
     public String postCreateForm(@ModelAttribute Resource resource) {
