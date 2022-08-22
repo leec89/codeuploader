@@ -1,78 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="partials/partials.html :: head('Login')"></head>
+<head th:replace="partials/partials.html :: head('login')"></head>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
 
 
 <section class="bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 order-2 order-lg-1">
-        <h1>A Resource Supplement  </h1>
-        <p class="lead">This application aligns with the phrase “necessity is the mother of invention”, and a desire to contribute something useful to pass on to future cohorts at Codeup. </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <h1>A Resource Supplement </h1>
+                <p class="lead">This application illustrates the phrase “necessity is the mother of invention”, and a
+                    desire to develop something useful to pass on to future cohorts at Codeup. </p>
 
-        <p ><a href="#" class="btn btn-primary shadow mr-2 ">Get Uploading!</a>
+                <p><a href="#" class="btn btn-primary shadow mr-2 ">Get Uploading!</a>
 
-      </div>
-      <div class="col-lg-6 order-1 order-lg-2"><img src="images/bit-art.jpeg" alt="landing image" class="img-fluid"></div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2"><img src="/images/bit-art.jpeg" alt="landing image" class="img-fluid"/>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <section>
-  <div class="container">
-    <h2>What is CodeUpLoader?</h2>
-    <p class="text-muted mb-5">
+    <div class="container">
+        <h2>What is CodeUpLoader?</h2>
+        <p class="text-muted mb-5">
+            Throughout the course cycle valuable and pertinent information to supplement the Codeup curriculum was
+            posted via Slack and Zoom. However, the information was not persistent and students are unable to retrieve
+            it because neither platform has a method to view past history.
+            <br><br>
+            CodeUpLoader is a tool designed to capture and retain information and files shared with Codeup students. It
+            allows users to create a “resource” containing the shared information, including the capability to upload
+            text and/or files, and save them to a database ensuring persistence.
+        </p>
+        <div class="row">
+            <div class="col-sm-4 col-lg-4 mt-3 mb-5">
+            </div>
+        </div>
+    </div>
 
-      Throughout the course cycle valuable and pertinent information to supplement the Codeup curriculum was posted via Slack and Zoom. However, the information was not persistent and students are unable to retrieve it because neither platform has a method to view past history.
-      <br><br>
-      CodeUpLoader is a tool designed to capture and retain information and files shared with Codeup students. It allows users to create a “resource” containing the shared information, including the capability to upload text and/or files, and save them to a database ensuring persistence.
-    </p>
-    <div class="row">
-      <div class="col-sm-4 col-lg-4 mt-3 mb-5">
-      </div>
+</section>
+<br>
 
-</section><br>
-
-
-<!--footer-->
 <section>
-  <div class="container">
-    <blockquote class="blockquote text-center mt-5 mb-0">
-      <!--            <svg class="lnr text-muted quote-icon pull-left">-->
-      <!--                <use xlink:href="#lnr-mustache"> </use>-->
-      <!--            </svg>-->
-      <p class="mb-0">Sometimes it is the people who no one imagines anything of, who do the things that no one can imagine.</p><br>
-      <footer class="blockquote-footer">Alan Turing
-        <!--                <cite title="Source Title">Meditationes Sacrae (1597)</cite>-->
-      </footer>
-    </blockquote>
-  </div>
+    <div class="container">
+        <blockquote class="blockquote text-center mt-5 mb-0">
+            <p class="mb-0">Sometimes it is the people who no one imagines anything of, who do the things that no one
+                can imagine. - Alan Turing</p><br>
+        </blockquote>
+    </div>
 </section>
 
 <div class="py-3 bg-dark text-white">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-7 text-center text-md-left">
-        <p class="mb-md-0">(C) 2022 CCKMA Corp. All rights reserved. </p>
-      </div>
-      <div class="col-md-5 text-center text-md-right">
-        <p class="mb-0">Bootstrap Landing Page by fastfreddy <a href="https://www.linkedin.com/in/alfredo-oviedo/" class="external text-white">noonchio</a> </p>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 text-center text-md-left">
+                <p class="mb-md-0">(C) 2022 CCKMA Corp. All rights reserved. </p>
+            </div>
+            <div class="col-md-5 text-center text-md-right">
+                <p class="mb-0">Bootstrap Landing Page by fastfreddy <a
+                        href="https://www.linkedin.com/in/alfredo-oviedo/" class="external text-white">noonchio</a></p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function(){
-    // add padding top to show content behind navbar
-    navbar_height = document.querySelector('.navbar').offsetHeight;
-    document.body.style.paddingTop = navbar_height + 'px';
-  });
+    document.addEventListener("DOMContentLoaded", function () {
+
+        navbar_height = document.querySelector('.navbar').offsetHeight;
+        document.body.style.paddingTop = navbar_height + 'px';
+    });
 </script>
 </body>
 </html>
