@@ -3,9 +3,14 @@
 
 <head th:replace="partials/partials.html :: head('All Resources')"></head>
 <style>
-    .bi-star {
-        cursor: pointer;
-    }
+    .dropdown-menu-center {
+        right: auto;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);}
+
+
 </style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
@@ -41,13 +46,34 @@
 <!--    </div>-->
 <!--</main>-->
 
-    <main class="container">
+
+<div class="dropdown text-center mb-5" >
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+        Curriculum Topic
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/resources/topic/CSS">CSS</a>
+        <a class="dropdown-item" href="/resources/topic/HTML">HTML</a>
+        <a class="dropdown-item" href="/resources/topic/Javascript">Javascript</a>
+        <a class="dropdown-item" href="/resources/topic/Java">Java</a>
+        <a class="dropdown-item" href="/resources/topic/MySQL">MySQL</a>
+        <a class="dropdown-item" href="/resources/topic/Spring Boot">Spring Boot</a>
+        <a class="dropdown-item" href="/resources/topic/Capstone">Capstone</a>
+        <a class="dropdown-item" href="resources/topic/Other">Other</a>
+    </div>
+</div>
+
+
+
+
+
+<main class="container">
         <div class="row gy-4">
             <div class="col-12 col-md-6" th:each="r : ${resources}">
-                <article class="card">
+                <article class="card" style=" border-radius: 2%">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-baseline">
-                            <h3 class="card-title" th:text="${r.title}"></h3>
+                        <div class="d-flex justify-content-between align-items-baseline" style="background-color: gainsboro">
+                            <h3 class="card-title"  th:text="${r.title}"></h3>
                             <p>
                                 <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
                                 <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
@@ -68,6 +94,8 @@
             </div>
         </div>
     </main>
+
+
     <th:block th:replace="partials/partials.html :: footer"></th:block>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 
@@ -116,8 +144,14 @@
     }));
 
 
+
 </script>
 
+<th:block th:replace="partials/partials.html :: scripts"></th:block>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -1,8 +1,10 @@
 package com.example.capstonecckma.controllers;
 
+import com.example.capstonecckma.model.CurriculumTopic;
 import com.example.capstonecckma.model.Doc;
 import com.example.capstonecckma.model.Resource;
 import com.example.capstonecckma.model.User;
+import com.example.capstonecckma.repositories.CurriculumTopicRepository;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.services.EmailService;
@@ -23,19 +25,22 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ResourceController {
     private ResourceRepository resourceDao;
     private UserRepository userDao;
 
+    private CurriculumTopicRepository curriculumTopicDao;
+
     private DocStorageService docStorageService;
     private final EmailService emailService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, DocStorageService docStorageService, EmailService emailService) {
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
+        this.curriculumTopicDao = curriculumTopicDao;
         this.docStorageService = docStorageService;
         this.emailService = emailService;
     }
@@ -90,6 +95,8 @@ public class ResourceController {
     @GetMapping("/create")
     public String getCreateForm(Model model) {
         model.addAttribute("resource", new Resource());
+        List<CurriculumTopic> list = curriculumTopicDao.findAll();
+        model.addAttribute("topic", list);
         return "resources/create";
     }
     @GetMapping("/createtest")
@@ -192,6 +199,18 @@ public class ResourceController {
         httpHeaders.setLocation(yahoo);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
+
+    @GetMapping("/resources/topic/{title}")
+    public String getTopic(@PathVariable("title") String title, Model vModel) {
+
+        CurriculumTopic curriculumTopic = curriculumTopicDao.findByTitle(title);
+        List<Resource> resourceList = resourceDao.findAll();
+        vModel.addAttribute("topics", curriculumTopic);
+        vModel.addAttribute("resources", resourceList);
+        return "resources/showone-topic";
+    }
+
+
 
 }
 
