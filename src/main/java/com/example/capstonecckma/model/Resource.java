@@ -3,6 +3,7 @@ package com.example.capstonecckma.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Resource {
     private String description;
 
     @ManyToOne
+
     @JoinColumn (name = "curriculum_topic_id")
     @JsonBackReference
     private CurriculumTopic curriculum_topic;

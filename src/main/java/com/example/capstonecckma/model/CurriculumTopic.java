@@ -1,6 +1,9 @@
 package com.example.capstonecckma.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "curriculum_topic")
@@ -13,6 +16,9 @@ public class CurriculumTopic {
     private String title;
     @Column(length = 100, nullable = false, unique = true)
     private String description;
+
+    @OneToMany(mappedBy = "curriculum_topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Resource> resources = new HashSet<>();
 
     public CurriculumTopic() {
     }
@@ -54,5 +60,16 @@ public class CurriculumTopic {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @OneToMany(mappedBy = "curriculum_topic")
+    private Collection<Resource> resource;
+
+    public Collection<Resource> getResource() {
+        return resource;
+    }
+
+    public void setResource(Collection<Resource> resource) {
+        this.resource = resource;
     }
 }

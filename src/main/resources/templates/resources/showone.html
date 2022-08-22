@@ -13,8 +13,12 @@
 <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}" style="text-align: center"></div>
 <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 
+
+
+
 <main class="container">
-    <p>Created by UserID: <span th:text="${resource.user.id}"></span></p>
+    <p>Created by: <span th:text="${resource.user.username}"></span></p>
+    <p>topic: <span th:text="${resource.curriculum_topic.title}"></span></p>
     <p th:text="${resource.link}"></p>
     <p th:text="${resource.description}"></p>
     <br>
