@@ -1,34 +1,20 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<!--   Bootstrap CSS-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-  <title>CodeUpLoader</title>
-  <script src="https://kit.fontawesome.com/6342bfb20c.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-<!--      <a target="_blank" href="https://icons8.com/icon/9QKFk2mi6YYi/flying-duck">Flying Duck</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
-  <link href = "/bootstrap/css/bootstrap.min.css" rel = "stylesheet">
-  <script src = "/scripts/jquery.min.js"></script>
-  <script src = "/bootstrap/js/bootstrap.min.js"></script>
-</head>
+<head th:replace="partials/partials.html :: head('Login')"></head>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
+
 
 <section class="bg-light">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 order-2 order-lg-1">
         <h1>A Resource Supplement  </h1>
-        <p class="lead">This application is based on the phrase “necessity is the mother of invention” and a desire to contribute something useful to pass on to future cohorts at Codeup as part of our Capstone project. </p>
-        <!--                <p class="lead">Lorem Ipsum dolor sit amet. Lorem Ipsum dolor sit amet. </p>-->
-        <!--                <p class="lead">Lorem Ipsum dolor sit amet. Lorem Ipsum dolor sit amet. </p>-->
+        <p class="lead">This application aligns with the phrase “necessity is the mother of invention”, and a desire to contribute something useful to pass on to future cohorts at Codeup. </p>
+
         <p ><a href="#" class="btn btn-primary shadow mr-2 ">Get Uploading!</a>
-<!--          <a href="#" class="btn btn-outline-primary">About CCKMA</a></p>-->
+
       </div>
       <div class="col-lg-6 order-1 order-lg-2"><img src="images/bit-art.jpeg" alt="landing image" class="img-fluid"></div>
     </div>
