@@ -52,24 +52,23 @@ public class DocController {
             int resId = (int) lastOne.getId();
             docStorageService.saveFile(file, resId);
         }
-
         return "redirect:/resources";
     }
 
     // =================== uploading DOC(s) to resource (inside showone, not after create)
 
     @GetMapping("/multiupload/{resId}")
-    public String uploadDocsFromRes(Model vModel, @PathVariable Integer resId) {
+    public String uploadDocsFromRes(Model vModel, @PathVariable long resId) {
         List<Doc> docs = docStorageService.getFiles();
+        Resource resource = resourceDao.findById(resId).get();
         vModel.addAttribute("docs", docs);
-        vModel.addAttribute("resId", resId);
+        vModel.addAttribute("resource", resource);
         return "multiuploadshowone";
     }
 
     @PostMapping("/uploadFiles/{resId}")
-    public String uploadMultipleDocsFromRes(@RequestParam("files") MultipartFile[] files, @PathVariable Integer resId) {
+    public String uploadMultipleDocsFromRes(@RequestParam("files") MultipartFile[] files, @PathVariable long resId) {
         for (MultipartFile file: files) {
-
             docStorageService.saveFile(file, resId);
         }
         return "redirect:/resources";
