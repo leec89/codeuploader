@@ -37,24 +37,27 @@ public class SecurityConfiguration {
             /* Login configuration */
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/resources") // user's home page, it can be any URL
+                .defaultSuccessUrl("/landing") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
+
             /* Logout configuration */
             .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout") // append a query string value
+
             /* Pages that can be viewed without having to log in */
             .and()
                 .authorizeRequests()
-                .antMatchers("/", "/resources", "/signup") // anyone can see the home and the resources page
+                .antMatchers("/", "/resources", "/signup", "/landing", "/about") // anyone can see the home and the resources page
                 .permitAll()
+
             /* Pages that require authentication */
             .and()
                 .authorizeRequests()
                 .antMatchers(
                         "/create", // only authenticated users can create
-                        "/resources/{id}/edit" // only authenticated users can edit
-//                        "/user/profile" // only authenticated users can view profile
+                        "/resources/{id}/edit", // only authenticated users can edit
+                        "/users/profile" // only authenticated users can view profile
                 )
                 .authenticated()
         ;

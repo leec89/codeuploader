@@ -16,16 +16,19 @@
 <main class="container">
     <form th:action="@{/resources/create}" method="POST" id="form" th:object="${resource}">
         <div class="mb-3">
-            <label class="form-label" for="title">Title</label>
-            <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title">
+            <label class="form-label" for="title">Title*</label>
+            <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title (a helpful tip - this field is searchable!)">
         </div>
         <div class="mb-3">
             <label class="form-label" for="link">Link</label>
             <input th:field="*{link}" class="form-control" id="link" name="link" placeholder="Enter link">
         </div>
         <div class="mb-3">
-            <label class="form-label" for="description">Description</label>
-            <textarea th:field="*{description}" class="form-control" id="description" name="description" placeholder="Enter description of text"></textarea>
+            <label class="form-label" for="description">Description*</label>
+            <textarea th:field="*{description}" class="form-control" id="description" name="description" placeholder="Enter description of text  (a helpful tip - this field is searchable!)"></textarea>
+        </div>
+        <div>
+            <p>*required</p>
         </div>
 
         <table style="text-align: center">

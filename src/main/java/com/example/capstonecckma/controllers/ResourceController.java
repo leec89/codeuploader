@@ -72,7 +72,7 @@ public class ResourceController {
     @GetMapping("/landing")
     public String getLanding(Model vModel) {
 
-        return "landing-page-idea";
+        return "landingpage";
     }
 
     // =================== resources URL - view ALL resources
