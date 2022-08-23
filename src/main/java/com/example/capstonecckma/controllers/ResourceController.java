@@ -87,6 +87,7 @@ public class ResourceController {
         List<Doc> docs = docStorageService.getFiles();
         vModel.addAttribute("docs", docs);
         vModel.addAttribute("resource", resource);
+        vModel.addAttribute("curriculum", curriculumTopicDao);
         return "resources/showone";
     }
 
