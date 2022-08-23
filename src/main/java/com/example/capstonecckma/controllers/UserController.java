@@ -27,13 +27,13 @@ public class UserController {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
-        this.emailService= emailService;
+        this.emailService = emailService;
     }
 
     // =================== user CREATE/REGISTER
 
     @GetMapping("/signup")
-    public String showSignupForm(Model vModel){
+    public String showSignupForm(Model vModel) {
         vModel.addAttribute("user", new User());
         return "users/signup";
     }
@@ -63,11 +63,16 @@ public class UserController {
         vModel.addAttribute("resources", resource);
         return "users/profile";
     }
-    
+
     // =================== About Us view
-    
+
     @GetMapping("/about")
     public String getAboutPage() {
         return "about";
+    }
+
+    @GetMapping("/landingpage")
+    public String getLandingPage() {
+        return "landingpage";
     }
 }
