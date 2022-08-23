@@ -9,6 +9,7 @@ import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.services.EmailService;
 import com.example.capstonecckma.services.DocStorageService;
+import com.example.capstonecckma.services.ResourceService;
 import com.slack.api.Slack;
 import com.slack.api.methods.SlackApiException;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.net.URI;
@@ -37,13 +39,17 @@ public class ResourceController {
     private DocStorageService docStorageService;
     private final EmailService emailService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService) {
+    private ResourceService resourceService;
+
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, ResourceService resourceService) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.curriculumTopicDao = curriculumTopicDao;
         this.docStorageService = docStorageService;
         this.emailService = emailService;
+        this.resourceService = resourceService;
     }
+
 
     // =================== Testing Page
 
@@ -204,6 +210,17 @@ public class ResourceController {
         vModel.addAttribute("resources", resourceList);
         return "resources/showone-topic";
     }
+
+
+
+    @GetMapping("/search")
+    public String searchResource1(@RequestParam("query") String query, Model vModel){
+        List<Resource> resourceList = resourceService.searchResource(query);
+        vModel.addAttribute("resources", resourceList);
+
+            return "resources/search";
+    }
+
 
 
 

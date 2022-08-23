@@ -2,16 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="partials/partials.html :: head('All Resources')"></head>
-<style>
-    .dropdown-menu-center {
-        right: auto;
-        left: 50%;
-        -webkit-transform: translate(-50%, 0);
-        -o-transform: translate(-50%, 0);
-        transform: translate(-50%, 0);}
-
-
-</style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
 
@@ -47,6 +37,13 @@
 <!--</main>-->
 
 
+
+<form style="text-align: center" th:action="@{/search}">
+    <input type="text" placeholder="Search by keyword" th:name="query"/>
+    <input type="submit"/>
+</form><br>
+
+
 <div class="dropdown text-center mb-5" >
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
         Curriculum Topic
@@ -61,18 +58,18 @@
         <a class="dropdown-item" href="/resources/topic/Capstone">Capstone</a>
         <a class="dropdown-item" href="resources/topic/Other">Other</a>
     </div>
-</div>
+</div><hr>
 
 
 
 
 
-<main class="container">
+<main class="container mt-5">
         <div class="row gy-4">
             <div class="col-12 col-md-6" th:each="r : ${resources}">
                 <article class="card" style=" border-radius: 2%">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-baseline" style="background-color: gainsboro">
+                        <div class="d-flex justify-content-between align-items-baseline" >
                             <h3 class="card-title"  th:text="${r.title}"></h3>
                             <p>
                                 <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
