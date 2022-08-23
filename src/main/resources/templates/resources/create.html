@@ -10,7 +10,9 @@
 </style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
+
 <header th:replace="partials/partials.html :: header('Create a Resource')"></header>
+
 <main class="container">
     <form th:action="@{/resources/create}" method="POST" id="form" th:object="${resource}">
         <div class="mb-3">
