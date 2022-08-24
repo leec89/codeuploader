@@ -15,7 +15,7 @@
     <p>Created by: <span th:text="${resource.user.username}"></span></p>
     <p>Topic: <span th:text="${resource.curriculum_topic.title}"></span></p>
     <p hidden th:text="${resource.curriculum_topic.id}"></p>
-    <p>Link: <a th:href="@{'https://' + ${resource.link}}" th:text="${resource.link}" /></p>
+    <p th:if="${not resource.link.isEmpty()}">Link: <a th:href="@{'https://' + ${resource.link}}" th:text="${resource.link}" /></p>
     <p th:text="${resource.description}"></p>
     <br>
     <div>

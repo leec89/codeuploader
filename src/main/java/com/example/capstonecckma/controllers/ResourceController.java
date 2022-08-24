@@ -65,7 +65,7 @@ public class ResourceController {
     @GetMapping("/")
     public String getIndex(Model vModel) {
 
-        return "index";
+        return "landingpage";
     }
 
     // =================== Landing page
