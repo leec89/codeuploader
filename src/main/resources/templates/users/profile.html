@@ -7,74 +7,56 @@
         cursor: pointer;
     }
 </style>
+
 <body>
-<nav th:replace="partials/partials.html :: nav"></nav>
+    <nav th:replace="partials/partials.html :: nav"></nav>
 
-<header th:replace="partials/partials.html :: header('Your Submitted Resources')"></header>
+    <header th:replace="partials/partials.html :: header('Your Submitted Resources')"></header>
 
-<main class="container">
-    <div class="row gy-4">
-        <div class="col-12 col-md-6" th:if="${#authentication.getName() == res.user.username}" th:each="res : ${resources}">
-            <article class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h3 class="card-title" th:text="${res.title}"></h3>
-                        <p>
-                            <span class="liked-posts" th:text="${#lists.size(res.usersThatLiked)}"></span>
-                            <span th:if="${#lists.size(res.usersThatLiked) == 1}"> like</span>
-                            <span th:if="${#lists.size(res.usersThatLiked) != 1}"> likes</span>
-                        </p>
+    <main class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-6" th:if="${#authentication.getName() == r.user.username}" th:each="r : ${resources}">
+                <article class="card" style=" border-radius: 2%">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-baseline" >
+                            <h3 class="card-title"  th:text="${r.title}"></h3>
+                            <div class="d-flex flex-column align-items-center">
+                                <p>
+                                    <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
+                                    <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
+                                    <span th:if="${#lists.size(r.usersThatLiked) != 1}"> likes</span>
+                                </p>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
+                                    <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
+                                </th:block>
+                            </div>
+                        </div>
+                        <p>By <span th:text="${r.user.username}"></span></p>
+                        <p th:text="${#strings.abbreviate(r.description,75)}"></p>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div>
+                                <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
+                            </div>
+                            <div>
+                                <a th:href="@{'/resources/topic/'+${r.curriculum_topic.id}}"><img th:src="'/images/'+${r.curriculum_topic.id}+'.png'"/></a>
+                            </div>
+                        </div>
                     </div>
-                    <p>By <span th:text="${res.user.username}"></span></p>
-                    <p th:text="${#strings.abbreviate(res.description,75)}"></p>
-                    <div class="d-flex">
-                        <a class="" th:href="@{/resources/{id}(id=${res.id})}">Read more</a>
-                        <th:block sec:authorize="isAuthenticated()">
-                            <h3 th:if="${!res.user.hasLikedResource(res)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${res.id}" class="bi bi-star"></i></h3>
-                            <h3 th:if="${res.user.hasLikedResource(res)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${res.id}" class="bi bi-star-fill"></i></h3>
-                        </th:block>
-                    </div>
-                </div>
-            </article>
+                </article>
+            </div>
         </div>
-    </div>
-</main>
-<th:block th:replace="partials/partials.html :: footer"></th:block>
-<th:block th:replace="partials/partials.html :: scripts"></th:block>
-<script>
-    // code to handle like post feature
-    document.querySelectorAll('.bi-star').forEach(element => element.addEventListener('click', function(e) {
-        function flipThumbVisibility(e) {
-            const classList = e.target.classList;
-            if (classList.contains('bi-star-fill')) {
-                classList.remove('bi-star-fill');
-                classList.add('bi-star');
-            } else {
-                classList.remove('bi-star');
-                classList.add('bi-star-fill');
-            }
-        }
-        function changeLikeCount(e) {
-            const likedPostsNode = e.target.parentNode.parentNode.parentNode.parentNode.querySelector('span.liked-posts');
-            if (e.target.classList.contains('bi-star-fill')) {
-                likedPostsNode.innerText = Number(likedPostsNode.innerText) + 1;
-            } else {
-                likedPostsNode.innerText = Number(likedPostsNode.innerText) - 1;
-            }
-        }
-        const likedPostId = e.currentTarget.getAttribute("data-id");
-        const options = {
-            method: 'POST',
-            headers: {}
-        }
-        const token = document.head.querySelector("meta[name=_csrf]").content;
-        const header = document.head.querySelector("meta[name=_csrf_header]").content;
-        options.headers[header] = token;
-        fetch(`/resources/${likedPostId}/like`, options).then(() => {
-            flipThumbVisibility(e);
-            changeLikeCount(e);
-        });
-    }));
-</script>
+    </main>
+
+    <th:block th:replace="partials/partials.html :: footer"></th:block>
+
+    <th:block th:replace="partials/partials.html :: likescript"></th:block>
+
+    <th:block th:replace="partials/partials.html :: scripts"></th:block>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
 </body>
 </html>
