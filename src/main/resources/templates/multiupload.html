@@ -13,6 +13,9 @@
             <input type="file" name="files" multiple required />
             <button type="submit">Submit</button>
         </form>
+        <form id="noUpload" name="noUpload" method="get" th:action=@{/resources}>
+            <button type="submit">Continue</button>
+        </form>
     </div>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>

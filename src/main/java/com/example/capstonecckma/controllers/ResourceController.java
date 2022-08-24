@@ -76,7 +76,7 @@ public class ResourceController {
         return "landingpage";
     }
 
-    // =================== resources URL - view ALL resources (resources/showall.html)
+    // =================== resources view ALL (resources/showall.html)
 
     @GetMapping("/resources")
     public String getResources(Model vModel) {
@@ -86,7 +86,7 @@ public class ResourceController {
         return "resources/showall";
     }
 
-    // =================== resources URL - view ONE resource (resources/showone.html)
+    // =================== resources view ONE (resources/showone.html)
 
     @GetMapping("/resources/{id}")
     public String getResource(@PathVariable("id") long id, Model vModel) {
@@ -98,7 +98,7 @@ public class ResourceController {
         return "resources/showone";
     }
 
-    // =================== resource CREATE - view create (resources/create.html)
+    // =================== resource CREATE (resources/create.html)
 
     @GetMapping("/create")
     public String getCreateForm(Model model) {
@@ -121,7 +121,7 @@ public class ResourceController {
         return "multiupload";
     }
 
-    // =================== resources EDIT/UPDATE - view edit (resources/edit.html)
+    // =================== resources EDIT/UPDATE (resources/edit.html)
 
     @GetMapping("/resources/{id}/edit")
     public String getEditForm(@PathVariable("id") long id, Model model) {
@@ -138,6 +138,25 @@ public class ResourceController {
         return "redirect:/resources";
     }
 
+    // =================== resource DELETE
+
+    @PostMapping("/resources/{id}/delete")
+    public String deletePost(
+            @PathVariable long id,
+            @ModelAttribute Resource resource
+    ) {
+
+        Resource resourceToDelete = resourceDao.findById(resource.getId()).get();
+        String emailTo = resourceToDelete.getUser().getEmail();
+
+        String emailSubject = "A CodeUploader resource has been deleted!";
+        String emailBlurb = "A CodeUploader resource has been deleted!\r\n\r\nThe title of the deleted resource was\r\n[ " + resourceToDelete.getTitle() + " ].\r\n If this was not expected, please contact customer support.";
+        resourceDao.deleteById(id);
+        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+
+        return "redirect:/resources";
+    }
+
     // =================== add single DOC to resource
 
     @GetMapping("/resources/individual-doc/{id}")
@@ -148,7 +167,7 @@ public class ResourceController {
         return "singleupload";
     }
 
-    // =================== resources by topic - view by topic (resources/showbytopic.html)
+    // =================== resources by TOPIC (resources/showbytopic.html)
 
     @GetMapping("/resources/topic/{topicId}")
     public String getTopic(@PathVariable long topicId, Model vModel) {
@@ -159,7 +178,7 @@ public class ResourceController {
         return "resources/showbytopic";
     }
 
-    // =================== resources after search - view by search result (resources/search.html)
+    // =================== resources by SEARCH (resources/search.html)
 
     @GetMapping("/search")
     public String searchResource1(@RequestParam("query") String query, Model vModel){
