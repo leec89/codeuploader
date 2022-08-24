@@ -13,7 +13,7 @@
 <body>
     <nav th:replace="partials/partials.html :: nav"></nav>
 
-    <header th:replace="partials/partials.html :: header('Your Submitted Resources')"></header>
+    <header th:replace="partials/partials.html :: header('All Resources of '+${topics.title})"></header>
 
     <main class="container">
         <div class="row gy-4">
