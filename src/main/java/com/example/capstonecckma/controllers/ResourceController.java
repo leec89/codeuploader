@@ -48,11 +48,16 @@ public class ResourceController {
         this.resourceService = resourceService;
     }
 
-    // =================== Testing Page
+    // =================== Testing Pages
 
     @GetMapping("/testing")
     public String testPage(Model vModel) {
         return "testpage";
+    }
+
+    @GetMapping("/hello")
+    ResponseEntity<String> hello() {
+        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
     }
 
     // =================== Initial landing on index URL
@@ -143,16 +148,31 @@ public class ResourceController {
         return "singleupload";
     }
 
-    @GetMapping("/hello")
-    ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+    // =================== resources by topic - view by topic (resources/showbytopic.html)
+
+    @GetMapping("/resources/topic/{topicId}")
+    public String getTopic(@PathVariable long topicId, Model vModel) {
+        CurriculumTopic topic = curriculumTopicDao.findById(topicId);
+        List<Resource> resourceList = resourceDao.findAll();
+        vModel.addAttribute("topics", topic);
+        vModel.addAttribute("resources", resourceList);
+        return "resources/showbytopic";
+    }
+
+    // =================== resources after search - view by search result (resources/search.html)
+
+    @GetMapping("/search")
+    public String searchResource1(@RequestParam("query") String query, Model vModel){
+        List<Resource> resourceList = resourceService.searchResource(query);
+        vModel.addAttribute("resources", resourceList);
+        vModel.addAttribute("queryValue", query);
+        return "resources/search";
     }
 
     @GetMapping("/customHeader")
     ResponseEntity<String> customHeader() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Custom-Header", "foo");
-
         return new ResponseEntity<>(
                 "Custom header set", headers, HttpStatus.OK);
     }
@@ -197,28 +217,6 @@ public class ResourceController {
         httpHeaders.setLocation(yahoo);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
-
-    @GetMapping("/resources/topic/{id}")
-    public String getTopic(@PathVariable long topicId, Model vModel) {
-        CurriculumTopic topic = curriculumTopicDao.findById(topicId);
-        List<Resource> resourceList = resourceDao.findAll();
-        vModel.addAttribute("topics", topic);
-        vModel.addAttribute("resources", resourceList);
-        return "resources/showbytopic";
-    }
-
-
-
-    @GetMapping("/search")
-    public String searchResource1(@RequestParam("query") String query, Model vModel){
-        List<Resource> resourceList = resourceService.searchResource(query);
-        vModel.addAttribute("resources", resourceList);
-
-            return "resources/search";
-    }
-
-
-
 
 }
 

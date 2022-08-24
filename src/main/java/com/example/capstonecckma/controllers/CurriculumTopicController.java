@@ -18,12 +18,12 @@ public class CurriculumTopicController {
         this.curriculumTopicDao = curriculumTopicDao;
     }
 
-    @GetMapping("/topics")
-    public String getResources(Model vModel) {
-        List<CurriculumTopic> topicList = curriculumTopicDao.findAll();
-        // pass posts to view
-        vModel.addAttribute("topics", topicList);
-        return "topics";
-    }
+//    @GetMapping("/topics")
+//    public String getResources(Model vModel) {
+//        List<CurriculumTopic> topicList = curriculumTopicDao.findAll();
+//        // pass posts to view
+//        vModel.addAttribute("topics", topicList);
+//        return "topics";
+//    }
 
 }

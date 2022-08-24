@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="partials/partials.html :: head('View Resource')"></head>
 <body>
@@ -29,7 +29,6 @@
             </tr>
             </thead>
             <tbody>
-            <!--            <tr th:each="doc:${docs}">-->
             <tr th:if="${resource.id == doc.resource.id}" th:each="doc:${docs}">
                 <td th:text="${doc.docName}" />
                 <td><a th:href="@{'/downloadFile/'+${doc.id}}">Download</a></td>
@@ -56,7 +55,6 @@
             </form>
         </div>
         <div>
-<!--            <button type="button" th:onclick="|window.location.href='@{/do-stuff/{id}(id=${r.id})}'|" >Share</button>-->
             <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET">
                 <button>Share</button>
             </form>
