@@ -18,11 +18,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.net.URI;
@@ -50,12 +48,10 @@ public class ResourceController {
         this.resourceService = resourceService;
     }
 
-
     // =================== Testing Page
 
     @GetMapping("/testing")
     public String testPage(Model vModel) {
-
         return "testpage";
     }
 
@@ -75,7 +71,7 @@ public class ResourceController {
         return "landingpage";
     }
 
-    // =================== resources URL - view ALL resources
+    // =================== resources URL - view ALL resources (resources/showall.html)
 
     @GetMapping("/resources")
     public String getResources(Model vModel) {
@@ -85,7 +81,7 @@ public class ResourceController {
         return "resources/showall";
     }
 
-    // =================== resources URL - view single resource
+    // =================== resources URL - view ONE resource (resources/showone.html)
 
     @GetMapping("/resources/{id}")
     public String getResource(@PathVariable("id") long id, Model vModel) {
@@ -97,7 +93,7 @@ public class ResourceController {
         return "resources/showone";
     }
 
-    // =================== resource CREATE
+    // =================== resource CREATE - view create (resources/create.html)
 
     @GetMapping("/create")
     public String getCreateForm(Model model) {
@@ -120,7 +116,7 @@ public class ResourceController {
         return "multiupload";
     }
 
-    // =================== resources EDIT/UPDATE
+    // =================== resources EDIT/UPDATE - view edit (resources/edit.html)
 
     @GetMapping("/resources/{id}/edit")
     public String getEditForm(@PathVariable("id") long id, Model model) {
@@ -202,14 +198,13 @@ public class ResourceController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
-    @GetMapping("/resources/topic/{title}")
-    public String getTopic(@PathVariable("title") String title, Model vModel) {
-
-        CurriculumTopic curriculumTopic = curriculumTopicDao.findByTitle(title);
+    @GetMapping("/resources/topic/{id}")
+    public String getTopic(@PathVariable long topicId, Model vModel) {
+        CurriculumTopic topic = curriculumTopicDao.findById(topicId);
         List<Resource> resourceList = resourceDao.findAll();
-        vModel.addAttribute("topics", curriculumTopic);
+        vModel.addAttribute("topics", topic);
         vModel.addAttribute("resources", resourceList);
-        return "resources/showone-topic";
+        return "resources/showbytopic";
     }
 
 
