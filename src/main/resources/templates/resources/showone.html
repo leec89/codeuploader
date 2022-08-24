@@ -39,27 +39,31 @@
         </table>
     </div>
     <br>
-    <div class="show-buttons" th:object="${resource}" >
-        <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
-            <button>Edit</button>
-        </form>
-        <br>
-        <form th:action="@{/multiupload/{id}(id=${resource.id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
-            <button>Upload More Docs</button>
-        </form>
-        <br>
-        <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
-            <button id="delete-post-btn">Delete</button>
-        </form>
+    <div class="d-flex justify-content-between align-items-end show-buttons" th:object="${resource}">
+        <div>
+            <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
+                <button>Edit</button>
+            </form>
+        </div>
+        <div>
+            <form th:action="@{/multiupload/{id}(id=${resource.id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
+                <button>Uploads</button>
+            </form>
+        </div>
+        <div>
+            <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
+                <button id="delete-post-btn">Delete</button>
+            </form>
+        </div>
         <div>
 <!--            <button type="button" th:onclick="|window.location.href='@{/do-stuff/{id}(id=${r.id})}'|" >Share</button>-->
-                <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET">
-                    <button>Share</button>
-                </form>
+            <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET">
+                <button>Share</button>
+            </form>
         </div>
         <div class="show-buttons" th:object="${resource}" >
             <form th:action="@{/resources}" th:method="GET">
-                <button>Back to Resources</button>
+                <button>Resources</button>
             </form>
             <br>
         </div>

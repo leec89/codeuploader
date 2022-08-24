@@ -50,14 +50,14 @@
         Curriculum Topic
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/resources/topic/CSS">CSS</a>
-        <a class="dropdown-item" href="/resources/topic/HTML">HTML</a>
-        <a class="dropdown-item" href="/resources/topic/Javascript">Javascript</a>
-        <a class="dropdown-item" href="/resources/topic/Java">Java</a>
-        <a class="dropdown-item" href="/resources/topic/MySQL">MySQL</a>
-        <a class="dropdown-item" href="/resources/topic/Spring Boot">Spring Boot</a>
-        <a class="dropdown-item" href="/resources/topic/Capstone">Capstone</a>
-        <a class="dropdown-item" href="resources/topic/Other">Other</a>
+        <a class="dropdown-item" href="/resources/topic/1">CSS</a>
+        <a class="dropdown-item" href="/resources/topic/2">HTML</a>
+        <a class="dropdown-item" href="/resources/topic/3">Javascript</a>
+        <a class="dropdown-item" href="/resources/topic/4">Java</a>
+        <a class="dropdown-item" href="/resources/topic/5">MySQL</a>
+        <a class="dropdown-item" href="/resources/topic/6">Spring Boot</a>
+        <a class="dropdown-item" href="/resources/topic/7">Capstone</a>
+        <a class="dropdown-item" href="/resources/topic/8">Other</a>
     </div>
 </div><hr>
 
@@ -72,20 +72,27 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline" >
                             <h3 class="card-title"  th:text="${r.title}"></h3>
-                            <p>
-                                <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
-                                <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
-                                <span th:if="${#lists.size(r.usersThatLiked) != 1}"> likes</span>
-                            </p>
+                            <div class="d-flex flex-column align-items-center">
+                                <p>
+                                    <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
+                                    <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
+                                    <span th:if="${#lists.size(r.usersThatLiked) != 1}"> likes</span>
+                                </p>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
+                                    <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
+                                </th:block>
+                            </div>
                         </div>
                         <p>By <span th:text="${r.user.username}"></span></p>
                         <p th:text="${#strings.abbreviate(r.description,75)}"></p>
-                        <div class="d-flex">
-                            <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
-                            <th:block sec:authorize="isAuthenticated()">
-                                <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
-                                <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
-                            </th:block>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <div>
+                                <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
+                            </div>
+                            <div>
+                                <a th:href="@{'/resources/topic/'+${r.curriculum_topic.id}}"><img th:src="'/images/'+${r.curriculum_topic.id}+'.png'"/></a>
+                            </div>
                         </div>
                     </div>
                 </article>

@@ -8,9 +8,9 @@ import java.util.Set;
 @Entity
 @Table(name = "curriculum_topic")
 public class CurriculumTopic {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(columnDefinition = "INT UNSIGNED NOT NULL")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT UNSIGNED NOT NULL")
     private long id;
     @Column(length = 100, nullable = false, unique = true)
     private String title;
@@ -28,6 +28,19 @@ public class CurriculumTopic {
         this.title = title;
         this.description = description;
     }
+
+    public CurriculumTopic(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    //    public CurriculumTopic(CurriculumTopic copy) {
+//        id = copy.id;
+//        title = copy.title;
+//        description = copy.description;
+//        resources = copy.resources;
+//        resource = copy.resource;
+//    }
 
     public long getId() {
         return id;
@@ -53,15 +66,6 @@ public class CurriculumTopic {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "CurriculumTopic{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
-
     @OneToMany(mappedBy = "curriculum_topic")
     private Collection<Resource> resource;
 
@@ -71,5 +75,14 @@ public class CurriculumTopic {
 
     public void setResource(Collection<Resource> resource) {
         this.resource = resource;
+    }
+
+    @Override
+    public String toString() {
+        return "CurriculumTopic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

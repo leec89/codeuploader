@@ -56,30 +56,34 @@
 
 <main class="container">
     <div class="row gy-4">
-        <div class="col-12 col-md-6" th:if="${topics.title == r.curriculum_topic.title}"    th:each="r : ${resources}">
+        <div class="col-12 col-md-6" th:if="${topics.id == r.curriculum_topic.id}" th:each="r : ${resources}">
             <article class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h3 class="card-title" th:text="${r.title}"></h3>
-                        <p>
-                            <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
-                            <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
-                            <span th:if="${#lists.size(r.usersThatLiked) != 1}"> likes</span>
-                        </p>
+                        <div class="d-flex flex-column align-items-center">
+                            <p>
+                                <span class="liked-posts" th:text="${#lists.size(r.usersThatLiked)}"></span>
+                                <span th:if="${#lists.size(r.usersThatLiked) == 1}"> like</span>
+                                <span th:if="${#lists.size(r.usersThatLiked) != 1}"> likes</span>
+                            </p>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
+                                <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
+                            </th:block>
+                        </div>
                     </div>
                     <p>By <span th:text="${r.user.username}"></span></p>
                     <p>topic: <span th:text="${r.curriculum_topic.title}"></span></p>
 <!--                    <img width="90px" height="75px" th:src="${r.curriculum_topic.description}"/>-->
                     <p th:text="${#strings.abbreviate(r.description,75)}"></p>
-                    <div style="text-align: right">
-                        <img width="90px" height="75px" th:src="${r.curriculum_topic.description}"/>
-                    </div>
-                    <div class="d-flex">
-                        <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
-                        <th:block sec:authorize="isAuthenticated()">
-                            <h3 th:if="${!r.user.hasLikedResource(r)}" class="ms-auto" title="Like Post"><i th:attr="data-id=${r.id}" class="bi bi-star"></i></h3>
-                            <h3 th:if="${r.user.hasLikedResource(r)}" class="ms-auto" title="Unlike Post"><i th:attr="data-id=${r.id}" class="bi bi-star-fill"></i></h3>
-                        </th:block>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
+                        </div>
+                        <div>
+                            <img th:src="'/images/'+${r.curriculum_topic.id}+'.png'"/>
+                        </div>
                     </div>
                 </div>
             </article>
