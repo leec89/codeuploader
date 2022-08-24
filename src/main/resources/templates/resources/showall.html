@@ -55,6 +55,7 @@
                         </div>
                         <p>By <span th:text="${r.user.username}"></span></p>
                         <p th:text="${#strings.abbreviate(r.description,75)}"></p>
+                        <p th:if="${not r.link.isEmpty()}">Link: <a th:href="@{'https://' + ${r.link}}" th:text="${r.link}" /></p>
                         <div class="d-flex justify-content-between align-items-end">
                             <div>
                                 <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
