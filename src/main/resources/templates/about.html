@@ -3,104 +3,470 @@
 
 <head th:replace="partials/partials.html :: head('About Us')"></head>
 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
+    /* GENERAL STYLES */
+    body {
+        font-family: 'Inter', sans-serif;
+        color: #343a40;
+        border-bottom: 8px solid #087f5b;
+    }
+
+    .container {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    header,
+    section {
+        margin-bottom: 48px;
+    }
+
+    h2 {
+        margin-bottom: 48px;
+
+        font-size: 36px;
+        letter-spacing: -0.5px;
+    }
+
+    .grid-3-cols {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 80px;
+    }
+
+    .btn:link, .btn:visited {
+        background-color: #087f5b;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        display: inline-block;
+        font-weight: 500;
+        border-radius: 100px;
+    }
+
+    .btn:hover, .btn:active {
+        background-color: #099268;
+    }
+
+
+    .btn--big {
+        font-size: 18px;
+        padding: 16px 32px;
+
+    }
+
+    img {
+        border-radius: 12px;
+    }
+
+    /* COMPONENT STYLES: */
+
+    /* HEADER */
+    header {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 80px;
+        margin-top: 48px;
+    }
+
+    .header-text-box {
+        align-self: center;
+    }
+
+    h1 {
+        margin-bottom: 24px;
+        font-size: 44px;
+        line-height: 1.0; /*  stay less than 1.5*/
+        letter-spacing: -1px;
+        text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-text {
+        margin-bottom: 24px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    /* FEATURES */
+
+
+    .features-title {
+        margin-bottom: 16px;
+        font-size: 20px;
+    }
+
+    .features-text {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    /* TESTIMONIAL */
+    .testimonial-section {
+        background-color: #087f5b;
+        color: #fff;
+        padding: 24px;
+        border-radius: 12px;
+
+    }
+
+    .testimonial-box {
+        grid-column: 2 / -1;
+        align-self: center;
+    }
+
+    .testimonial-box h2 {
+        margin-bottom: 24px;
+        font-size: 24px;
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 24px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    /* Members */
+    .member {
+        box-shadow: 0 30px 30px 0 rgba(0, 0, 0, 0.07);
+        border-radius: 12px;
+    }
+
+    .chair img {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .member-box {
+        padding: 24px;
+    }
+
+    h3 {
+        margin-bottom: 24px;
+        font-size: 20px;
+    }
+
+    .member-details {
+        list-style: none;
+        margin-bottom: 24px;
+    }
+
+    .member-details li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .member-details li:last-child {
+        margin-bottom: 0;
+    }
+
+    footer {
+        margin-bottom: 48px;
+        font-size: 14px;
+        color: #495057
+    }
+</style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header('About Us')"></header>
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <div class="row d-lg-flex justify-content-between">
-            <h1 class="display-4">Meet our Developers</h1>
-            <div class="col-lg-2">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Chris</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="card" style="width: 18rem ;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Cory</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Kenny</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                    </div>
-                </div>
+<!--<div class="jumbotron jumbotron-fluid">-->
+<!--    <div class="container">-->
+<!--        <div class="row d-lg-flex justify-content-between">-->
+<!--            <h1 class="display-4">Meet our Developers</h1>-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card" style="width: 18rem;">-->
+<!--                    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Chris</h5>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--                    </ul>-->
+<!--                    <div class="card-body">-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card" style="width: 18rem ;">-->
+<!--                    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Cory</h5>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--                    </ul>-->
+<!--                    <div class="card-body">-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card" style="width: 18rem;">-->
+<!--                    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Kenny</h5>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--                    </ul>-->
+<!--                    <div class="card-body">-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
 
+<!--            </div>-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card" style="width: 18rem;">-->
+<!--                    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Mike</h5>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--                    </ul>-->
+<!--                    <div class="card-body">-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-2">-->
+<!--                <div class="card" style="width: 18rem;">-->
+<!--                    <img class="card-img-top" src="..." alt="Card image cap">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title">Alfredo</h5>-->
+<!--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--                        <li class="list-group-item">Vestibulum at eros</li>-->
+<!--                    </ul>-->
+<!--                    <div class="card-body">-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>-->
+<!--                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="container">
+    <header>
+        <div class="header-text-box">
+            <h1>We are GO-ing places after CodeUp!</h1>
+            <p class="header-text">
+                As graduates of CodeUp, we are looking forward to the next chapter of our lives.
+                To leave CodeUp better than we found it, we created CodeUpLoader. Finally, students and
+                instructors can come together to share their knowledge and resources in a more
+                organized, performant, persistent manner.
+            </p>
+            <a class="btn btn--big" href="https://github.com/CodeUpLoader-TM1/capstone-cckma">See our code</a>
+        </div>
+        <img src="/images/codeupScreenie.png" alt="Photo" />
+    </header>
+
+    <section>
+        <h2>What makes our Capstone special</h2>
+        <div class="grid-3-cols">
+            <div>
+                <p class="features-title"><strong>Persistent data</strong></p>
+                <p class="features-text">
+                    Class related materials are stored in a fully CRUD-able database with
+                    no expiration date to speak of. Students can access their course-related materials
+                    at any time from an internal, organized, and searchable database.
+                </p>
             </div>
-            <div class="col-lg-2">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Mike</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                    </div>
-                </div>
+
+            <div>
+                <p class="features-title">
+                    <strong>Slack integration</strong>
+                </p>
+                <p class="features-text">
+                    Just can't leave Slack behind? No problem! CodeUpLoader is fully integrated with
+                    Slack, allowing alerts to be pushed to your members whenever a new resource is posted.
+                </p>
             </div>
-            <div class="col-lg-2">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Alfredo</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                    </div>
-                </div>
+            <div>
+                <p class="features-title">
+                    <strong>Connects the dots</strong>
+                </p>
+                <p class="features-text">
+                    Clearly see what lesson(s) the shared resource is related to per the
+                    course curriculum with a direct link to java.codeup; no need go to
+                    the website and dig it out, interrupting your workflow.
+                </p>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="grid-3-cols">
+            <img src="/images/chartunsplash.jpg" alt="Pic of stock values" />
+            <div class="testimonial-box">
+                <h2>"We were very impressed"</h2>
+                <blockquote class="testimonial-text">
+                    At each review we were really impressed with how much progress was
+                    made towards the projects functionality and features.
+                </blockquote>
+                <p class="testimonial-author">&mdash; J Dawg</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Our Team</h2>
+
+        <div class="grid-3-cols">
+            <figure class="member">
+                <img src="/images/C.Lee.jpg" alt="Chris" />
+                <div class="member-box">
+                    <h3>"The Chief"</h3>
+                    <ul class="member-details">
+                        <li>
+                            <span>LinkedIn <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>GitHub <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>Twitter</span>
+                        </li>
+                    </ul>
+                </div>
+            </figure>
+
+
+            <figure class="member">
+                <img src="/images/myIn.jpeg" alt="Cory" />
+                <div class="member-box">
+                    <h3>Cory "America's Least Wanted" Urton</h3>
+                    <ul class="member-details">
+                        <li>
+                            <span>LinkedIn <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>GitHub <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>Twitter</span>
+                        </li>
+                    </ul>
+                </div>
+            </figure>
+
+
+
+            <figure class="member">
+                <img src="/images/kennycodeup.JPG" alt="Kenny" />
+                <div class="member-box">
+                    <h3>Kenneth "T.O." Pittman</h3>
+                    <ul class="member-details">
+                        <li>
+                            <span>LinkedIn <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>GitHub<a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>Twitter</span>
+                        </li>
+                    </ul>
+                </div>
+            </figure>
+
+            <figure class="member">
+                <img src="/images/DickensHS2.jpg" alt="Mike" />
+                <div class="member-box">
+                    <h3>Michael "The Highlander" Dickens</h3>
+                    <ul class="member-details">
+                        <li>
+                            <span>LinkedIn <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>GitHub <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>Twitter</span>
+                        </li>
+                    </ul>
+                </div>
+            </figure>
+
+            <figure class="member">
+                <img src="/images/alfredo.png" alt="Alfredo" />
+                <div class="member-box">
+                    <h3>Alfredo "Top Chef" Oviedo</h3>
+                    <ul class="member-details">
+                        <li>
+                            <span>LinkedIn <a href="#" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>GitHub <a href="#" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+                        </li>
+                        <li>
+                            <span>Twitter</span>
+                        </li>
+                    </ul>
+                </div>
+            </figure>
+
+<!--            <figure class="chair">-->
+<!--                <img src="chair-3.jpeg" alt="Chair" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>The Chair 4/2</h3>-->
+<!--                    <ul class="chair-details">-->
+<!--                        <li>-->
+<!--                            <span>Leisure and relaxing</span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>Comfortable all day!</span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>Organic cotton</span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>Weighs 80 kg</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--&lt;!&ndash;                    </div> &ndash;&gt;-->
+<!--                </div>-->
+<!--            </figure>-->
+        </div>
+    </section>
+
+    <footer>
+        Copyright &copy; 2022 by CCKMA. All Rights Reserved.
+        Attempts to commit intellectual property theft will be met with severe civil and criminal penalties.
+
+    </footer>
 </div>
+
 
 
 <th:block th:replace="partials/partials.html :: footer"></th:block>
