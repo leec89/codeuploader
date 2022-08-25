@@ -18,7 +18,7 @@
     <p th:if="${not resource.link.isEmpty()}">Link: <a th:href="@{'https://' + ${resource.link}}" th:text="${resource.link}" /></p>
     <p th:text="${resource.description}"></p>
     <br>
-    <div>
+    <div th:if="${not docs.isEmpty()}">
         <h3>Resource Document(s)</h3>
         <table>
             <thead>
@@ -55,11 +55,11 @@
             </form>
         </div>
         <div>
-            <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET">
+            <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
                 <button>Share</button>
             </form>
         </div>
-        <div class="show-buttons" th:object="${resource}" >
+        <div class="show-buttons" th:object="${resource}"  th:if="*{#authentication.getName() == user.getUsername()}">
             <form th:action="@{/resources}" th:method="GET">
                 <button>Resources</button>
             </form>
@@ -67,6 +67,7 @@
         </div>
     </div>
 
+    <th:block th:replace="partials/partials.html :: footer"></th:block>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </main>
 </body>

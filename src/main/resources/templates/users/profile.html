@@ -34,6 +34,7 @@
                         </div>
                         <p>By <span th:text="${r.user.username}"></span></p>
                         <p th:text="${#strings.abbreviate(r.description,75)}"></p>
+                        <p th:if="${not r.link.isEmpty()}">Link: <a th:href="@{'https://' + ${r.link}}" th:text="${r.link}" /></p>
                         <div class="d-flex justify-content-between align-items-end">
                             <div>
                                 <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
@@ -53,11 +54,6 @@
     <th:block th:replace="partials/partials.html :: likescript"></th:block>
 
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
-
-<!--    &lt;!&ndash; JavaScript Bundle with Popper &ndash;&gt;-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"-->
-<!--            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"-->
-<!--            crossorigin="anonymous"></script>-->
 
 </body>
 </html>
