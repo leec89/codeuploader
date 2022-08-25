@@ -7,6 +7,39 @@
         margin: 0 auto;
         width: 80%;
     }
+
+    .form-field label{
+        display: block;
+        margin-bottom: 5px;
+        color: #777;
+    }
+
+    .form-field input {
+        border: solid 2px #f0f0f0;
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        display: block;
+        width: 100%;
+    }
+
+    .form-field input:focus {
+        outline: none;
+    }
+
+    .form-field.error input {
+        border-color: #ff0000;
+    }
+
+    .form-field.success input {
+        color: green;
+    }
+
+    .form-field small {
+        color: #ff0000;
+    }
+
 </style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
@@ -15,17 +48,22 @@
 
 <main class="container">
     <form th:action="@{/resources/create}" method="POST" id="form" th:object="${resource}">
-        <div class="mb-3">
+        <div class="mb-3 form-field">
             <label class="form-label" for="title">Title*</label>
             <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title (a helpful tip - this field is searchable!)">
+            <small></small>
+
         </div>
-        <div class="mb-3">
+        <div class="mb-3 form-field">
             <label class="form-label" for="link">Link</label>
             <input th:field="*{link}" class="form-control" id="link" name="link" placeholder="Enter link">
+            <small></small>
+
         </div>
-        <div class="mb-3">
+        <div class="mb-3 form-field">
             <label class="form-label" for="description">Description*</label>
             <textarea th:field="*{description}" class="form-control" id="description" name="description" placeholder="Enter description of text  (a helpful tip - this field is searchable!)"></textarea>
+            <small></small>
         </div>
         <div>
             <p>*required</p>
@@ -44,7 +82,11 @@
                 </td>
             </tr>
             <tr>
-                <td><input name="submit" type="submit" value="submit" /></td>
+                <td>
+                    <div class="form-field">
+                    <input name="submit" type="submit" value="submit" />
+                    </div>
+                </td>
             </tr>
         </table>
 
@@ -61,33 +103,126 @@
 
 
 <!--<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>-->
-
 <!--<script>-->
-<!--    const validation = new JustValidate('#form');-->
+    <script>
 
-<!--    validation-->
-<!--        .addField('#title', [-->
-<!--            {-->
-<!--                rule: 'minLength',-->
-<!--                value: 3,-->
-<!--            },-->
-<!--            {-->
-<!--                rule: 'maxLength',-->
-<!--                value: 240,-->
-<!--            },-->
-<!--        ])-->
-<!--        .addField('#description', [-->
-<!--            {-->
-<!--                rule: 'required',-->
-<!--                errorMessage: 'description is required',-->
-<!--            },-->
-<!--            // {-->
-<!--            //     rule: 'description',-->
-<!--            //     errorMessage: 'description is invalid!',-->
-<!--            // },-->
-<!--        ]);-->
-<!--</script>-->
+    const titleEl = document.querySelector('#title')
+    const descriptionEl = document.querySelector('#description')
+    const linkEl = document.querySelector('#link')
+
+    const isRequired = value => value === '' ? false : true
+    const isBetween = (length, min, max) => length < min || length > max ? false : true
+
+    const showError = (input, message) => {
+        //get form-field El
+        const formField = input.parentElement
+        //add error class
+        formField.classList.remove('success')
+        formField.classList.add('error')
+        //show error message
+        const error = formField.querySelector('small')
+        error.textContent = message
+    }
+
+    const showSuccess = (input) => {
+        //get form-field El
+        const formField = input.parentElement
+        //add success class
+        formField.classList.remove('error')
+        formField.classList.add('success')
+        //hide error message
+        const error = formField.querySelector('small')
+        error.textContent = '';
+    }
+
+    const checkTitle = () => {
+        let valid = false
+        const min = 3
+        const max = 30
+
+        const title = titleEl.value.trim()
+
+        if (!isRequired(title)) {
+            showError(titleEl, 'Title cannot be blank.')
+        } else if (!isBetween(title.length, min, max)) {
+            showError(titleEl, `Title must be between ${min} and ${max} characters.`)
+        } else {
+            showSuccess(titleEl)
+            valid = true
+        }
+        return valid
+    }
+
+    const checkDescription = () => {
+        let valid = false
+        const min = 3
+        const max = 240
+
+        const description = descriptionEl.value.trim()
+
+        if (!isRequired(description)) {
+            showError(descriptionEl, 'Description cannot be blank.')
+        } else if (!isBetween(description.length, min, max)) {
+            showError(descriptionEl, `Description must be between ${min} and ${max} characters.`)
+        } else {
+            showSuccess(descriptionEl)
+            valid = true
+        }
+        return valid
+    }
+
+    const checkLink = () => {
+        let valid = false
+        const min = 3
+        const max = 240
+
+        const link = linkEl.value.trim()
+
+        if (!isRequired(link)) {
+            showError(linkEl, 'Link cannot be blank.')
+        } else if (!isBetween(link.length, min, max)) {
+            showError(linkEl, `Link must be between ${min} and ${max} characters.`)
+        } else {
+            showSuccess(linkEl)
+            valid = true
+        }
+        return valid
+    }
+
+    const checkForm = () => {
+        let isTitleValid = checkTitle()
+        let isDescriptionValid = checkDescription()
+        let isLinkValid = checkLink()
+
+        let isFormValid = isTitleValid && isDescriptionValid && isLinkValid
+
+        if (isFormValid) {
+            document.getElementById("form").submit();
+        }
+    }
+
+    let form = document.getElementById('form');
+    form.addEventListener('input', function (e) {
+        e.preventDefault()
+
+        //validate fields
+        let isTitleValid = checkTitle();
+        let isDescriptionValid = checkDescription();
+        let isLinkValid = checkLink();
+
+        //validate form
+        let isFormValid = isTitleValid && isDescriptionValid && isLinkValid;
+
+        //submit to DB if valid
+        if (isFormValid) {
+            document.getElementById("form").submit();
+        }
+
+    })
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
