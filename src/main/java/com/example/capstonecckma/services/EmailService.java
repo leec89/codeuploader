@@ -10,14 +10,16 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service("emailService")
-
 public class EmailService {
 
     @Value("${spring_sendgrid_api_key}")
     private String sendgridApiKey;
 
+    @Value("${spring_sendgrid_email_from}")
+    private String sendgridEmailFrom;
+
     public void prepareAndSend(String subject, String emailContent, String emailTo) {
-        Email from = new Email("leec89@protonmail.com");
+        Email from = new Email(sendgridEmailFrom);
         Email to = new Email(emailTo);
         Content content = new Content("text/plain", emailContent);
         Mail mail = new Mail(from, subject, to, content);

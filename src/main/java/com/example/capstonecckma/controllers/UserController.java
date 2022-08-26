@@ -5,6 +5,8 @@ import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.model.User;
 import com.example.capstonecckma.services.EmailService;
+import com.example.capstonecckma.services.SlackService;
+import com.slack.api.methods.SlackApiException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Controller
@@ -22,6 +26,7 @@ public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private EmailService emailService;
+    private SlackService slackService;
 
     public UserController(ResourceRepository resourceDao, UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.resourceDao = resourceDao;
@@ -39,17 +44,21 @@ public class UserController {
     }
 
     @PostMapping("/users/signup")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user) throws SlackApiException, IOException, URISyntaxException {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-
-        String emailSubject = "A new CodeUpLoader account has been created!";
+        String username = user.getUsername();
+        String emailSubject = "A new CodeUpLoader User has joined!";
         String emailBlurb = "Thank you for creating your new account in CodeUpLoader!\r\n\r\nThe username submitted was\r\n["
-                + user.getUsername() + "].\r\nIf this was not expected, please contact customer support.";
+                + username + "].\r\nIf this was not expected, please contact customer support.";
         String emailTo = user.getEmail();
 
         userDao.save(user);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+        String textToSlack = emailSubject + "\n" +
+                "Username: " + username + "\n" +
+                "Message from CodeUpLoader :robot_face: :sparkling_heart:";
+        slackService.sendToSlack(textToSlack);
         return "redirect:/login";
     }
 
