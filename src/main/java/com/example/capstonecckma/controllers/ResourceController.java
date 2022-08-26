@@ -8,6 +8,7 @@ import com.example.capstonecckma.repositories.CurriculumTopicRepository;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
 import com.example.capstonecckma.services.EmailService;
+import com.example.capstonecckma.services.SlackService;
 import com.example.capstonecckma.services.DocStorageService;
 import com.example.capstonecckma.services.ResourceService;
 import com.slack.api.Slack;
@@ -36,15 +37,17 @@ public class ResourceController {
 
     private DocStorageService docStorageService;
     private final EmailService emailService;
+    private final SlackService slackService;
 
     private ResourceService resourceService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, ResourceService resourceService) {
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, SlackService slackService, ResourceService resourceService) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.curriculumTopicDao = curriculumTopicDao;
         this.docStorageService = docStorageService;
         this.emailService = emailService;
+        this.slackService = slackService;
         this.resourceService = resourceService;
     }
 
@@ -109,15 +112,20 @@ public class ResourceController {
     }
 
     @PostMapping("/resources/create")
-    public String postCreateForm(@ModelAttribute Resource resource) {
+    public String postCreateForm(@ModelAttribute Resource resource) throws SlackApiException, IOException, URISyntaxException {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resource.setUser(principal);
-        String emailSubject = "New Resource Added";
-        String emailBlurb = "Thank you for uploading a new resource. The resource is titled \r\n["
-                + resource.getTitle() + "].\r\nIf this was not expected, please contact customer support.";
+        String resourceTitle = resource.getTitle();
+        String emailSubject = "A New Resource Has Been Added!";
+        String emailBlurb = "Thank you for creating a new resource. The resource is titled \r\n["
+                + resourceTitle + "].\r\nIf this was not expected, please contact customer support.";
         String emailTo = principal.getEmail();
         resourceDao.save(resource);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+        String textToSlack = emailSubject + "\n" +
+                "Title: " + resourceTitle + "\n" +
+                "Message from CodeUpLoader :robot_face:";
+        slackService.sendToSlack(textToSlack);
         return "multiupload";
     }
 
@@ -144,15 +152,19 @@ public class ResourceController {
     public String deletePost(
             @PathVariable long id,
             @ModelAttribute Resource resource
-    ) {
+    ) throws SlackApiException, IOException, URISyntaxException {
 
         Resource resourceToDelete = resourceDao.findById(resource.getId()).get();
+        String resourceTitle = resourceToDelete.getTitle();
         String emailTo = resourceToDelete.getUser().getEmail();
-
         String emailSubject = "A CodeUploader resource has been deleted!";
-        String emailBlurb = "A CodeUploader resource has been deleted!\r\n\r\nThe title of the deleted resource was\r\n[ " + resourceToDelete.getTitle() + " ].\r\n If this was not expected, please contact customer support.";
+        String emailBlurb = "A CodeUploader resource has been deleted!\r\n\r\nThe title of the deleted resource was\r\n[ " + resourceTitle + " ].\r\n If this was not expected, please contact customer support.";
         resourceDao.deleteById(id);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+        String textToSlack = emailSubject + "\n" +
+                "Title: " + resourceTitle + "\n" +
+                "Message from CodeUpLoader :robot_face:";
+        slackService.sendToSlack(textToSlack);
 
         return "redirect:/resources";
     }
@@ -208,33 +220,13 @@ public class ResourceController {
     }
 
     @GetMapping("/do-stuff/{id}/{title}")
-    static ResponseEntity<ByteArrayResource>  publishMessage(@PathVariable int id, @PathVariable String title) throws SlackApiException, IOException, URISyntaxException {
-        String text = "I believe this to be a relevant resource about: " + "\n" +
+    public String slackSend(@PathVariable int id, @PathVariable String title) throws SlackApiException, IOException, URISyntaxException {
+        String textToSlack = "Check out this resource about: " + "\n" +
                 title + "\n" +
                 "http://localhost:8080/resources/" + id + "\n" +
                 "Message from CodeUpLoader :robot_face: :sparkling_heart:";
-
-        String id1 = "C03UG71J5T6";
-
-        // you can get this instance via ctx.client() in a Bolt app
-        var client = Slack.getInstance().methods();
-        var logger = LoggerFactory.getLogger("my-awesome-slack-app");
-
-            // Call the chat.postMessage method using the built-in WebClient
-            var result = client.chatPostMessage(r -> r
-                            // The token you used to initialize your app
-                            .token("")
-                            .channel(id1)
-                            .text(text)
-                    // You could also use a blocks[] array to send richer content
-            );
-            // Print result, which includes information about the message (like TS)
-            logger.info("result {}", result);
-
-        URI yahoo = new URI("/resources/"+id);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(yahoo);
-        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
+        slackService.sendToSlack(textToSlack);
+        return "redirect:/resources/{id}";
     }
 
 }
