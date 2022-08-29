@@ -241,30 +241,30 @@
         return valid
     }
 
-    const checkLink = () => {
-        let valid = false
-        const min = 3
-        const max = 240
-
-        const link = linkEl.value.trim()
-
-        if (!isRequired(link)) {
-            showError(linkEl, 'Link cannot be blank.')
-        } else if (!isBetween(link.length, min, max)) {
-            showError(linkEl, `Link must be between ${min} and ${max} characters.`)
-        } else {
-            showSuccess(linkEl)
-            valid = true
-        }
-        return valid
-    }
+    // const checkLink = () => {
+    //     let valid = false
+    //     const min = 3
+    //     const max = 240
+    //
+    //     const link = linkEl.value.trim()
+    //
+    //     if (!isRequired(link)) {
+    //         showError(linkEl, 'Link cannot be blank.')
+    //     } else if (!isBetween(link.length, min, max)) {
+    //         showError(linkEl, `Link must be between ${min} and ${max} characters.`)
+    //     } else {
+    //         showSuccess(linkEl)
+    //         valid = true
+    //     }
+    //     return valid
+    // }
 
     const checkForm = () => {
         let isTitleValid = checkTitle()
         let isDescriptionValid = checkDescription()
-        let isLinkValid = checkLink()
+        // let isLinkValid = checkLink()
 
-        let isFormValid = isTitleValid && isDescriptionValid && isLinkValid
+        let isFormValid = isTitleValid && isDescriptionValid //&& isLinkValid
 
         if (isFormValid) {
             document.getElementById("form").submit();
@@ -278,10 +278,10 @@
         //validate fields
         let isTitleValid = checkTitle();
         let isDescriptionValid = checkDescription();
-        let isLinkValid = checkLink();
+        // let isLinkValid = checkLink();
 
         //validate form
-        let isFormValid = isTitleValid && isDescriptionValid && isLinkValid;
+        let isFormValid = isTitleValid && isDescriptionValid //&& isLinkValid;
 
         //submit to DB if valid
         if (isFormValid) {

@@ -5,15 +5,15 @@
 <head th:replace="partials/partials.html :: head('Sign Up')"></head>
 <style>
     input:invalid {
-        border: 1px dashed #e1acac;
-    }
-
-    input:invalid:required {
-        background-image: linear-gradient(45deg, transparent 80%, #d79090 10%), linear-gradient(135deg, #b74949 80%, transparent 10%);
+        border: 1px dashed #ee4d4d;
     }
 
     input:valid {
         border: 2px solid black;
+    }
+
+    div {
+        margin-bottom: 10px;
     }
 </style>
 <body>
@@ -24,15 +24,15 @@
     <form th:action="@{/users/signup}" method="POST" id="form" th:object="${user}">
         <div class="mt-3">
             <label class="form-label" for="email">Email</label>
-            <input class="form-control" id="email" th:field="*{email}" required/>
+            <input class="form-control" id="email" type="email" th:field="*{email}" required maxlength="100"/>
         </div>
         <div class="mt-3">
             <label class="form-label" for="username">Username</label>
-            <input class="form-control" id="username" th:field="*{username}" required />
+            <input class="form-control" id="username" th:field="*{username}" required maxlength="100" />
         </div>
         <div class="mt-3">
             <label class="form-label" for="password">Password</label>
-            <input class="form-control" id="password" type="password" th:field="*{password}" required />
+            <input class="form-control" id="password" type="password" th:field="*{password}" required maxlength="100" />
         </div>
         <div class="d-grid mt-3">
             <button class="btn btn-dark btn-block">Create Account!</button>
@@ -43,7 +43,19 @@
 </main>
 
 
-<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+<script>
+//constraint validation api
+    const email = document.getElementById("mail");
+
+    email.addEventListener("input", (event) => {
+        if (email.validity.typeMismatch) {
+            email.setCustomValidity("I am expecting an e-mail address!");
+            email.reportValidity();
+        } else {
+            email.setCustomValidity("");
+        }
+    });
+</script>
 
 
 </body>
