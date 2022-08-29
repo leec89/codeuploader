@@ -47,7 +47,7 @@ public class ResourceController {
     @Autowired
     private CommentRepository commentRepository;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, ResourceService resourceService, CommentRepository commentRepository) {
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, SlackService slackService, ResourceService resourceService, CommentRepository commentRepository) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.curriculumTopicDao = curriculumTopicDao;
@@ -58,8 +58,7 @@ public class ResourceController {
         this.commentRepository = commentRepository;
     }
 
-
-    // =================== Testing Pages
+// =================== Testing Pages
 
     @GetMapping("/testing")
     public String testPage(Model vModel) {
