@@ -3,6 +3,7 @@ package com.example.capstonecckma.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -78,3 +79,5 @@ public class Doc {
         this.data = data;
     }
 }
+
+

@@ -128,7 +128,7 @@ public class ResourceController {
     }
 
     @PostMapping("/resources/create")
-    public void postCreateForm(@ModelAttribute Resource resource) {
+    public String postCreateForm(@ModelAttribute Resource resource) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resource.setUser(principal);
         String emailSubject = "New Resource Added";
@@ -137,7 +137,7 @@ public class ResourceController {
         String emailTo = principal.getEmail();
         resourceDao.save(resource);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-
+        return "multiupload";
     }
 
     // =================== resources EDIT/UPDATE (resources/edit.html)

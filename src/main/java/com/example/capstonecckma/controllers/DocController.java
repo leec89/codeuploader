@@ -52,7 +52,10 @@ public class DocController {
             int resId = (int) lastOne.getId();
             docStorageService.saveFile(file, resId);
         }
-        return "redirect:/resources";
+        List<Resource> resourceList = resourceDao.findAll();
+        Resource lastOne = resourceList.get(resourceList.size()-1);
+        int resId2 = (int) lastOne.getId();
+        return "redirect:/resources/" + resId2;
     }
 
     // =================== uploading DOC(s) to resource (inside showone, not after create)
@@ -71,6 +74,8 @@ public class DocController {
         for (MultipartFile file: files) {
             docStorageService.saveFile(file, resId);
         }
+
+
         return "redirect:/resources";
     }
 
