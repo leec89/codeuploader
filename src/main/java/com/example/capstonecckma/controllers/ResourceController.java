@@ -1,9 +1,7 @@
 package com.example.capstonecckma.controllers;
 
-import com.example.capstonecckma.model.CurriculumTopic;
-import com.example.capstonecckma.model.Doc;
-import com.example.capstonecckma.model.Resource;
-import com.example.capstonecckma.model.User;
+import com.example.capstonecckma.model.*;
+import com.example.capstonecckma.repositories.CommentRepository;
 import com.example.capstonecckma.repositories.CurriculumTopicRepository;
 import com.example.capstonecckma.repositories.ResourceRepository;
 import com.example.capstonecckma.repositories.UserRepository;
@@ -14,7 +12,11 @@ import com.example.capstonecckma.services.ResourceService;
 import com.slack.api.Slack;
 import com.slack.api.methods.SlackApiException;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,11 @@ public class ResourceController {
 
     private ResourceService resourceService;
 
-    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, SlackService slackService, ResourceService resourceService) {
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    public ResourceController(ResourceRepository resourceDao, UserRepository userDao, CurriculumTopicRepository curriculumTopicDao, DocStorageService docStorageService, EmailService emailService, ResourceService resourceService, CommentRepository commentRepository) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.curriculumTopicDao = curriculumTopicDao;
@@ -49,7 +55,9 @@ public class ResourceController {
         this.emailService = emailService;
         this.slackService = slackService;
         this.resourceService = resourceService;
+        this.commentRepository = commentRepository;
     }
+
 
     // =================== Testing Pages
 
@@ -92,12 +100,15 @@ public class ResourceController {
     // =================== resources view ONE (resources/showone.html)
 
     @GetMapping("/resources/{id}")
-    public String getResource(@PathVariable("id") long id, Model vModel) {
+    public String getResource(@PathVariable("id") long id, Model vModel,  @PageableDefault(value=10) Pageable pageable) {
         Resource resource = resourceDao.findById(id).get();
         List<Doc> docs = docStorageService.getFiles();
+        Page<Comment> comments = commentRepository.findByResourceId(id, pageable);
         vModel.addAttribute("docs", docs);
         vModel.addAttribute("resource", resource);
         vModel.addAttribute("curriculum", curriculumTopicDao);
+        vModel.addAttribute("comment", new Comment());
+        vModel.addAttribute("page", comments );
         return "resources/showone";
     }
 
@@ -231,6 +242,10 @@ public class ResourceController {
 
 }
 
+
+//    public String createComment(@ModelAttribute Comment comment, @PathVariable (value = "resourceId") Long resourceId) {
+//
+//        return null;
 
 
 
