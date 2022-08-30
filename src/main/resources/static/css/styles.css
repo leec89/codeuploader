@@ -102,11 +102,8 @@ body {
     padding: 1rem 0;
 }
 
-.custom {
-    width: 160px !important;
-}
+ @media (max-width: 600px){
 
-@media (max-width: 576px) {
     .toggle-button {
         display: flex;
     }
@@ -140,5 +137,9 @@ body {
 
     .navbar-links.active {
         display: flex;
+    }
+
+    .resource-actions{
+        padding-left:2.5em;
     }
 }
