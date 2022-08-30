@@ -19,7 +19,7 @@ body {
 .brand-title {
     font-size: 1.5rem;
     margin: .5rem;
-    color: black;
+    color: dodgerblue;
 }
 
 .navbar-brand {
@@ -39,7 +39,7 @@ body {
 
 .navbar-links li a {
     text-decoration: none;
-    color: black;
+    color: dodgerblue;
     padding: 1rem;
     display: block;
 }
@@ -60,7 +60,7 @@ body {
 
 .navbar-left-links li a {
     text-decoration: none;
-    color: black;
+    color: dodgerblue;
     padding: 1rem;
     display: block;
 }
@@ -83,7 +83,7 @@ body {
 .toggle-button .bar {
     height: 3px;
     width: 100%;
-    background-color: black;
+    background-color: dodgerblue;
     border-radius: 10px;
 }
 
@@ -102,9 +102,17 @@ body {
     padding: 1rem 0;
 }
 
-@media (max-width: 600px) {
+.custom {
+    width: 160px !important;
+}
+
+@media (max-width: 576px) {
     .toggle-button {
         display: flex;
+    }
+
+    .custom {
+        width: 160px !important;
     }
 
     .navbar-links {

@@ -12,12 +12,12 @@
             <label class="form-label" for="title">Title</label>
             <input th:field="*{title}" class="form-control" id="title" type="text" name="title" placeholder="Enter resource title">
         </div>
-        <div class="mb-3">
+        <div hidden class="mb-3">
             <label class="form-label" for="curriculum_topic.id">Curriculum Topic Id</label>
             <input th:field="*{curriculum_topic.id}" class="form-control" id="curriculum_topic.id" type="text" name="curriculum_topic.id" placeholder="Enter curriculum id">
         </div>
-        <div hidden class="mb-3">
-            <label class="form-label" for="title">link</label>
+        <div class="mb-3">
+            <label class="form-label" for="title">Link</label>
             <input th:field="*{link}" class="form-control" id="link" type="text" name="link" placeholder="Enter resource link">
         </div>
         <div class="mb-3">
