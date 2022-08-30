@@ -18,7 +18,7 @@
     }
 
     .container {
-        width: 960px;
+        width: 980px;
         margin: 0 auto;
     }
 
@@ -29,16 +29,23 @@
 
     h2 {
         margin-bottom: 48px;
-
+        text-align: center;
         font-size: 36px;
         letter-spacing: -0.5px;
     }
 
     .grid-3-cols {
-        display: grid;
+        display: flex;
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 80px;
+        column-gap: 50px;
+
     }
+    /*.row{*/
+    /*    display: flex;*/
+    /*    flex-direction: row;*/
+    /*    justify-content: space-around;*/
+    /*    flex-flow: wrap;*/
+    /*}*/
 
     .btn:link, .btn:visited {
         background-color: #087f5b;
@@ -73,6 +80,7 @@
         grid-template-columns: repeat(2, 1fr);
         column-gap: 80px;
         margin-top: 48px;
+        float: right;
     }
 
     .header-text-box {
@@ -85,9 +93,11 @@
         line-height: 1.0; /*  stay less than 1.5*/
         letter-spacing: -1px;
         text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
     }
 
     .header-text {
+        text-align: center;
         margin-bottom: 24px;
         font-size: 18px;
         line-height: 1.6;
@@ -138,6 +148,9 @@
 
     /* Members */
     .member {
+        display: inline-block;
+        width: 150px;
+        /*justify-content: space-between;*/
         box-shadow: 0 30px 30px 0 rgba(0, 0, 0, 0.07);
         border-radius: 12px;
     }
@@ -149,21 +162,26 @@
 
     .member-box {
         padding: 24px;
+
     }
 
     h3 {
         margin-bottom: 24px;
         font-size: 20px;
+        text-align: center;
     }
 
     .member-details {
+        justify-content: center;
         list-style: none;
         margin-bottom: 24px;
+        margin-right: 30px;
+        padding-top: 5px;
     }
 
     .member-details li {
         display: flex;
-        align-items: center;
+        justify-content: center;
         gap: 12px;
         margin-bottom: 24px;
     }
@@ -182,8 +200,89 @@
 <nav th:replace="partials/partials.html :: nav"></nav>
 <header th:replace="partials/partials.html :: header('About Us')"></header>
 
-
 <div class="container">
+    <section>
+        <h2>Our Team</h2>
+
+    <div class="grid-3-cols">
+        <figure class="member">
+            <img src="/images/C.Lee.jpg" alt="Chris" />
+            <div class="member-box">
+                <h3>Chris <br> Lee</h3>
+                <ul class="member-details">
+                    <li>
+                        <span><a href="https://www.linkedin.com/in/leec89/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
+                        <span><a href="https://github.com/leec89" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
+                        <span><a href="https://alumni.codeup.com/students/1446" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                    </li>
+<!--                    <li>-->
+<!--                        <span><a href="https://github.com/leec89" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                    </li>-->
+                </ul>
+            </div>
+        </figure>
+
+
+        <figure class="member">
+            <img src="/images/myIn.jpeg" alt="Cory" />
+            <div class="member-box">
+                <h3>Cory <br>Urton</h3>
+                <ul class="member-details">
+                    <li>
+                        <span><a href="https://www.linkedin.com/in/cory-urton/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
+                        <span><a href="https://github.com/CoJUr" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
+                        <span><a href="https://alumni.codeup.com/students/1436" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                    </li>
+                </ul>
+            </div>
+        </figure>
+
+        <figure class="member">
+            <img src="/images/kennycodeup.JPG" alt="Kenny" />
+            <div class="member-box">
+                <h3>Kenneth Pittman</h3>
+                <ul class="member-details">
+                    <li>
+                        <span><a href="https://www.linkedin.com/in/kenneth-pittman-ii/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
+                        <span><a href="https://github.com/KP21024" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
+                        <img src="/images/codeup-arrow.png" alt="CodeupLogo" href="https://alumni.codeup.com/students/1447" class="card-link" style="width: 35px; height: 35px" />
+                    </li>
+                </ul>
+            </div>
+        </figure>
+
+        <figure class="member">
+            <img src="/images/DickensHS2.jpg" alt="Mike" />
+            <div class="member-box">
+                <h3>Michael Dickens</h3>
+                <ul class="member-details">
+                    <li>
+                        <span><a href="https://www.linkedin.com/in/michael-dickens-a140796/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
+                        <span><a href="https://github.com/dickensml" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
+                        <span><a href="https://alumni.codeup.com/students/1443" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                    </li>
+                </ul>
+            </div>
+        </figure>
+
+        <figure class="member">
+            <img src="/images/alfredo.png" alt="Alfredo" />
+            <div class="member-box">
+                <h3>Alfredo Oviedo</h3>
+                <ul class="member-details">
+                    <li>
+                        <span><a href="https://www.linkedin.com/in/alfredo-oviedo/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
+                        <span><a href="https://github.com/noonchio" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
+                        <span><a href="https://alumni.codeup.com/students/1452" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                    </li>
+                </ul>
+            </div>
+        </figure>
+    </div>
+</section>
+
+
+
     <header>
         <div class="header-text-box">
             <h1>We are GO-ing places after CodeUp!</h1>
@@ -243,90 +342,90 @@
                 </blockquote>
                 <p class="testimonial-author">&mdash; J Dawg</p>
             </div>
-        </div>
+
     </section>
+</div>
+<!--    <section>-->
+<!--        <h2>Our Team</h2>-->
 
-    <section>
-        <h2>Our Team</h2>
-
-        <div class="grid-3-cols">
-            <figure class="member">
-                <img src="/images/C.Lee.jpg" alt="Chris" />
-                <div class="member-box">
-                    <h3>"The Chief"</h3>
-                    <ul class="member-details">
-                        <li>
-                            <span>LinkedIn <a href="https://www.linkedin.com/in/leec89/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
-                        </li>
-                        <li>
-                            <span>GitHub <a href="https://github.com/leec89" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </figure>
+<!--        <div class="grid-3-cols">-->
+<!--            <figure class="member">-->
+<!--                <img src="/images/C.Lee.jpg" alt="Chris" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>"The Chief"</h3>-->
+<!--                    <ul class="member-details">-->
+<!--                        <li>-->
+<!--                            <span>LinkedIn <a href="https://www.linkedin.com/in/leec89/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>GitHub <a href="https://github.com/leec89" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </figure>-->
 
 
-            <figure class="member">
-                <img src="/images/myIn.jpeg" alt="Cory" />
-                <div class="member-box">
-                    <h3>Cory "America's Least Wanted" Urton</h3>
-                    <ul class="member-details">
-                        <li>
-                            <span>LinkedIn <a href="https://www.linkedin.com/in/cory-urton/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
-                        </li>
-                        <li>
-                            <span>GitHub <a href="https://github.com/CoJUr" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </figure>
+<!--            <figure class="member">-->
+<!--                <img src="/images/myIn.jpeg" alt="Cory" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>Cory "America's Least Wanted" Urton</h3>-->
+<!--                    <ul class="member-details">-->
+<!--                        <li>-->
+<!--                            <span>LinkedIn <a href="https://www.linkedin.com/in/cory-urton/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>GitHub <a href="https://github.com/CoJUr" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </figure>-->
 
-            <figure class="member">
-                <img src="/images/kennycodeup.JPG" alt="Kenny" />
-                <div class="member-box">
-                    <h3>Kenneth "T.O." Pittman</h3>
-                    <ul class="member-details">
-                        <li>
-                            <span>LinkedIn <a href="https://www.linkedin.com/in/kenneth-pittman-ii/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
-                        </li>
-                        <li>
-                            <span>GitHub<a href="https://github.com/KP21024" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </figure>
+<!--            <figure class="member">-->
+<!--                <img src="/images/kennycodeup.JPG" alt="Kenny" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>Kenneth "T.O." Pittman</h3>-->
+<!--                    <ul class="member-details">-->
+<!--                        <li>-->
+<!--                            <span>LinkedIn <a href="https://www.linkedin.com/in/kenneth-pittman-ii/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>GitHub<a href="https://github.com/KP21024" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </figure>-->
 
-            <figure class="member">
-                <img src="/images/DickensHS2.jpg" alt="Mike" />
-                <div class="member-box">
-                    <h3>Michael "The Highlander" Dickens</h3>
-                    <ul class="member-details">
-                        <li>
-                            <span>LinkedIn <a href="https://www.linkedin.com/in/michael-dickens-a140796/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
-                        </li>
-                        <li>
-                            <span>GitHub <a href="https://github.com/dickensml" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </figure>
+<!--            <figure class="member">-->
+<!--                <img src="/images/DickensHS2.jpg" alt="Mike" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>Michael "The Highlander" Dickens</h3>-->
+<!--                    <ul class="member-details">-->
+<!--                        <li>-->
+<!--                            <span>LinkedIn <a href="https://www.linkedin.com/in/michael-dickens-a140796/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>GitHub <a href="https://github.com/dickensml" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </figure>-->
 
-            <figure class="member">
-                <img src="/images/alfredo.png" alt="Alfredo" />
-                <div class="member-box">
-                    <h3>Alfredo "Top Chef" Oviedo</h3>
-                    <ul class="member-details">
-                        <li>
-                            <span>LinkedIn <a href="https://www.linkedin.com/in/alfredo-oviedo/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>
-                        </li>
-                        <li>
-                            <span>GitHub <a href="https://github.com/noonchio" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </figure>
-        </div>
-    </section>
+<!--            <figure class="member">-->
+<!--                <img src="/images/alfredo.png" alt="Alfredo" />-->
+<!--                <div class="member-box">-->
+<!--                    <h3>Alfredo "Top Chef" Oviedo</h3>-->
+<!--                    <ul class="member-details">-->
+<!--                        <li>-->
+<!--                            <span>LinkedIn <a href="https://www.linkedin.com/in/alfredo-oviedo/" class="card-link"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <span>GitHub <a href="https://github.com/noonchio" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </figure>-->
+<!--        </div>-->
+<!--    </section>-->
 
 </div>
 
