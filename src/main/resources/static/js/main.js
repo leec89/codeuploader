@@ -26,4 +26,17 @@
         });
     }
 
+    // code to create confirm step for delete doc
+    if (document.querySelector('#delete-doc-btn')) {
+        document.querySelector('#delete-doc-btn').addEventListener('click', e => {
+            e.preventDefault();
+            const willDelete = confirm('Are you sure you want to delete this post?');
+            if (willDelete) {
+                e.currentTarget.parentNode.submit();
+            }
+        });
+    }
+
+
+
 })();

@@ -44,18 +44,14 @@ public class DocController {
         return "multiupload";
     }
 
-    @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    @PostMapping("/uploadFile/{id}")
+    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files, @PathVariable long id) {
         for (MultipartFile file: files) {
             List<Resource> resourceList = resourceDao.findAll();
-            Resource lastOne = resourceList.get(resourceList.size()-1);
-            int resId = (int) lastOne.getId();
-            docStorageService.saveFile(file, resId);
+
+            docStorageService.saveFile(file, id);
         }
-        List<Resource> resourceList = resourceDao.findAll();
-        Resource lastOne = resourceList.get(resourceList.size()-1);
-        int resId2 = (int) lastOne.getId();
-        return "redirect:/resources/" + resId2;
+        return "redirect:/resources/" + id;
     }
 
     // =================== uploading DOC(s) to resource (inside showone, not after create)
@@ -75,8 +71,7 @@ public class DocController {
             docStorageService.saveFile(file, resId);
         }
 
-
-        return "redirect:/resources";
+        return "redirect:/resources/" + resId;
     }
 
     // =================== downloading a DOC after click DOWNLOAD link

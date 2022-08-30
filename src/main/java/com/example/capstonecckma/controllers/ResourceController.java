@@ -136,7 +136,11 @@ public class ResourceController {
                 "Title: " + resourceTitle + "\n" +
                 "Message from CodeUpLoader :robot_face:";
         slackService.sendToSlack(textToSlack);
-        return "multiupload";
+
+        List<Resource> resourceList = resourceDao.findAll();
+        Resource lastOne = resourceList.get(resourceList.size()-1);
+        int resId2 = (int) lastOne.getId();
+        return "redirect:/resources/" + resId2;
     }
 
     // =================== resources EDIT/UPDATE (resources/edit.html)

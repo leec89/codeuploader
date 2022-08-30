@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.swing.text.Document;
@@ -48,6 +49,7 @@ public class Resource {
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     @JsonIgnore
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime created_at = LocalDateTime.now();
 
 //    Many to many resource_likes
