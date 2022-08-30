@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:insert="partials/partials.html :: head('Error!')"></head>
+
+    <meta charset="UTF-8"/>
+    <title th:text="'Ooops, ' + ${error}"></title>
+</head>
+<body>
+<nav th:insert="partials/partials.html :: nav"></nav>
+
+<th:block th:switch="${error}">
+    <div th:case="'Internal Server Error'">
+        <h1>There was a 500 Error - internal server issue. You can try the following steps:</h1>
+        <li>Refresh the page</li>
+        <li>Wait a few minutes or perhaps a few hours and try again.</li>
+        <li>Delete your browsing history and cookies, then retry your request</li>
+        <li>Contact the system administrator if the problem persists</li>
+    </div>
+    <div th:case="'Not Implemented'">
+        <h1>Server was unable to perform the requested action at this time.</h1>
+    </div>
+    <div th:case="'Bad Gateway'">
+        <h1>There was a gateway problem - reason unknown. Please try again. If the
+        problem persists, please try the following: </h1>
+        <ul>
+            <li>Reload the page</li>
+            <li>Clear your browser cache</li>
+            <li>Make sure your connection to the server is stable</li>
+            <li>Simply wait a few hours and try again later - we may be performing server maintenance or changing to a different IP address. </li>
+            <li>Check your firewall configurations. Try turning it off temporarily.</li>
+            <li>If all else fails,  <a href="#">Contact Us</a> </li>
+        </ul>
+    </div>
+    <div th:case="'Service Unavailable">
+        <h1>503 - Service unavailable error occurred. We may have taken the server down temporarily for maintenance. Please try again later.</h1>
+
+    </div>
+    <div th:case="'Gateway Timeout'">
+        <h1>Our gateway server took too long to respond, sorry!</h1>
+    </div>
+</th:block>
+<p>Watch a video instead</p>
+<iframe
+        width="420"
+        height="315"
+        src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
+        frameborder="0"
+        allowfullscreen="allowfullscreen"
+>
+</iframe>
+</body>
+</html>
