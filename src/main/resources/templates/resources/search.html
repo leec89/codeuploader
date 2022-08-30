@@ -13,6 +13,40 @@
 
     <header th:replace="partials/partials.html :: header('Search Results of: '+${queryValue})"></header>
 
+    <form style="text-align: center" th:action="@{/search}">
+        <input type="text" placeholder="Search by keyword" th:name="query"/>
+        <input type="submit"/>
+    </form><br>
+
+    <!--    <div class="dropdown text-center mb-5" >-->
+    <!--        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">-->
+    <!--            Curriculum Topic-->
+    <!--        </button>-->
+    <!--        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/1">CSS &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/1tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/2">HTML &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/2tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/3">Javascript &nbsp &nbsp &nbsp<img th:src="'/images/3tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/4">Java &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/4tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/5">mySQL &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/5tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/6">Spring Boot &nbsp &nbsp<img th:src="'/images/6tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/7">Capstone &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/7tn.png'"/></a></span>-->
+    <!--            <span><a class="dropdown-item" href="/resources/topic/8">Other &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/8tn.png'"/></a></span>-->
+    <!--        </div>-->
+    <!--    </div><hr>-->
+
+    <div class="d-flex flex-wrap justify-content-between container">
+        <div class="row row-col-2 justify-content-sm-center">
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/1">CSS &nbsp<img th:src="'/images/1tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/2">HTML &nbsp<img th:src="'/images/2tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/4">Java &nbsp<img th:src="'/images/4tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/5">mySQL &nbsp<img th:src="'/images/5tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/8">Other &nbsp<img th:src="'/images/8tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/3">Javascript &nbsp<img th:src="'/images/3tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/6">Spring &nbsp<img th:src="'/images/6tn.png'"/></a>
+            <a class="col btn btn-secondary px-3 mx-2 custom" href="/resources/topic/7">Capstone &nbsp<img th:src="'/images/7tn.png'"/></a>
+        </div>
+    </div><hr>
+
     <main class="container mt-5">
         <div class="row gy-4">
             <div class="col-12 col-md-6" th:each="r : ${resources}">
@@ -34,7 +68,9 @@
                         </div>
                         <p>By <span th:text="${r.user.username}"></span></p>
                         <p th:text="${#strings.abbreviate(r.description,75)}"></p>
-                        <p th:if="${not r.link.isEmpty()}">Link: <a th:href="@{'https://' + ${r.link}}" th:text="${r.link}" /></p>
+                        <p th:if="${not r.link.isEmpty()}"><a th:href="@{'https://' + ${r.link}}">Link to additional information!</a></p>
+                        <br th:if="${r.link.isEmpty()}">
+                        <br th:if="${r.link.isEmpty()}">
                         <div class="d-flex justify-content-between align-items-end">
                             <div>
                                 <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
@@ -48,6 +84,13 @@
             </div>
         </div>
     </main>
+
+    <form class="footer-button" th:action="@{/search}">
+        <input hidden type=text th:value="${queryValue}" id="query" name="query" />
+        <button type="submit">Back to Top</button>
+    </form>
+
+<!--    "@{/multiupload/{id}(id=${resource.id})}"-->
 
     <th:block th:replace="partials/partials.html :: footer"></th:block>
 
