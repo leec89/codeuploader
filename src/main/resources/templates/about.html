@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="partials/partials.html :: head('About Us')"></head>
+<head th:replace="partials/partials.html :: head('Our Team')"></head>
 
 <style>
     * {
@@ -48,7 +48,7 @@
     /*}*/
 
     .btn:link, .btn:visited {
-        background-color: #087f5b;
+        background-color: dodgerblue;
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
@@ -58,7 +58,7 @@
     }
 
     .btn:hover, .btn:active {
-        background-color: #099268;
+        background-color: rgb(124, 179, 66);
     }
 
 
@@ -122,7 +122,7 @@
 
     /* TESTIMONIAL */
     .testimonial-section {
-        background-color: #087f5b;
+        background-color: dodgerblue;
         color: #fff;
         padding: 24px;
         border-radius: 12px;
@@ -139,12 +139,12 @@
         font-size: 24px;
     }
 
-    .testimonial-text {
-        font-style: italic;
-        margin-bottom: 24px;
-        font-size: 18px;
-        line-height: 1.6;
-    }
+    /*.testimonial-text {*/
+    /*    font-style: italic;*/
+    /*    margin-bottom: 24px;*/
+    /*    font-size: 18px;*/
+    /*    line-height: 1.6;*/
+    /*}*/
 
     /* Members */
     .member {
@@ -176,7 +176,7 @@
         list-style: none;
         margin-bottom: 24px;
         margin-right: 30px;
-        padding-top: 5px;
+        padding-top: 10px;
     }
 
     .member-details li {
@@ -198,11 +198,15 @@
 </style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
-<header th:replace="partials/partials.html :: header('About Us')"></header>
+<header th:replace="partials/partials.html :: header('Our Team')"></header>
 
 <div class="container">
     <section>
-        <h2>Our Team</h2>
+
+        <br>
+        <br>
+        <br>
+        <h2>   </h2>
 
     <div class="grid-3-cols">
         <figure class="member">
@@ -213,7 +217,7 @@
                     <li>
                         <span><a href="https://www.linkedin.com/in/leec89/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
                         <span><a href="https://github.com/leec89" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
-                        <span><a href="https://alumni.codeup.com/students/1446" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                        <p><a href="https://alumni.codeup.com/students/1446"><img src="/images/codeup-arrow.png" alt="CodeupLogo" style="width: 30px; height: 30px"/></a></p>
                     </li>
 <!--                    <li>-->
 <!--                        <span><a href="https://github.com/leec89" class="card-link"><i class="fa fa-github" aria-hidden="true"></i></a></span>-->
@@ -231,7 +235,7 @@
                     <li>
                         <span><a href="https://www.linkedin.com/in/cory-urton/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
                         <span><a href="https://github.com/CoJUr" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
-                        <span><a href="https://alumni.codeup.com/students/1436" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                        <p><a href="https://alumni.codeup.com/students/1436"><img src="/images/codeup-arrow.png" alt="CodeupLogo" style="width: 30px; height: 30px"/></a></p>
                     </li>
                 </ul>
             </div>
@@ -245,7 +249,7 @@
                     <li>
                         <span><a href="https://www.linkedin.com/in/kenneth-pittman-ii/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
                         <span><a href="https://github.com/KP21024" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
-                        <img src="/images/codeup-arrow.png" alt="CodeupLogo" href="https://alumni.codeup.com/students/1447" class="card-link" style="width: 35px; height: 35px" />
+                        <p><a href="https://alumni.codeup.com/students/1447"><img src="/images/codeup-arrow.png" alt="CodeupLogo" style="width: 30px; height: 30px"/></a></p>
                     </li>
                 </ul>
             </div>
@@ -259,7 +263,7 @@
                     <li>
                         <span><a href="https://www.linkedin.com/in/michael-dickens-a140796/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
                         <span><a href="https://github.com/dickensml" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
-                        <span><a href="https://alumni.codeup.com/students/1443" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                        <p><a href="https://alumni.codeup.com/students/1443"><img src="/images/codeup-arrow.png" alt="CodeupLogo" style="width: 30px; height: 30px"/></a></p>
                     </li>
                 </ul>
             </div>
@@ -273,15 +277,13 @@
                     <li>
                         <span><a href="https://www.linkedin.com/in/alfredo-oviedo/" class="card-link"><i class="fa fa-linkedin-square fa-2x" style="color: #0077B7" aria-hidden="true"></i></a></span>
                         <span><a href="https://github.com/noonchio" class="card-link"><i class="fa fa-github fa-2x" style="color: #2A404D" aria-hidden="true"></i></a></span>
-                        <span><a href="https://alumni.codeup.com/students/1452" class="card-link"><i class="fa-solid fa-graduation-cap fa-2x" style="color: #7CB342"></i></a></span>
+                        <p><a href="https://alumni.codeup.com/students/1452"><img src="/images/codeup-arrow.png" alt="CodeupLogo" style="width: 30px; height: 30px"/></a></p>
                     </li>
                 </ul>
             </div>
         </figure>
     </div>
 </section>
-
-
 
     <header>
         <div class="header-text-box">
@@ -334,14 +336,6 @@
     <section class="testimonial-section">
         <div class="grid-3-cols">
             <img src="/images/chartunsplash.jpg" alt="Pic of stock values" />
-            <div class="testimonial-box">
-                <h2>"We were very impressed"</h2>
-                <blockquote class="testimonial-text">
-                    At each review we were really impressed with how much progress was
-                    made towards the projects functionality and features.
-                </blockquote>
-                <p class="testimonial-author">&mdash; J Dawg</p>
-            </div>
 
     </section>
 </div>
