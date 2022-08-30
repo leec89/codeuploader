@@ -212,36 +212,34 @@
             <!-- Side widget-->
             <div class="card mb-2 mt-4  " th:object="${resource}">
                 <div class="card-header">Resource Actions</div>
-                       <div class="container my-3 resource-actions">
-                           <div class="row ">
-                        <div class="col" style="padding-left:1em" th:if="*{#authentication.getName() == user.getUsername()}">
-<!--                                <form th:action="/" th:method="GET"  th:if="*{#authentication.getName() == user.getUsername()}">-->
+                    <div class="container my-3 resource-actions">
+                        <div class="row ">
+                            <div class="col" style="padding-left:1em" th:if="*{#authentication.getName() == user.getUsername()}">
                                     <button class="addMore" title="Upload Files" id="myBtn"><i class="bi bi-file-earmark-arrow-up fa-2x"></i></button>
-<!--                                </form>-->
+                            </div>
+                            <div class="col">
+                                <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
+                                    <button class="addMore" title="Edit"><i class="bi bi-pen fa-2x"></i></button>
+                                </form>
+                            </div>
+                            <div class="col ">
+                                <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
+                                   <button title="Slack"><img src="/images/slackbtn.jpg" alt="Slack" /></button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
+                                    <button class="addMore" title="Delete" id="delete-post-btn"><i class="bi bi-trash3 fa-2x"></i></button>
+                                </form>
+                            </div>
+                            <div class="col" th:object="${resource}"  th:if="*{#authentication.getName() == user.getUsername()}">
+                                <form th:action="@{/resources}" th:method="GET">
+                                    <button class="addMore" title="View Resources"><i class="bi bi-house fa-2x"></i></button>
+                                </form>
+                                <br>
+                            </div>
                         </div>
-                        <div class="col">
-                            <form th:action="@{/resources/{id}/edit(id=*{id})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
-                                <button class="addMore" title="Edit"><i class="bi bi-pen fa-2x"></i></button>
-                            </form>
-                        </div>
-                               <div class="col ">
-                                   <form  th:action="@{/do-stuff/{id}/{title}(id=*{id},title=*{title})}" th:method="GET" th:if="*{#authentication.getName() == user.getUsername()}">
-                                       <button class="addMore" title="Slack" style=""><img src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg" alt="Slack" width="65px" height="40px"></button>
-                                   </form>
-                               </div>
-                        <div class="col">
-                            <form th:action="@{/resources/{id}/delete(id=*{id})}" th:method="POST" th:if="*{#authentication.getName() == user.getUsername()}">
-                                <button class="addMore" title="Delete" id="delete-post-btn"><i class="bi bi-trash3 fa-2x"></i></button>
-                            </form>
-                        </div>
-                               <div class="col" th:object="${resource}"  th:if="*{#authentication.getName() == user.getUsername()}">
-                                   <form th:action="@{/resources}" th:method="GET">
-                                       <button class="addMore" title="View Resources"><i class="bi bi-house fa-2x"></i></button>
-                                   </form>
-                                   <br>
-                               </div>
-                       </div>
-                       </div>
+                    </div>
             </div>
         </div>
     </div>
