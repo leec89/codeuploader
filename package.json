@@ -1,7 +1,0 @@
-{
-  "name": "capstone-cckma",
-  "version": "1.0.0",
-  "dependencies": {
-    "just-validate": "^3.8.1"
-  }
-}
