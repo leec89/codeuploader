@@ -153,10 +153,19 @@ public class ResourceController {
     }
 
     @PostMapping("/resources/{id}/edit")
-    public String postEditForm(@ModelAttribute Resource resource) {
+    public String postEditForm(@ModelAttribute Resource resource) throws SlackApiException, IOException, URISyntaxException {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resource.setUser(principal);
+        String resourceTitle = resource.getTitle();
+        String emailTo = resource.getUser().getEmail();
+        String emailSubject = "A CodeUploader resource has been updated!";
+        String emailBlurb = "A CodeUploader resource has been updated!\r\n\r\nThe title of the updated resource was\r\n[ " + resourceTitle + " ].\r\n If this was not expected, please contact customer support.";
         resourceDao.save(resource);
+        emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
+        String textToSlack = emailSubject + "\n" +
+                "Title: " + resourceTitle + "\n" +
+                "Message from CodeUpLoader :robot_face:";
+        slackService.sendToSlack(textToSlack);
         return "redirect:/resources";
     }
 

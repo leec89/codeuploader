@@ -23,21 +23,21 @@
             Curriculum Topic
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/resources/topic/1">CSS</a>
-            <a class="dropdown-item" href="/resources/topic/2">HTML</a>
-            <a class="dropdown-item" href="/resources/topic/3">Javascript</a>
-            <a class="dropdown-item" href="/resources/topic/4">Java</a>
-            <a class="dropdown-item" href="/resources/topic/5">MySQL</a>
-            <a class="dropdown-item" href="/resources/topic/6">Spring Boot</a>
-            <a class="dropdown-item" href="/resources/topic/7">Capstone</a>
-            <a class="dropdown-item" href="/resources/topic/8">Other</a>
+            <span><a class="dropdown-item" href="/resources/topic/1">CSS &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/1tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/2">HTML &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/2tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/3">Javascript &nbsp &nbsp &nbsp<img th:src="'/images/3tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/4">Java &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/4tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/5">mySQL &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/5tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/6">Spring Boot &nbsp &nbsp<img th:src="'/images/6tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/7">Capstone &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/7tn.png'"/></a></span>
+            <span><a class="dropdown-item" href="/resources/topic/8">Other &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<img th:src="'/images/8tn.png'"/></a></span>
         </div>
     </div><hr>
 
     <main class="container mt-5">
         <div class="row gy-4">
             <div class="col-12 col-md-6" th:each="r : ${resources}">
-                <article class="card" style=" border-radius: 2%">
+                <article class="card card-deck" style=" border-radius: 2%">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline" >
                             <h3 class="card-title"  th:text="${r.title}"></h3>
@@ -55,7 +55,9 @@
                         </div>
                         <p>By <span th:text="${r.user.username}"></span></p>
                         <p th:text="${#strings.abbreviate(r.description,75)}"></p>
-                        <p th:if="${not r.link.isEmpty()}">Link: <a th:href="@{'https://' + ${r.link}}" th:text="${r.link}" /></p>
+                        <p th:if="${not r.link.isEmpty()}"><a th:href="@{'https://' + ${r.link}}">Link to additional information!</a></p>
+                        <br th:if="${r.link.isEmpty()}">
+                        <br th:if="${r.link.isEmpty()}">
                         <div class="d-flex justify-content-between align-items-end">
                             <div>
                                 <a class="" th:href="@{/resources/{id}(id=${r.id})}">Read more</a>
@@ -70,6 +72,11 @@
         </div>
     </main>
 
+    <div class="footer-button">
+        <form th:action="@{/resources}" th:method="GET">
+            <button>Go to Top</button>
+        </form>
+    </div>
 
     <th:block th:replace="partials/partials.html :: footer"></th:block>
 
