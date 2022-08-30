@@ -195,6 +195,23 @@
         font-size: 14px;
         color: #495057
     }
+
+    @media(max-width: 84em) {
+        .grid-3-cols {
+            width: 90%;
+            grid-template-columns: repeat(3, 2fr);
+            column-gap: 35px;
+        }
+    }
+
+    @media(max-width: 64em) {
+        .grid-3-cols {
+            width: 70%;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 15px;
+            display: inline-grid;
+        }
+    }
 </style>
 <body>
 <nav th:replace="partials/partials.html :: nav"></nav>
