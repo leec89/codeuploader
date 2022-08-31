@@ -28,14 +28,15 @@ public class UserController {
     private EmailService emailService;
     private SlackService slackService;
 
-    public UserController(ResourceRepository resourceDao, UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public UserController(ResourceRepository resourceDao, UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService, SlackService slackService) {
         this.resourceDao = resourceDao;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.slackService = slackService;
     }
 
-    // =================== user CREATE/REGISTER
+// =================== user CREATE/REGISTER
 
     @GetMapping("/signup")
     public String showSignupForm(Model vModel) {
