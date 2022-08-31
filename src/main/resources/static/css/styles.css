@@ -142,4 +142,22 @@ body {
     .resource-actions{
         padding-left:2.5em;
     }
+
+    .profile{
+        margin-left: 1.5em;
+        margin-right: 12em;
+
+    }
+
+    #hide-this{
+        display: none;
+    }
+
+    #hide-this2{
+        display: none;
+    }
+
+    #hide-this3{
+        display: none;
+    }
 }
