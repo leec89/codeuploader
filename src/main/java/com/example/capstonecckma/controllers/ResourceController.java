@@ -153,7 +153,10 @@ public class ResourceController {
     }
 
     @PostMapping("/resources/{id}/edit")
-    public String postEditForm(@ModelAttribute Resource resource) throws SlackApiException, IOException, URISyntaxException {
+    public String postEditForm(
+            @PathVariable long id,
+            @ModelAttribute Resource resource
+        ) throws SlackApiException, IOException, URISyntaxException {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         resource.setUser(principal);
         String resourceTitle = resource.getTitle();
@@ -164,7 +167,8 @@ public class ResourceController {
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
         String textToSlack = emailSubject + "\n" +
                 "Title: " + resourceTitle + "\n" +
-                "Message from CodeUpLoader :robot_face:";
+                "https://codeuploader/resources/" + id + "\n" +
+                "Message from CodeUpLoader :robot_face: :sparkling_heart:";
         slackService.sendToSlack(textToSlack);
         return "redirect:/resources";
     }
@@ -246,7 +250,7 @@ public class ResourceController {
     public String slackSend(@PathVariable int id, @PathVariable String title) throws SlackApiException, IOException, URISyntaxException {
         String textToSlack = "Check out this resource about: " + "\n" +
                 title + "\n" +
-                "http://localhost:8080/resources/" + id + "\n" +
+                "https://codeuploader/resources/" + id + "\n" +
                 "Message from CodeUpLoader :robot_face: :sparkling_heart:";
         slackService.sendToSlack(textToSlack);
         return "redirect:/resources/{id}";
