@@ -132,14 +132,14 @@ public class ResourceController {
         String emailTo = principal.getEmail();
         resourceDao.save(resource);
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
-        String textToSlack = emailSubject + "\n" +
-                "Title: " + resourceTitle + "\n" +
-                "Message from CodeUpLoader :robot_face:";
-        slackService.sendToSlack(textToSlack);
-
         List<Resource> resourceList = resourceDao.findAll();
         Resource lastOne = resourceList.get(resourceList.size()-1);
         int resId2 = (int) lastOne.getId();
+        String textToSlack = emailSubject + "\n" +
+                "Title: " + resourceTitle + "\n" +
+                "https://codeuploader.com/resources/" + resId2 + "\n" +
+                "Message from CodeUpLoader :robot_face:";
+        slackService.sendToSlack(textToSlack);
         return "redirect:/resources/" + resId2;
     }
 
@@ -167,7 +167,7 @@ public class ResourceController {
         emailService.prepareAndSend(emailSubject, emailBlurb, emailTo);
         String textToSlack = emailSubject + "\n" +
                 "Title: " + resourceTitle + "\n" +
-                "https://codeuploader/resources/" + id + "\n" +
+                "https://codeuploader.com/resources/" + id + "\n" +
                 "Message from CodeUpLoader :robot_face: :sparkling_heart:";
         slackService.sendToSlack(textToSlack);
         return "redirect:/resources";
@@ -250,7 +250,7 @@ public class ResourceController {
     public String slackSend(@PathVariable int id, @PathVariable String title) throws SlackApiException, IOException, URISyntaxException {
         String textToSlack = "Check out this resource about: " + "\n" +
                 title + "\n" +
-                "https://codeuploader/resources/" + id + "\n" +
+                "https://codeuploader.com/resources/" + id + "\n" +
                 "Message from CodeUpLoader :robot_face: :sparkling_heart:";
         slackService.sendToSlack(textToSlack);
         return "redirect:/resources/{id}";
