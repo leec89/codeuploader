@@ -11,11 +11,9 @@
 
 <th:block th:switch="${error}">
     <div th:case="'Internal Server Error'">
-        <h1>There was a 500 Error - internal server issue. You can try the following steps:</h1>
-        <li>Refresh the page</li>
-        <li>Wait a few minutes or perhaps a few hours and try again.</li>
-        <li>Delete your browsing history and cookies, then retry your request</li>
-        <li>Contact the system administrator if the problem persists</li>
+        <h1>There was a 500 Error - internal server issue.</h1>
+        <li>If you're trying to signup, you cannot reuse a current email or username</li>
+        <li>If you think it's something else, please contact customer support</li>
     </div>
     <div th:case="'Not Implemented'">
         <h1>Server was unable to perform the requested action at this time.</h1>
@@ -34,20 +32,11 @@
     </div>
     <div th:case="'Service Unavailable">
         <h1>503 - Service unavailable error occurred. We may have taken the server down temporarily for maintenance. Please try again later.</h1>
-
     </div>
     <div th:case="'Gateway Timeout'">
         <h1>Our gateway server took too long to respond, sorry!</h1>
     </div>
 </th:block>
-<p>Watch a video instead</p>
-<iframe
-        width="420"
-        height="315"
-        src="https://www.youtube.com/embed/NN75im_us4k?autoplay=1"
-        frameborder="0"
-        allowfullscreen="allowfullscreen"
->
-</iframe>
+
 </body>
 </html>
