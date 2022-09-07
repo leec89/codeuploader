@@ -50,14 +50,14 @@ public class Resource {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime created_at = LocalDateTime.now();
 
-//    Many to many resource_likes
-@ManyToMany(cascade = CascadeType.ALL)
-@JoinTable(
-        name="resource_likes",
-        joinColumns={@JoinColumn(name="resource_id")},
-        inverseJoinColumns={@JoinColumn(name="user_id")}
-)
-public List<User> usersThatLiked = new ArrayList<>();
+    //    Many to many resource_likes
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="resource_likes",
+            joinColumns={@JoinColumn(name="resource_id")},
+            inverseJoinColumns={@JoinColumn(name="user_id")}
+    )
+    public List<User> usersThatLiked = new ArrayList<>();
 
     public Resource() {
     }

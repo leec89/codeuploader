@@ -2,14 +2,17 @@ package com.example.codeuploader.controllers;
 
 import com.example.codeuploader.model.Comment;
 import com.example.codeuploader.model.Resource;
+import com.example.codeuploader.model.User;
 import com.example.codeuploader.repositories.CommentRepository;
 import com.example.codeuploader.repositories.ResourceRepository;
+import com.example.codeuploader.repositories.UserRepository;
 import com.example.codeuploader.rest.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +23,19 @@ import javax.validation.Valid;
 @Controller
 public class CommentController {
 
-
-
     @Autowired
     private CommentRepository commentRepository;
 
     @Autowired
     private ResourceRepository resourceRepository;
 
-    public CommentController(CommentRepository commentRepository, ResourceRepository resourceRepository) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public CommentController(CommentRepository commentRepository, ResourceRepository resourceRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
         this.resourceRepository = resourceRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/resources/{resourcesId}/comments")
@@ -53,10 +58,12 @@ public class CommentController {
 //            comment.setResource(resource);
 //            return commentRepository.save(comment);
 //        }).orElseThrow(() -> new ResourceNotFoundException("ResourceId " + resourceId + " not found"));
-      Resource resource = resourceRepository.findById(resourceId).get();
-      comment.setResource(resource);
-      commentRepository.save(comment);
-      return "redirect:/resources/" + resourceId;
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        comment.setUser(principal);
+        Resource resource = resourceRepository.findById(resourceId).get();
+        comment.setResource(resource);
+        commentRepository.save(comment);
+        return "redirect:/resources/" + resourceId;
 
     }
 

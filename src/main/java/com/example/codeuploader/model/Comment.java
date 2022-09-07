@@ -1,5 +1,6 @@
 package com.example.codeuploader.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -24,15 +25,18 @@ public class Comment extends AuditModel {
     @JsonIgnore
     private Resource resource;
 
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    @JsonBackReference
+    private User user;
     // Getters and Setters (Omitted for brevity)
 
+    public Comment() {}
 
-    public Comment() {
-    }
-
-    public Comment(String text, Resource resource) {
+    public Comment(String text, Resource resource, User user) {
         this.text = text;
         this.resource = resource;
+        this.user = user;
     }
 
     public Long getId() {
@@ -58,4 +62,8 @@ public class Comment extends AuditModel {
     public void setResource(Resource resource) {
         this.resource = resource;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
 }

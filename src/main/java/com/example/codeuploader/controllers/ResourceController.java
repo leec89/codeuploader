@@ -39,7 +39,6 @@ public class ResourceController {
 
     private ResourceService resourceService;
 
-
     @Autowired
     private CommentRepository commentRepository;
 
@@ -95,15 +94,17 @@ public class ResourceController {
     // =================== resources view ONE (resources/showone.html)
 
     @GetMapping("/resources/{id}")
-    public String getResource(@PathVariable("id") long id, Model vModel,  @PageableDefault(value=10) Pageable pageable) {
+    public String getResource(@PathVariable("id") long id, Model vModel, @PageableDefault(value=10) Pageable pageable) {
         Resource resource = resourceDao.findById(id).get();
         List<Doc> docs = docStorageService.getFiles();
         Page<Comment> comments = commentRepository.findByResourceId(id, pageable);
+//        String username = commentRepository.
         vModel.addAttribute("docs", docs);
         vModel.addAttribute("resource", resource);
+//        vModel.addAttribute("username", username);
         vModel.addAttribute("curriculum", curriculumTopicDao);
         vModel.addAttribute("comment", new Comment());
-        vModel.addAttribute("page", comments );
+        vModel.addAttribute("page", comments);
         return "resources/showone";
     }
 
